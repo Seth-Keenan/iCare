@@ -17,9 +17,9 @@
         <EntityTypeShape EntityType="Group2_iCAREDBModel.UserPassword" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Group2_iCAREDBModel.UserRole" Width="1.5" PointX="10.375" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="Group2_iCAREDBModel.FK__Modificat__DocID__4BAC3F29" ManuallyRouted="false" />
-        <AssociationConnector Association="Group2_iCAREDBModel.FK__iCAREAdmin__ID__3C69FB99" ManuallyRouted="false" />
-        <AssociationConnector Association="Group2_iCAREDBModel.FK__iCAREWorker__ID__398D8EEE" ManuallyRouted="false" />
-        <AssociationConnector Association="Group2_iCAREDBModel.FK__UserPassword__ID__3F466844" ManuallyRouted="false" />
+        <AssociationConnector ManuallyRouted="false" Association="Group2_iCAREDBModel.FK__iCAREAdmin__ID__3C69FB99" />
+        <AssociationConnector ManuallyRouted="false" Association="Group2_iCAREDBModel.FK__iCAREWorker__ID__398D8EEE" />
+        <AssociationConnector ManuallyRouted="false" Association="Group2_iCAREDBModel.FK__UserPassword__ID__3F466844" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

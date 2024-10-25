@@ -4,35 +4,35 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Group2_iCAREDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="Group2_iCAREDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
         <EntityType Name="DocumentMetadata">
           <Key>
             <PropertyRef Name="DocID" />
           </Key>
-          <Property Name="DocID" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="DocName" Type="varchar" MaxLength="255" />
+          <Property Name="DocID" Nullable="false" MaxLength="255" Type="varchar" />
+          <Property Name="DocName" MaxLength="255" Type="varchar" />
           <Property Name="DateOfCreation" Type="date" />
         </EntityType>
         <EntityType Name="DrugsDictionary">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="ID" Nullable="false" MaxLength="255" Type="varchar" />
+          <Property Name="Name" MaxLength="255" Type="varchar" />
         </EntityType>
         <EntityType Name="GeoCodes">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="ID" Nullable="false" MaxLength="255" Type="varchar" />
+          <Property Name="Description" MaxLength="255" Type="varchar" />
         </EntityType>
         <EntityType Name="iCAREAdmin">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="AdminEmail" Type="varchar" MaxLength="255" />
+          <Property Name="ID" Nullable="false" MaxLength="255" Type="varchar" />
+          <Property Name="AdminEmail" MaxLength="255" Type="varchar" />
           <Property Name="DateHired" Type="date" />
           <Property Name="DateFinished" Type="date" />
         </EntityType>
@@ -40,53 +40,53 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="ID" Nullable="false" MaxLength="255" Type="varchar" />
+          <Property Name="Name" MaxLength="255" Type="varchar" />
         </EntityType>
         <EntityType Name="iCAREWorker">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="Profession" Type="varchar" MaxLength="20" />
+          <Property Name="ID" Nullable="false" MaxLength="255" Type="varchar" />
+          <Property Name="Profession" MaxLength="20" Type="varchar" />
         </EntityType>
         <EntityType Name="ModificationHistory">
           <Key>
             <PropertyRef Name="DocID" />
           </Key>
-          <Property Name="DocID" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DocID" Nullable="false" MaxLength="255" Type="varchar" />
           <Property Name="dateOfModification" Type="date" />
-          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="Description" MaxLength="255" Type="varchar" />
         </EntityType>
         <EntityType Name="PatientRecord">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="255" />
-          <Property Name="Address" Type="varchar" MaxLength="255" />
+          <Property Name="ID" Nullable="false" MaxLength="255" Type="varchar" />
+          <Property Name="Name" MaxLength="255" Type="varchar" />
+          <Property Name="Address" MaxLength="255" Type="varchar" />
           <Property Name="DateOfBirth" Type="date" />
           <Property Name="Height" Type="float" />
           <Property Name="Weight" Type="float" />
-          <Property Name="BloodGroup" Type="varchar" MaxLength="255" />
-          <Property Name="BedID" Type="varchar" MaxLength="255" />
-          <Property Name="TreatmentArea" Type="varchar" MaxLength="255" />
+          <Property Name="BloodGroup" MaxLength="255" Type="varchar" />
+          <Property Name="BedID" MaxLength="255" Type="varchar" />
+          <Property Name="TreatmentArea" MaxLength="255" Type="varchar" />
         </EntityType>
         <EntityType Name="TreatmentRecord">
           <Key>
             <PropertyRef Name="TreatmentID" />
           </Key>
-          <Property Name="TreatmentID" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="TreatmentID" Nullable="false" MaxLength="255" Type="varchar" />
+          <Property Name="Description" MaxLength="255" Type="varchar" />
           <Property Name="TreatmentDate" Type="date" />
         </EntityType>
         <EntityType Name="UserPassword">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="UserName" Type="varchar" MaxLength="255" />
-          <Property Name="EncryptedPassword" Type="varchar" MaxLength="255" />
+          <Property Name="ID" Nullable="false" MaxLength="255" Type="varchar" />
+          <Property Name="UserName" MaxLength="255" Type="varchar" />
+          <Property Name="EncryptedPassword" MaxLength="255" Type="varchar" />
           <Property Name="PasswordExpiryTime" Type="int" />
           <Property Name="UserAccountExpriyDate" Type="date" />
         </EntityType>
@@ -94,12 +94,12 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="RoleName" Type="varchar" MaxLength="255" />
+          <Property Name="ID" Nullable="false" MaxLength="255" Type="varchar" />
+          <Property Name="RoleName" MaxLength="255" Type="varchar" />
         </EntityType>
         <Association Name="FK__iCAREAdmin__ID__3C69FB99">
-          <End Role="iCAREUser" Type="Self.iCAREUser" Multiplicity="1" />
-          <End Role="iCAREAdmin" Type="Self.iCAREAdmin" Multiplicity="0..1" />
+          <End Type="Self.iCAREUser" Multiplicity="1" Role="iCAREUser" />
+          <End Type="Self.iCAREAdmin" Multiplicity="0..1" Role="iCAREAdmin" />
           <ReferentialConstraint>
             <Principal Role="iCAREUser">
               <PropertyRef Name="ID" />
@@ -110,8 +110,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__iCAREWorker__ID__398D8EEE">
-          <End Role="iCAREUser" Type="Self.iCAREUser" Multiplicity="1" />
-          <End Role="iCAREWorker" Type="Self.iCAREWorker" Multiplicity="0..1" />
+          <End Type="Self.iCAREUser" Multiplicity="1" Role="iCAREUser" />
+          <End Type="Self.iCAREWorker" Multiplicity="0..1" Role="iCAREWorker" />
           <ReferentialConstraint>
             <Principal Role="iCAREUser">
               <PropertyRef Name="ID" />
@@ -122,8 +122,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Modificat__DocID__4BAC3F29">
-          <End Role="DocumentMetadata" Type="Self.DocumentMetadata" Multiplicity="1" />
-          <End Role="ModificationHistory" Type="Self.ModificationHistory" Multiplicity="0..1" />
+          <End Type="Self.DocumentMetadata" Multiplicity="1" Role="DocumentMetadata" />
+          <End Type="Self.ModificationHistory" Multiplicity="0..1" Role="ModificationHistory" />
           <ReferentialConstraint>
             <Principal Role="DocumentMetadata">
               <PropertyRef Name="DocID" />
@@ -134,8 +134,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__UserPassword__ID__3F466844">
-          <End Role="iCAREUser" Type="Self.iCAREUser" Multiplicity="1" />
-          <End Role="UserPassword" Type="Self.UserPassword" Multiplicity="0..1" />
+          <End Type="Self.iCAREUser" Multiplicity="1" Role="iCAREUser" />
+          <End Type="Self.UserPassword" Multiplicity="0..1" Role="UserPassword" />
           <ReferentialConstraint>
             <Principal Role="iCAREUser">
               <PropertyRef Name="ID" />
@@ -158,20 +158,20 @@
           <EntitySet Name="UserPassword" EntityType="Self.UserPassword" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__iCAREAdmin__ID__3C69FB99" Association="Self.FK__iCAREAdmin__ID__3C69FB99">
-            <End Role="iCAREUser" EntitySet="iCAREUser" />
-            <End Role="iCAREAdmin" EntitySet="iCAREAdmin" />
+            <End EntitySet="iCAREUser" Role="iCAREUser" />
+            <End EntitySet="iCAREAdmin" Role="iCAREAdmin" />
           </AssociationSet>
           <AssociationSet Name="FK__iCAREWorker__ID__398D8EEE" Association="Self.FK__iCAREWorker__ID__398D8EEE">
-            <End Role="iCAREUser" EntitySet="iCAREUser" />
-            <End Role="iCAREWorker" EntitySet="iCAREWorker" />
+            <End EntitySet="iCAREUser" Role="iCAREUser" />
+            <End EntitySet="iCAREWorker" Role="iCAREWorker" />
           </AssociationSet>
           <AssociationSet Name="FK__Modificat__DocID__4BAC3F29" Association="Self.FK__Modificat__DocID__4BAC3F29">
-            <End Role="DocumentMetadata" EntitySet="DocumentMetadata" />
-            <End Role="ModificationHistory" EntitySet="ModificationHistory" />
+            <End EntitySet="DocumentMetadata" Role="DocumentMetadata" />
+            <End EntitySet="ModificationHistory" Role="ModificationHistory" />
           </AssociationSet>
           <AssociationSet Name="FK__UserPassword__ID__3F466844" Association="Self.FK__UserPassword__ID__3F466844">
-            <End Role="iCAREUser" EntitySet="iCAREUser" />
-            <End Role="UserPassword" EntitySet="UserPassword" />
+            <End EntitySet="iCAREUser" Role="iCAREUser" />
+            <End EntitySet="UserPassword" Role="UserPassword" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -206,7 +206,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" Type="String" />
           <Property Name="AdminEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="DateHired" Type="DateTime" Precision="0" />
           <Property Name="DateFinished" Type="DateTime" Precision="0" />
@@ -226,7 +226,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" Type="String" />
           <Property Name="Profession" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="iCAREUser" Relationship="Self.FK__iCAREWorker__ID__398D8EEE" FromRole="iCAREWorker" ToRole="iCAREUser" />
         </EntityType>
@@ -292,8 +292,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__iCAREAdmin__ID__3C69FB99">
-          <End Role="iCAREUser" Type="Self.iCAREUser" Multiplicity="1" />
-          <End Role="iCAREAdmin" Type="Self.iCAREAdmin" Multiplicity="0..1" />
+          <End Type="Self.iCAREUser" Multiplicity="1" Role="iCAREUser" />
+          <End Type="Self.iCAREAdmin" Multiplicity="0..1" Role="iCAREAdmin" />
           <ReferentialConstraint>
             <Principal Role="iCAREUser">
               <PropertyRef Name="ID" />
@@ -304,8 +304,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__iCAREWorker__ID__398D8EEE">
-          <End Role="iCAREUser" Type="Self.iCAREUser" Multiplicity="1" />
-          <End Role="iCAREWorker" Type="Self.iCAREWorker" Multiplicity="0..1" />
+          <End Type="Self.iCAREUser" Multiplicity="1" Role="iCAREUser" />
+          <End Type="Self.iCAREWorker" Multiplicity="0..1" Role="iCAREWorker" />
           <ReferentialConstraint>
             <Principal Role="iCAREUser">
               <PropertyRef Name="ID" />
@@ -316,8 +316,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__UserPassword__ID__3F466844">
-          <End Role="iCAREUser" Type="Self.iCAREUser" Multiplicity="1" />
-          <End Role="UserPassword" Type="Self.UserPassword" Multiplicity="0..1" />
+          <End Type="Self.iCAREUser" Multiplicity="1" Role="iCAREUser" />
+          <End Type="Self.UserPassword" Multiplicity="0..1" Role="UserPassword" />
           <ReferentialConstraint>
             <Principal Role="iCAREUser">
               <PropertyRef Name="ID" />
@@ -344,16 +344,16 @@
             <End Role="ModificationHistory" EntitySet="ModificationHistory" />
           </AssociationSet>
           <AssociationSet Name="FK__iCAREAdmin__ID__3C69FB99" Association="Self.FK__iCAREAdmin__ID__3C69FB99">
-            <End Role="iCAREUser" EntitySet="iCAREUser" />
-            <End Role="iCAREAdmin" EntitySet="iCAREAdmin" />
+            <End EntitySet="iCAREUser" Role="iCAREUser" />
+            <End EntitySet="iCAREAdmin" Role="iCAREAdmin" />
           </AssociationSet>
           <AssociationSet Name="FK__iCAREWorker__ID__398D8EEE" Association="Self.FK__iCAREWorker__ID__398D8EEE">
-            <End Role="iCAREUser" EntitySet="iCAREUser" />
-            <End Role="iCAREWorker" EntitySet="iCAREWorker" />
+            <End EntitySet="iCAREUser" Role="iCAREUser" />
+            <End EntitySet="iCAREWorker" Role="iCAREWorker" />
           </AssociationSet>
           <AssociationSet Name="FK__UserPassword__ID__3F466844" Association="Self.FK__UserPassword__ID__3F466844">
-            <End Role="iCAREUser" EntitySet="iCAREUser" />
-            <End Role="UserPassword" EntitySet="UserPassword" />
+            <End EntitySet="iCAREUser" Role="iCAREUser" />
+            <End EntitySet="UserPassword" Role="UserPassword" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
