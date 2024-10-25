@@ -203,7 +203,6 @@
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="iCAREAdmin" BaseType="Group2_iCAREDBModel.iCAREUser">
-          <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="AdminEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="DateHired" Type="DateTime" Precision="0" />
           <Property Name="DateFinished" Type="DateTime" Precision="0" />
@@ -217,7 +216,6 @@
           <NavigationProperty Name="UserPassword" Relationship="Self.FK__UserPassword__ID__3F466844" FromRole="iCAREUser" ToRole="UserPassword" />
         </EntityType>
         <EntityType Name="iCAREWorker" BaseType="Group2_iCAREDBModel.iCAREUser">
-          <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Profession" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ModificationHistory">

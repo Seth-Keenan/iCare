@@ -1,25 +1,24 @@
 ﻿-- CREATES ALL TABLES --
 
--- Parent Class of iCAREWorker and iCAREAdmin --
+-- Parent Table --
 CREATE TABLE iCAREUser (
-	ID VARCHAR(255) PRIMARY KEY,
-	Name VARCHAR(255)
-)
-
--- Child of iCAREUser --
-CREATE TABLE iCAREWorker (
-	ID VARCHAR(255) PRIMARY KEY,
-	Profession VARCHAR(20),
-	FOREIGN KEY (ID) REFERENCES iCAREUser(ID)
+    ID VARCHAR(255) PRIMARY KEY,
 );
 
--- Child of iCAREUser --
+-- Child Table for iCAREWorker (inherits iCAREUser) --
+CREATE TABLE iCAREWorker (
+    ID VARCHAR(255) PRIMARY KEY, 
+    Profession VARCHAR(20),
+    FOREIGN KEY (ID) REFERENCES iCAREUser(ID) 
+);
+
+-- Child Table for iCAREAdmin (inherits iCAREUser) --
 CREATE TABLE iCAREAdmin (
-	ID VARCHAR(255) PRIMARY KEY,
-	AdminEmail VARCHAR(255),
-	DateHired DATE,
-	DateFinished DATE,
-	FOREIGN KEY (ID) REFERENCES iCAREUser(ID)
+    ID VARCHAR(255) PRIMARY KEY,  
+    AdminEmail VARCHAR(255),
+    DateHired DATE,
+    DateFinished DATE,
+    FOREIGN KEY (ID) REFERENCES iCAREUser(ID)
 );
 
 -- Every iCAREUser has a UserPassword --
