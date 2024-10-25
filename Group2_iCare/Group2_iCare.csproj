@@ -130,26 +130,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\iCAREUsersController.cs" />
-    <Compile Include="Controllers\PatientRecordsController.cs" />
-    <Compile Include="Controllers\TreatmentRecordsController.cs" />
-    <Compile Include="Controllers\UserPasswordsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DocumentMetadata.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DrugsDictionary.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\GeoCode.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\iCAREUser.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\iCAREWorker.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model1.Context.cs">
@@ -167,17 +151,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\PatientRecord.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="Models\Model2.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model2.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TreatmentRecord.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="Models\Model2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserPassword.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserRole.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="Models\Model2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model2.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -212,6 +199,16 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\Model2.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model2.edmx</DependentUpon>
+      <LastGenOutput>Model2.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Model2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model2.edmx</DependentUpon>
+      <LastGenOutput>Model2.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -224,6 +221,13 @@
     </EntityDeploy>
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\Model2.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model2.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model2.edmx.diagram">
+      <DependentUpon>Model2.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
@@ -250,26 +254,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\iCAREUsers\Create.cshtml" />
-    <Content Include="Views\iCAREUsers\Delete.cshtml" />
-    <Content Include="Views\iCAREUsers\Details.cshtml" />
-    <Content Include="Views\iCAREUsers\Edit.cshtml" />
-    <Content Include="Views\iCAREUsers\Index.cshtml" />
-    <Content Include="Views\PatientRecords\Create.cshtml" />
-    <Content Include="Views\PatientRecords\Delete.cshtml" />
-    <Content Include="Views\PatientRecords\Details.cshtml" />
-    <Content Include="Views\PatientRecords\Edit.cshtml" />
-    <Content Include="Views\PatientRecords\Index.cshtml" />
-    <Content Include="Views\TreatmentRecords\Create.cshtml" />
-    <Content Include="Views\TreatmentRecords\Delete.cshtml" />
-    <Content Include="Views\TreatmentRecords\Details.cshtml" />
-    <Content Include="Views\TreatmentRecords\Edit.cshtml" />
-    <Content Include="Views\TreatmentRecords\Index.cshtml" />
-    <Content Include="Views\UserPasswords\Create.cshtml" />
-    <Content Include="Views\UserPasswords\Delete.cshtml" />
-    <Content Include="Views\UserPasswords\Details.cshtml" />
-    <Content Include="Views\UserPasswords\Edit.cshtml" />
-    <Content Include="Views\UserPasswords\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

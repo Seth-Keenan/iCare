@@ -8,14 +8,14 @@ CREATE TABLE iCAREUser (
 
 -- Child of iCAREUser --
 CREATE TABLE iCAREWorker (
-	ID VARCHAR(255),
+	ID VARCHAR(255) PRIMARY KEY,
 	Profession VARCHAR(20),
 	FOREIGN KEY (ID) REFERENCES iCAREUser(ID)
 );
 
 -- Child of iCAREUser --
 CREATE TABLE iCAREAdmin (
-	ID VARCHAR(255),
+	ID VARCHAR(255) PRIMARY KEY,
 	AdminEmail VARCHAR(255),
 	DateHired DATE,
 	DateFinished DATE,
@@ -73,7 +73,7 @@ CREATE TABLE DocumentMetadata (
 
 -- ModificationHistory manages history of PDF documents --
 CREATE TABLE ModificationHistory (
-	DocID VARCHAR(255),
+	DocID VARCHAR(255) PRIMARY KEY,
 	dateOfModification DATE,
 	Description VARCHAR(255),
 	FOREIGN KEY (DocID) REFERENCES DocumentMetadata(DocID)
