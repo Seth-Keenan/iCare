@@ -1,0 +1,86 @@
+﻿-- CREATES ALL TABLES --
+
+-- Parent Class of iCAREWorker and iCAREAdmin --
+CREATE TABLE iCAREUser (
+	ID VARCHAR(255) PRIMARY KEY,
+	Name VARCHAR(255)
+)
+
+-- Child of iCAREUser --
+CREATE TABLE iCAREWorker (
+	ID VARCHAR(255),
+	Profession VARCHAR(20),
+	FOREIGN KEY (ID) REFERENCES iCAREUser(ID)
+);
+
+-- Child of iCAREUser --
+CREATE TABLE iCAREAdmin (
+	ID VARCHAR(255),
+	AdminEmail VARCHAR(255),
+	DateHired DATE,
+	DateFinished DATE,
+	FOREIGN KEY (ID) REFERENCES iCAREUser(ID)
+);
+
+-- Every iCAREUser has a UserPassword --
+CREATE TABLE UserPassword (
+	ID VARCHAR(255) PRIMARY KEY,
+	FOREIGN KEY (ID) REFERENCES iCAREUser(ID),
+	UserName VARCHAR(255),
+	EncryptedPassword VARCHAR(255),
+	PasswordExpiryTime INT,
+	UserAccountExpriyDate DATE
+);
+
+-- UserRole manages permissions of iCAREUser --
+CREATE TABLE UserRole (
+	ID VARCHAR(255) PRIMARY KEY,
+	RoleName VARCHAR(255)
+);
+
+-- GeoCodes holds attributes for iCARE locations --
+CREATE TABLE GeoCodes (
+	ID VARCHAR(255) PRIMARY KEY,
+	Description VARCHAR(255),
+);
+
+-- PatientRecord defines fundamental information about the patient --
+CREATE TABLE PatientRecord (
+	ID VARCHAR(255) PRIMARY KEY,
+	Name VARCHAR(255),
+	Address VARCHAR(255),
+	DateOfBirth DATE,
+	Height FLOAT,
+	Weight FLOAT,
+	BloodGroup VARCHAR(255),
+	BedID VARCHAR(255),
+	TreatmentArea VARCHAR(255)
+);
+
+-- TreatmentRecord associates workers and patients --
+CREATE TABLE TreatmentRecord (
+	TreatmentID VARCHAR(255) PRIMARY KEY,
+	Description VARCHAR(255),
+	TreatmentDate DATE,
+);
+
+-- DocumentMetadata stores information or iCARE PDF files --
+CREATE TABLE DocumentMetadata (
+	DocID VARCHAR(255) PRIMARY KEY,
+	DocName VARCHAR(255),
+	DateOfCreation DATE,
+);
+
+-- ModificationHistory manages history of PDF documents --
+CREATE TABLE ModificationHistory (
+	DocID VARCHAR(255),
+	dateOfModification DATE,
+	Description VARCHAR(255),
+	FOREIGN KEY (DocID) REFERENCES DocumentMetadata(DocID)
+);
+
+-- DrugsDictionary manages external drugs management system
+CREATE TABLE DrugsDictionary (
+	ID VARCHAR(255) PRIMARY KEY,
+	Name VARCHAR(255)
+);
