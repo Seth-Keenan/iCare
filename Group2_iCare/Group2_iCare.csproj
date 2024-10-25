@@ -133,6 +133,7 @@
     <Compile Include="Controllers\iCAREUsersController.cs" />
     <Compile Include="Controllers\PatientRecordsController.cs" />
     <Compile Include="Controllers\TreatmentRecordsController.cs" />
+    <Compile Include="Controllers\UserPasswordsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -264,6 +265,11 @@
     <Content Include="Views\TreatmentRecords\Details.cshtml" />
     <Content Include="Views\TreatmentRecords\Edit.cshtml" />
     <Content Include="Views\TreatmentRecords\Index.cshtml" />
+    <Content Include="Views\UserPasswords\Create.cshtml" />
+    <Content Include="Views\UserPasswords\Delete.cshtml" />
+    <Content Include="Views\UserPasswords\Details.cshtml" />
+    <Content Include="Views\UserPasswords\Edit.cshtml" />
+    <Content Include="Views\UserPasswords\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
