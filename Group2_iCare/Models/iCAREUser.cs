@@ -17,6 +17,8 @@ namespace Group2_iCare.Models
         public string ID { get; set; }
         public string Name { get; set; }
     
+        public virtual iCAREAdmin iCAREAdmin { get; set; }
+        public virtual iCAREWorker iCAREWorker { get; set; }
         public virtual UserPassword UserPassword { get; set; }
     }
 }

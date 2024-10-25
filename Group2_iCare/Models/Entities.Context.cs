@@ -13,10 +13,10 @@ namespace Group2_iCare.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Group2_iCAREDBEntities1 : DbContext
+    public partial class Group2_iCAREDBEntities : DbContext
     {
-        public Group2_iCAREDBEntities1()
-            : base("name=Group2_iCAREDBEntities1")
+        public Group2_iCAREDBEntities()
+            : base("name=Group2_iCAREDBEntities")
         {
         }
     
@@ -28,7 +28,9 @@ namespace Group2_iCare.Models
         public virtual DbSet<DocumentMetadata> DocumentMetadata { get; set; }
         public virtual DbSet<DrugsDictionary> DrugsDictionary { get; set; }
         public virtual DbSet<GeoCodes> GeoCodes { get; set; }
+        public virtual DbSet<iCAREAdmin> iCAREAdmin { get; set; }
         public virtual DbSet<iCAREUser> iCAREUser { get; set; }
+        public virtual DbSet<iCAREWorker> iCAREWorker { get; set; }
         public virtual DbSet<ModificationHistory> ModificationHistory { get; set; }
         public virtual DbSet<PatientRecord> PatientRecord { get; set; }
         public virtual DbSet<TreatmentRecord> TreatmentRecord { get; set; }

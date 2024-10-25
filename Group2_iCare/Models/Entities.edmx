@@ -202,10 +202,15 @@
           <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="iCAREAdmin" BaseType="Group2_iCAREDBModel.iCAREUser">
+        <EntityType Name="iCAREAdmin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="AdminEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="DateHired" Type="DateTime" Precision="0" />
           <Property Name="DateFinished" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="iCAREUser" Relationship="Self.FK__iCAREAdmin__ID__3C69FB99" FromRole="iCAREAdmin" ToRole="iCAREUser" />
         </EntityType>
         <EntityType Name="iCAREUser">
           <Key>
@@ -213,10 +218,17 @@
           </Key>
           <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="iCAREAdmin" Relationship="Self.FK__iCAREAdmin__ID__3C69FB99" FromRole="iCAREUser" ToRole="iCAREAdmin" />
+          <NavigationProperty Name="iCAREWorker" Relationship="Self.FK__iCAREWorker__ID__398D8EEE" FromRole="iCAREUser" ToRole="iCAREWorker" />
           <NavigationProperty Name="UserPassword" Relationship="Self.FK__UserPassword__ID__3F466844" FromRole="iCAREUser" ToRole="UserPassword" />
         </EntityType>
-        <EntityType Name="iCAREWorker" BaseType="Group2_iCAREDBModel.iCAREUser">
+        <EntityType Name="iCAREWorker">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Profession" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="iCAREUser" Relationship="Self.FK__iCAREWorker__ID__398D8EEE" FromRole="iCAREWorker" ToRole="iCAREUser" />
         </EntityType>
         <EntityType Name="ModificationHistory">
           <Key>
@@ -279,6 +291,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__iCAREAdmin__ID__3C69FB99">
+          <End Role="iCAREUser" Type="Self.iCAREUser" Multiplicity="1" />
+          <End Role="iCAREAdmin" Type="Self.iCAREAdmin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="iCAREUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="iCAREAdmin">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__iCAREWorker__ID__398D8EEE">
+          <End Role="iCAREUser" Type="Self.iCAREUser" Multiplicity="1" />
+          <End Role="iCAREWorker" Type="Self.iCAREWorker" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="iCAREUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="iCAREWorker">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__UserPassword__ID__3F466844">
           <End Role="iCAREUser" Type="Self.iCAREUser" Multiplicity="1" />
           <End Role="UserPassword" Type="Self.UserPassword" Multiplicity="0..1" />
@@ -291,11 +327,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Group2_iCAREDBEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Group2_iCAREDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="DocumentMetadata" EntityType="Self.DocumentMetadata" />
           <EntitySet Name="DrugsDictionary" EntityType="Self.DrugsDictionary" />
           <EntitySet Name="GeoCodes" EntityType="Self.GeoCodes" />
+          <EntitySet Name="iCAREAdmin" EntityType="Self.iCAREAdmin" />
           <EntitySet Name="iCAREUser" EntityType="Self.iCAREUser" />
+          <EntitySet Name="iCAREWorker" EntityType="Self.iCAREWorker" />
           <EntitySet Name="ModificationHistory" EntityType="Self.ModificationHistory" />
           <EntitySet Name="PatientRecord" EntityType="Self.PatientRecord" />
           <EntitySet Name="TreatmentRecord" EntityType="Self.TreatmentRecord" />
@@ -304,6 +342,14 @@
           <AssociationSet Name="FK__Modificat__DocID__4BAC3F29" Association="Self.FK__Modificat__DocID__4BAC3F29">
             <End Role="DocumentMetadata" EntitySet="DocumentMetadata" />
             <End Role="ModificationHistory" EntitySet="ModificationHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__iCAREAdmin__ID__3C69FB99" Association="Self.FK__iCAREAdmin__ID__3C69FB99">
+            <End Role="iCAREUser" EntitySet="iCAREUser" />
+            <End Role="iCAREAdmin" EntitySet="iCAREAdmin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__iCAREWorker__ID__398D8EEE" Association="Self.FK__iCAREWorker__ID__398D8EEE">
+            <End Role="iCAREUser" EntitySet="iCAREUser" />
+            <End Role="iCAREWorker" EntitySet="iCAREWorker" />
           </AssociationSet>
           <AssociationSet Name="FK__UserPassword__ID__3F466844" Association="Self.FK__UserPassword__ID__3F466844">
             <End Role="iCAREUser" EntitySet="iCAREUser" />
@@ -315,7 +361,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Group2_iCAREDBModelStoreContainer" CdmEntityContainer="Group2_iCAREDBEntities1">
+        <EntityContainerMapping StorageEntityContainer="Group2_iCAREDBModelStoreContainer" CdmEntityContainer="Group2_iCAREDBEntities">
           <EntitySetMapping Name="DocumentMetadata">
             <EntityTypeMapping TypeName="Group2_iCAREDBModel.DocumentMetadata">
               <MappingFragment StoreEntitySet="DocumentMetadata">
@@ -341,25 +387,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="iCAREAdmin">
+            <EntityTypeMapping TypeName="Group2_iCAREDBModel.iCAREAdmin">
+              <MappingFragment StoreEntitySet="iCAREAdmin">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
+                <ScalarProperty Name="DateHired" ColumnName="DateHired" />
+                <ScalarProperty Name="DateFinished" ColumnName="DateFinished" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="iCAREUser">
-            <EntityTypeMapping TypeName="IsTypeOf(Group2_iCAREDBModel.iCAREUser)">
+            <EntityTypeMapping TypeName="Group2_iCAREDBModel.iCAREUser">
               <MappingFragment StoreEntitySet="iCAREUser">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
-            <EntityTypeMapping TypeName="IsTypeOf(Group2_iCAREDBModel.iCAREAdmin)">
-              <MappingFragment StoreEntitySet="iCAREAdmin">
-                <ScalarProperty Name="DateFinished" ColumnName="DateFinished" />
-                <ScalarProperty Name="DateHired" ColumnName="DateHired" />
-                <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-            <EntityTypeMapping TypeName="IsTypeOf(Group2_iCAREDBModel.iCAREWorker)">
+          </EntitySetMapping>
+          <EntitySetMapping Name="iCAREWorker">
+            <EntityTypeMapping TypeName="Group2_iCAREDBModel.iCAREWorker">
               <MappingFragment StoreEntitySet="iCAREWorker">
-                <ScalarProperty Name="Profession" ColumnName="Profession" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Profession" ColumnName="Profession" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

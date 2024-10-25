@@ -12,10 +12,13 @@ namespace Group2_iCare.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class iCAREAdmin : iCAREUser
+    public partial class iCAREAdmin
     {
+        public string ID { get; set; }
         public string AdminEmail { get; set; }
         public Nullable<System.DateTime> DateHired { get; set; }
         public Nullable<System.DateTime> DateFinished { get; set; }
+    
+        public virtual iCAREUser iCAREUser { get; set; }
     }
 }

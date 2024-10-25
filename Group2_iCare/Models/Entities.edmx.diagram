@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="66f8d51a88b0427783a63f1219d21b36" Name="Diagram1">
+      <Diagram DiagramId="0863aca3ce414c498b1164d0a876417a" Name="Diagram1">
         <EntityTypeShape EntityType="Group2_iCAREDBModel.DocumentMetadata" Width="1.5" PointX="5.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Group2_iCAREDBModel.DrugsDictionary" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Group2_iCAREDBModel.GeoCodes" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
@@ -15,11 +15,11 @@
         <EntityTypeShape EntityType="Group2_iCAREDBModel.PatientRecord" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Group2_iCAREDBModel.TreatmentRecord" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Group2_iCAREDBModel.UserPassword" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_iCAREDBModel.UserRole" Width="1.5" PointX="0.5" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_iCAREDBModel.UserRole" Width="1.5" PointX="10.375" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="Group2_iCAREDBModel.FK__Modificat__DocID__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="Group2_iCAREDBModel.FK__iCAREAdmin__ID__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="Group2_iCAREDBModel.FK__iCAREWorker__ID__398D8EEE" ManuallyRouted="false" />
         <AssociationConnector Association="Group2_iCAREDBModel.FK__UserPassword__ID__3F466844" ManuallyRouted="false" />
-        <InheritanceConnector EntityType="Group2_iCAREDBModel.iCAREAdmin" />
-        <InheritanceConnector EntityType="Group2_iCAREDBModel.iCAREWorker" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

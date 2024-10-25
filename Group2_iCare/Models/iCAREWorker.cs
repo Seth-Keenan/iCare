@@ -12,8 +12,11 @@ namespace Group2_iCare.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class iCAREWorker : iCAREUser
+    public partial class iCAREWorker
     {
+        public string ID { get; set; }
         public string Profession { get; set; }
+    
+        public virtual iCAREUser iCAREUser { get; set; }
     }
 }
