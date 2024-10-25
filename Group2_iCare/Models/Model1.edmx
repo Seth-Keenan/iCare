@@ -229,7 +229,14 @@ error 6004: The table 'Group2_ICAREDB.dbo.ModificationHistory' is referenced by 
             <End Role="iCAREUser" EntitySet="iCAREUsers" />
             <End Role="UserPassword" EntitySet="UserPasswords" />
           </AssociationSet>
+          <EntitySet Name="iCAREWorkers" EntityType="Group2_ICAREDBModel.iCAREWorker" />
         </EntityContainer>
+        <EntityType Name="iCAREWorker">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

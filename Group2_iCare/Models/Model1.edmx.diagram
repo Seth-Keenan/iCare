@@ -5,15 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="a36e4e3b8e9e486b8aa204e599d350cb" Name="Diagram1">
-        <EntityTypeShape EntityType="Group2_ICAREDBModel.DocumentMetadata" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_ICAREDBModel.DrugsDictionary" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_ICAREDBModel.GeoCode" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_ICAREDBModel.iCAREUser" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_ICAREDBModel.PatientRecord" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_ICAREDBModel.TreatmentRecord" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_ICAREDBModel.UserPassword" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_ICAREDBModel.UserRole" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_ICAREDBModel.DocumentMetadata" Width="1.5" PointX="1" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_ICAREDBModel.DrugsDictionary" Width="1.5" PointX="3.125" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_ICAREDBModel.GeoCode" Width="1.5" PointX="5" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_ICAREDBModel.iCAREUser" Width="1.5" PointX="4.375" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_ICAREDBModel.PatientRecord" Width="1.5" PointX="15.625" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_ICAREDBModel.TreatmentRecord" Width="1.5" PointX="13.125" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_ICAREDBModel.UserPassword" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_ICAREDBModel.UserRole" Width="1.5" PointX="14.625" PointY="1.625" IsExpanded="true" />
         <AssociationConnector Association="Group2_ICAREDBModel.FK__UserPassword__ID__3D5E1FD2" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Group2_ICAREDBModel.iCAREWorker" Width="1.5" PointX="5.625" PointY="4.25" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

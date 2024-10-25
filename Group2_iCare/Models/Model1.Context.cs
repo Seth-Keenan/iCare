@@ -33,5 +33,6 @@ namespace Group2_iCare.Models
         public virtual DbSet<TreatmentRecord> TreatmentRecords { get; set; }
         public virtual DbSet<UserPassword> UserPasswords { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
+        public virtual DbSet<iCAREWorker> iCAREWorkers { get; set; }
     }
 }
