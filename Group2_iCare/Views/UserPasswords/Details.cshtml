@@ -1,0 +1,58 @@
+﻿@model Group2_iCare.Models.UserPassword
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserPassword</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EncryptedPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EncryptedPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PasswordExpiryTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PasswordExpiryTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserAccountExpriyDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserAccountExpriyDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iCAREUser.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iCAREUser.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
