@@ -4,6 +4,9 @@
 {
     @Html.AntiForgeryToken()
 
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
     <div class="form-horizontal">
         <h4>UserAuthentication</h4>
         <hr />
@@ -24,17 +27,18 @@
             </div>
         </div>
 
+        <p></p>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Login" class="btn btn-default" />
+                <input type="submit" value="Login" class="btn btn-outline-primary" />
             </div>
         </div>
     </div>
-    <p>Username: @ViewBag.UserName</p>
 
 
 }
 
 <div>
+    <p></p>
     @Html.ActionLink("Back to Home", "Index", "Home")
 </div>
