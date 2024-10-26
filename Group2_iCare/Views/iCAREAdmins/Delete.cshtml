@@ -1,0 +1,56 @@
+﻿@model Group2_iCare.Models.iCAREAdmin
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>iCAREAdmin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateHired)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateHired)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateFinished)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateFinished)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iCAREUser.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iCAREUser.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

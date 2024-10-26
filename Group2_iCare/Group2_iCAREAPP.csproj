@@ -121,12 +121,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\iCAREAdminsController.cs" />
     <Compile Include="Controllers\iCAREUsersController.cs" />
+    <Compile Include="Controllers\iCAREWorkersController.cs" />
+    <Compile Include="Controllers\ManageAccountsController.cs" />
     <Compile Include="Controllers\UserAuthenticationController.cs" />
     <Compile Include="Controllers\UserPasswordsController.cs" />
+    <Compile Include="Controllers\UserRolesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ManageAccounts.cs" />
     <Compile Include="Models\UserAuthentication.cs" />
     <Compile Include="Models\DocumentMetadata.cs">
       <DependentUpon>Entities.tt</DependentUpon>
@@ -258,6 +263,22 @@
     <Content Include="Views\UserPasswords\Edit.cshtml" />
     <Content Include="Views\UserPasswords\Index.cshtml" />
     <Content Include="Views\UserAuthentication\LoginForm.cshtml" />
+    <Content Include="Views\iCAREAdmins\Create.cshtml" />
+    <Content Include="Views\iCAREAdmins\Delete.cshtml" />
+    <Content Include="Views\iCAREAdmins\Details.cshtml" />
+    <Content Include="Views\iCAREAdmins\Edit.cshtml" />
+    <Content Include="Views\iCAREAdmins\Index.cshtml" />
+    <Content Include="Views\iCAREWorkers\Create.cshtml" />
+    <Content Include="Views\iCAREWorkers\Delete.cshtml" />
+    <Content Include="Views\iCAREWorkers\Details.cshtml" />
+    <Content Include="Views\iCAREWorkers\Edit.cshtml" />
+    <Content Include="Views\iCAREWorkers\Index.cshtml" />
+    <Content Include="Views\UserRoles\Create.cshtml" />
+    <Content Include="Views\UserRoles\Delete.cshtml" />
+    <Content Include="Views\UserRoles\Details.cshtml" />
+    <Content Include="Views\UserRoles\Edit.cshtml" />
+    <Content Include="Views\UserRoles\Index.cshtml" />
+    <Content Include="Views\ManageAccounts\AdminDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

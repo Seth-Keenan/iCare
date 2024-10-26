@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Admin Dashboard";
+}
+
+<div class="jumbotron">
+    <h1>iCARE Admin Dashboard</h1>
+    <p class="lead">Hello, Admin. Use this page to manage users.</p>
+
+
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("iCARE Users", "Index", "iCAREUsers")</h2>
+        <p>
+            Manage Users
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("iCARE Workers", "Index", "iCAREWorkers")</h2>
+        <p>
+            Manage Workers
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("iCARE Admin", "Index", "iCAREAdmins")</h2>
+        <p>
+            Manage Your Account
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("iCARE User Passwords", "Index", "UserPasswords")</h2>
+        <p>
+            Manage Passwords
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("iCARE User Roles", "Index", "UserRoles")</h2>
+        <p>
+            Manage User Roles
+        </p>
+    </div>
+</div>
+
+<div>
+    <p></p>
+    @Html.ActionLink("Logout", "Index", "Home")
+</div>

@@ -19,7 +19,7 @@ namespace Group2_iCare.Controllers
         }
 
         // POST: User/Login
-        [HttpPost]
+        [HttpPost] // Needed for taking info in from user, not posting to the DB
         [ValidateAntiForgeryToken]
         public ActionResult LoginForm(UserAuthentication user)
         {
@@ -34,20 +34,17 @@ namespace Group2_iCare.Controllers
                 
                 if (userPassword.EncryptedPassword == user.Password && userPassword.UserName == user.UserName)
                 {
-                    //// Redirect the user based on their role or other criteria
-                    //if (/* check if user is admin */)
-                    //{
-                    //    return RedirectToAction("AdminDashboard", "Admin");
-                    //}
-                    //else if (/* check if user is a worker */)
+                    // RedirectToAction for the user based on their role
+
+                    iCAREAdmin admin = db.iCAREAdmin.Find(userPassword.ID); // if null, user is not admin
+                    if (admin != null) // Check if the user is the Admin
+                    {
+                        return RedirectToAction("AdminDashboard", "ManageAccounts");
+                    }
+                    //else
                     //{
                     //    return RedirectToAction("WorkerDashboard", "Worker");
                     //}
-                    //else
-                    //{
-                    //    return RedirectToAction("UserDashboard", "User");
-                    //}
-                    return Redirect("/");
                 }
                 else
                 {
