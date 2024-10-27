@@ -3,6 +3,7 @@
 -- Parent Table --
 CREATE TABLE iCAREUser (
     ID VARCHAR(255) PRIMARY KEY,
+	Name VARCHAR(255) 
 );
 
 -- Child Table for iCAREWorker (inherits iCAREUser) --
