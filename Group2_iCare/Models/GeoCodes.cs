@@ -14,7 +14,16 @@ namespace Group2_iCare.Models
     
     public partial class GeoCodes
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public GeoCodes()
+        {
+            this.PatientRecord = new HashSet<PatientRecord>();
+        }
+    
         public string ID { get; set; }
         public string Description { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PatientRecord> PatientRecord { get; set; }
     }
 }

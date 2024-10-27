@@ -120,11 +120,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GeoCodesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\iCAREAdminsController.cs" />
+    <Compile Include="Controllers\iCAREBoardController.cs" />
     <Compile Include="Controllers\iCAREUsersController.cs" />
     <Compile Include="Controllers\iCAREWorkersController.cs" />
     <Compile Include="Controllers\ManageAccountsController.cs" />
+    <Compile Include="Controllers\PatientRecordsController.cs" />
     <Compile Include="Controllers\UserAuthenticationController.cs" />
     <Compile Include="Controllers\UserPasswordsController.cs" />
     <Compile Include="Controllers\UserRolesController.cs" />
@@ -279,6 +282,17 @@
     <Content Include="Views\UserRoles\Edit.cshtml" />
     <Content Include="Views\UserRoles\Index.cshtml" />
     <Content Include="Views\ManageAccounts\AdminDashboard.cshtml" />
+    <Content Include="Views\PatientRecords\Create.cshtml" />
+    <Content Include="Views\PatientRecords\Delete.cshtml" />
+    <Content Include="Views\PatientRecords\Details.cshtml" />
+    <Content Include="Views\PatientRecords\Edit.cshtml" />
+    <Content Include="Views\PatientRecords\Index.cshtml" />
+    <Content Include="Views\GeoCodes\Create.cshtml" />
+    <Content Include="Views\GeoCodes\Delete.cshtml" />
+    <Content Include="Views\GeoCodes\Details.cshtml" />
+    <Content Include="Views\GeoCodes\Edit.cshtml" />
+    <Content Include="Views\GeoCodes\Index.cshtml" />
+    <Content Include="Views\iCAREBoard\iCAREBoardForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
