@@ -3,6 +3,7 @@
 -- Parent Table --
 CREATE TABLE iCAREUser (
     ID VARCHAR(255) PRIMARY KEY,
+	Name VARCHAR(255)
 );
 
 -- Child Table for iCAREWorker (inherits iCAREUser) --
@@ -83,3 +84,15 @@ CREATE TABLE DrugsDictionary (
 	ID VARCHAR(255) PRIMARY KEY,
 	Name VARCHAR(255)
 );
+
+INSERT INTO iCAREUser (ID, Name) 
+VALUES
+	('1', 'Admin');
+
+INSERT INTO iCAREAdmin (ID, AdminEmail) 
+VALUES
+	('1', 'g@g.com');
+
+INSERT INTO UserPassword (ID, UserName, EncryptedPassword, PasswordExpiryTime, UserAccountExpriyDate)
+VALUES
+	('1', 'ADMIN', 'ADMIN', 90, '2025-01-01');
