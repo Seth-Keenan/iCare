@@ -23,5 +23,10 @@ namespace Group2_iCare.Models
         public string BloodGroup { get; set; }
         public string BedID { get; set; }
         public string TreatmentArea { get; set; }
+        public string GeoCodeID { get; set; }
+        public string WorkerID { get; set; }
+    
+        public virtual GeoCodes GeoCodes { get; set; }
+        public virtual iCAREWorker iCAREWorker { get; set; }
     }
 }

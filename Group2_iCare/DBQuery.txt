@@ -47,6 +47,8 @@ CREATE TABLE GeoCodes (
 -- PatientRecord defines fundamental information about the patient --
 CREATE TABLE PatientRecord (
 	ID VARCHAR(255) PRIMARY KEY,
+	WorkerID VARCHAR(255),
+	GeoCodeID VARCHAR(255),
 	Name VARCHAR(255),
 	Address VARCHAR(255),
 	DateOfBirth DATE,
@@ -54,7 +56,9 @@ CREATE TABLE PatientRecord (
 	Weight FLOAT,
 	BloodGroup VARCHAR(255),
 	BedID VARCHAR(255),
-	TreatmentArea VARCHAR(255)
+	TreatmentArea VARCHAR(255),
+	FOREIGN KEY (WorkerID) REFERENCES iCAREWorker(ID),
+	FOREIGN KEY (GeoCodeID) REFERENCES GeoCodes(ID),
 );
 
 -- TreatmentRecord associates workers and patients --
