@@ -14,6 +14,12 @@ namespace Group2_iCare.Models
     
     public partial class PatientRecord
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PatientRecord()
+        {
+            this.DocumentMetadata = new HashSet<DocumentMetadata>();
+        }
+    
         public string ID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
@@ -28,5 +34,7 @@ namespace Group2_iCare.Models
     
         public virtual GeoCodes GeoCodes { get; set; }
         public virtual iCAREWorker iCAREWorker { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DocumentMetadata> DocumentMetadata { get; set; }
     }
 }

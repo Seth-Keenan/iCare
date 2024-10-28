@@ -5,14 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0863aca3ce414c498b1164d0a876417a" Name="Diagram1">
-        <EntityTypeShape EntityType="Group2_iCAREDBModel.DocumentMetadata" Width="1.5" PointX="5.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_iCAREDBModel.DrugsDictionary" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_iCAREDBModel.DocumentMetadata" Width="1.5" PointX="5.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_iCAREDBModel.DrugsDictionary" Width="1.5" PointX="7.375" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Group2_iCAREDBModel.GeoCodes" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Group2_iCAREDBModel.iCAREAdmin" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Group2_iCAREDBModel.iCAREUser" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Group2_iCAREDBModel.iCAREWorker" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Group2_iCAREDBModel.ModificationHistory" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_iCAREDBModel.PatientRecord" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_iCAREDBModel.PatientRecord" Width="1.5" PointX="10.25" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Group2_iCAREDBModel.TreatmentRecord" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Group2_iCAREDBModel.UserPassword" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Group2_iCAREDBModel.UserRole" Width="1.5" PointX="10.375" PointY="1" IsExpanded="true" />
@@ -22,6 +22,9 @@
         <AssociationConnector ManuallyRouted="false" Association="Group2_iCAREDBModel.FK__UserPassword__ID__3F466844" />
         <AssociationConnector Association="Group2_iCAREDBModel.FK__PatientRe__GeoCo__45F365D3" />
         <AssociationConnector Association="Group2_iCAREDBModel.FK__PatientRe__Worke__45F365D3" />
+        <AssociationConnector Association="Group2_iCAREDBModel.FK__DocumentM__Modif__4D94879B" />
+        <AssociationConnector Association="Group2_iCAREDBModel.FK__DocumentM__Patie__4BAC3F29" />
+        <AssociationConnector Association="Group2_iCAREDBModel.FK__DocumentM__Worke__4CA06362" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

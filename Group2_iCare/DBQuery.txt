@@ -70,11 +70,19 @@ CREATE TABLE TreatmentRecord (
 
 -- DocumentMetadata stores information or iCARE PDF files --
 CREATE TABLE DocumentMetadata (
-	DocID VARCHAR(255) PRIMARY KEY,
-	DocName VARCHAR(255),
-	DateOfCreation DATE,
+    DocID VARCHAR(255) PRIMARY KEY,
+    DocName VARCHAR(255),
+    DateOfCreation DATE,
+    PatientID VARCHAR(255),
+    WorkerID VARCHAR(255),
+    ModifiedByID VARCHAR(255),
+    CreationDate DATE,
+    ModifyDate DATE,
+    Descript VARCHAR(255),
+    FOREIGN KEY (PatientID) REFERENCES PatientRecord(ID),
+    FOREIGN KEY (WorkerID) REFERENCES iCAREWorker(ID),
+    FOREIGN KEY (ModifiedByID) REFERENCES iCAREUser(ID)
 );
-
 -- ModificationHistory manages history of PDF documents --
 CREATE TABLE ModificationHistory (
 	DocID VARCHAR(255) PRIMARY KEY,

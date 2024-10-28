@@ -17,7 +17,16 @@ namespace Group2_iCare.Models
         public string DocID { get; set; }
         public string DocName { get; set; }
         public Nullable<System.DateTime> DateOfCreation { get; set; }
+        public string PatientID { get; set; }
+        public string WorkerID { get; set; }
+        public string ModifiedByID { get; set; }
+        public Nullable<System.DateTime> CreationDate { get; set; }
+        public Nullable<System.DateTime> ModifyDate { get; set; }
+        public string Descript { get; set; }
     
         public virtual ModificationHistory ModificationHistory { get; set; }
+        public virtual iCAREUser iCAREUser { get; set; }
+        public virtual PatientRecord PatientRecord { get; set; }
+        public virtual iCAREWorker iCAREWorker { get; set; }
     }
 }
