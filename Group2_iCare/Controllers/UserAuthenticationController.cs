@@ -37,14 +37,18 @@ namespace Group2_iCare.Controllers
                     // RedirectToAction for the user based on their role
 
                     iCAREAdmin admin = db.iCAREAdmin.Find(userPassword.ID); // if null, user is not admin
+                    iCAREWorker worker = db.iCAREWorker.Find(userPassword.ID); // if null, user is not worker
+
                     if (admin != null) // Check if the user is the Admin
                     {
+                        Session["User"] = db.iCAREUser.Find(userPassword.ID); // Store worker in Session
                         return RedirectToAction("AdminDashboard", "ManageAccounts");
                     }
-                    //else
-                    //{
-                    //    return RedirectToAction("WorkerDashboard", "Worker");
-                    //}
+                    else if (worker != null) // Check if the user is a worker
+                    {
+                        Session["User"] = db.iCAREUser.Find(userPassword.ID); // Store worker in Session
+                        return RedirectToAction("Index", "WorkerDashboard");
+                    }
                 }
                 else
                 {
@@ -54,5 +58,13 @@ namespace Group2_iCare.Controllers
 
             return View(user);
         }
+
+        // Logout method
+        public ActionResult Logout()
+        {
+            Session.Clear(); // Clear all session data
+            return RedirectToAction("Index", "Home"); // Redirect to login page or home page
+        }
+
     }
 }

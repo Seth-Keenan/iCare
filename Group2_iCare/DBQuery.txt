@@ -103,7 +103,7 @@ VALUES
 
 INSERT INTO iCAREAdmin (ID, AdminEmail) 
 VALUES
-	('1', 'g@g.com');
+	('1', 'test@test.com');
 
 INSERT INTO UserPassword (ID, UserName, EncryptedPassword, PasswordExpiryTime, UserAccountExpriyDate)
 VALUES

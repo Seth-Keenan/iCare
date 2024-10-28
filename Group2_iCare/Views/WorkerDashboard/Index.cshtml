@@ -1,0 +1,22 @@
+﻿@model Group2_iCare.Models.iCAREUser
+
+<div class="jumbotron">
+    <h1>iCARE Worker Dashboard</h1>
+    <p class="lead">Hello, @Model.Name. Use this page to manage your patients and documents.</p>
+
+
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Assign Patient", "AssignPatientForm", "AssignPatient")</h2>
+        <p>
+            Assign Patients to Workers
+        </p>
+    </div>
+</div>
+
+<div>
+    <p></p>
+    @Html.ActionLink("Logout", "Logout", "UserAuthentication", new { }, new { @class = "btn btn-outline-primary" })
+</div>

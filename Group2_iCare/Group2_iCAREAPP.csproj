@@ -132,6 +132,7 @@
     <Compile Include="Controllers\UserAuthenticationController.cs" />
     <Compile Include="Controllers\UserPasswordsController.cs" />
     <Compile Include="Controllers\UserRolesController.cs" />
+    <Compile Include="Controllers\WorkerDashboardController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -300,6 +301,7 @@
     <Content Include="Views\GeoCodes\Edit.cshtml" />
     <Content Include="Views\GeoCodes\Index.cshtml" />
     <Content Include="Views\iCAREBoard\iCAREBoardForm.cshtml" />
+    <Content Include="Views\WorkerDashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

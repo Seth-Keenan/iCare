@@ -7,15 +7,13 @@ using System.Web.Mvc;
 
 namespace Group2_iCare.Controllers
 {
-    public class ManageAccountsController : Controller
+    public class WorkerDashboardController : Controller
     {
-        private Group2_iCAREDBEntities db = new Group2_iCAREDBEntities();
-
-        // GET: ManageAccounts
-        public ActionResult AdminDashboard()
+        // GET: WorkerDashboard
+        public ActionResult Index()
         {
             var user = Session["User"] as iCAREUser;
-
+            
             if (user == null)
             {
                 return RedirectToAction("LoginForm", "UserAuthentication");

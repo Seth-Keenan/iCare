@@ -17,6 +17,9 @@
                 <th>Name</th>
                 <th>Address</th>
                 <th>Date of Birth</th>
+                <th>Blood Group</th>
+                <th>Bed ID</th>
+                <th>Treatment Area</th>
             </tr>
         </thead>
         <tbody>
@@ -29,7 +32,10 @@
                     <td>@patient.ID</td>
                     <td>@patient.Name</td>
                     <td>@patient.Address</td>
-                    <td>@patient.DateOfBirth?.ToString("yyyy-MM-dd")</td>
+                    <td>@patient.DateOfBirth</td>
+                    <td>@patient.BloodGroup</td>
+                    <td>@patient.BedID</td>
+                    <td>@patient.TreatmentArea</td>
                 </tr>
             }
         </tbody>
@@ -39,7 +45,7 @@
         <label for="workerId">Worker ID:</label>
         <input type="text" name="workerId" id="workerId" class="form-control" required />
     </div>
-
+    <p></p>
     <button type="submit" class="btn btn-primary">Assign Selected Patients</button>
 }
 

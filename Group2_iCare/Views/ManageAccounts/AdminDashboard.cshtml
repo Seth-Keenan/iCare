@@ -1,12 +1,8 @@
-﻿@{
-    ViewBag.Title = "Admin Dashboard";
-}
+﻿@model Group2_iCare.Models.iCAREUser
 
 <div class="jumbotron">
     <h1>iCARE Admin Dashboard</h1>
-    <p class="lead">Hello, Admin. Use this page to manage users.</p>
-
-
+    <p class="lead">Hello, @Model.Name. Use this page to manage users.</p>
 </div>
 
 <div class="row">
@@ -56,9 +52,15 @@
             Display GUI Window showing document metadata (e.g. patient info)
         </p>
     </div>
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Manage Patient Records", "Index", "PatientRecords")</h2>
+        <p>
+            Assign Patients to Workers
+        </p>
+    </div>
 </div>
 
 <div>
     <p></p>
-    @Html.ActionLink("Logout", "Index", "Home")
+    @Html.ActionLink("Logout", "Logout", "UserAuthentication", new { }, new { @class = "btn btn-outline-primary" })
 </div>
