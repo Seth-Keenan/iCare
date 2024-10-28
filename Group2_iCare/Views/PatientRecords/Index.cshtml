@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Patient Records</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -34,6 +34,12 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TreatmentArea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GeoCodes.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iCAREWorker.Profession)
         </th>
         <th></th>
     </tr>
@@ -65,6 +71,12 @@
             @Html.DisplayFor(modelItem => item.TreatmentArea)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.GeoCodes.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iCAREWorker.Profession)
+        </td>
+        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ID })
@@ -73,8 +85,3 @@
 }
 
 </table>
-
-<div>
-    <p></p>
-    @Html.ActionLink("Back to Admin Dashboard", "AdminDashboard", "ManageAccounts")
-</div>

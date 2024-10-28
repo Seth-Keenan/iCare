@@ -17,7 +17,8 @@ namespace Group2_iCare.Controllers
         // GET: PatientRecords
         public ActionResult Index()
         {
-            return View(db.PatientRecord.ToList());
+            var patientRecord = db.PatientRecord.Include(p => p.GeoCodes).Include(p => p.iCAREWorker);
+            return View(patientRecord.ToList());
         }
 
         // GET: PatientRecords/Details/5
@@ -38,6 +39,8 @@ namespace Group2_iCare.Controllers
         // GET: PatientRecords/Create
         public ActionResult Create()
         {
+            ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description");
+            ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession");
             return View();
         }
 
@@ -46,7 +49,7 @@ namespace Group2_iCare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Address,DateOfBirth,Height,Weight,BloodGroup,BedID,TreatmentArea")] PatientRecord patientRecord)
+        public ActionResult Create([Bind(Include = "ID,Name,Address,DateOfBirth,Height,Weight,BloodGroup,BedID,TreatmentArea,GeoCodeID,WorkerID")] PatientRecord patientRecord)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +58,8 @@ namespace Group2_iCare.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description", patientRecord.GeoCodeID);
+            ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", patientRecord.WorkerID);
             return View(patientRecord);
         }
 
@@ -70,6 +75,8 @@ namespace Group2_iCare.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description", patientRecord.GeoCodeID);
+            ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", patientRecord.WorkerID);
             return View(patientRecord);
         }
 
@@ -78,7 +85,7 @@ namespace Group2_iCare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Address,DateOfBirth,Height,Weight,BloodGroup,BedID,TreatmentArea")] PatientRecord patientRecord)
+        public ActionResult Edit([Bind(Include = "ID,Name,Address,DateOfBirth,Height,Weight,BloodGroup,BedID,TreatmentArea,GeoCodeID,WorkerID")] PatientRecord patientRecord)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +93,8 @@ namespace Group2_iCare.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description", patientRecord.GeoCodeID);
+            ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", patientRecord.WorkerID);
             return View(patientRecord);
         }
 

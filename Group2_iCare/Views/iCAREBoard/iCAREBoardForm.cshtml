@@ -1,1 +1,33 @@
-﻿
+﻿@model Group2_iCare.Models.GeoCodes
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <div class="form-horizontal">
+        <h4>GeoCode Selection</h4>
+        <hr />
+
+        <div class="form-group">
+            <label asp-for="GeoCodeId" class="col-md-2 control-label">Select a GeoCode</label>
+            <p></p>
+            <div class="col-md-10">
+                @Html.DropDownList("GeoCodeId", ViewBag.GeoCodeList as List<SelectListItem>, "Select a GeoCode", new { @class = "form-control" })
+            </div>
+        </div>
+        <p></p>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Search" class="btn btn-outline-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <p></p>
+    @Html.ActionLink("Back to Worker Dashboard", "Index", "WorkerDashboard")
+</div>
