@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "AssignPatientForm";
+}
+
+<h2>Assign Patients</h2>
+
+@using (Html.BeginForm("AssignPatientForm", "AssignPatient", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Patient ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Date of Birth</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var patient in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="selectedPatientIds" value="@patient.ID" />
+                    </td>
+                    <td>@patient.ID</td>
+                    <td>@patient.Name</td>
+                    <td>@patient.Address</td>
+                    <td>@patient.DateOfBirth?.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="form-group">
+        <label for="workerId">Worker ID:</label>
+        <input type="text" name="workerId" id="workerId" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Assign Selected Patients</button>
+}
+
+<div>
+    <p></p>
+    @Html.ActionLink("Back to Admin Dashboard", "AdminDashboard", "ManageAccounts")
+</div>

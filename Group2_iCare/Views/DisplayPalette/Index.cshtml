@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Group2_iCare.Models.DocumentMetadata>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DocName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfCreation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModificationHistory.Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfCreation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModificationHistory.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DocID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DocID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DocID })
+        </td>
+    </tr>
+}
+
+</table>

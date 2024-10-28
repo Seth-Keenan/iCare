@@ -3,7 +3,7 @@
 -- Parent Table --
 CREATE TABLE iCAREUser (
     ID VARCHAR(255) PRIMARY KEY,
-	Name VARCHAR(255) 
+	Name VARCHAR(255)
 );
 
 -- Child Table for iCAREWorker (inherits iCAREUser) --
@@ -47,6 +47,8 @@ CREATE TABLE GeoCodes (
 -- PatientRecord defines fundamental information about the patient --
 CREATE TABLE PatientRecord (
 	ID VARCHAR(255) PRIMARY KEY,
+	WorkerID VARCHAR(255),
+	GeoCodeID VARCHAR(255),
 	Name VARCHAR(255),
 	Address VARCHAR(255),
 	DateOfBirth DATE,
@@ -54,7 +56,9 @@ CREATE TABLE PatientRecord (
 	Weight FLOAT,
 	BloodGroup VARCHAR(255),
 	BedID VARCHAR(255),
-	TreatmentArea VARCHAR(255)
+	TreatmentArea VARCHAR(255),
+	FOREIGN KEY (WorkerID) REFERENCES iCAREWorker(ID),
+	FOREIGN KEY (GeoCodeID) REFERENCES GeoCodes(ID),
 );
 
 -- TreatmentRecord associates workers and patients --
@@ -66,11 +70,19 @@ CREATE TABLE TreatmentRecord (
 
 -- DocumentMetadata stores information or iCARE PDF files --
 CREATE TABLE DocumentMetadata (
-	DocID VARCHAR(255) PRIMARY KEY,
-	DocName VARCHAR(255),
-	DateOfCreation DATE,
+    DocID VARCHAR(255) PRIMARY KEY,
+    DocName VARCHAR(255),
+    DateOfCreation DATE,
+    PatientID VARCHAR(255),
+    WorkerID VARCHAR(255),
+    ModifiedByID VARCHAR(255),
+    CreationDate DATE,
+    ModifyDate DATE,
+    Descript VARCHAR(255),
+    FOREIGN KEY (PatientID) REFERENCES PatientRecord(ID),
+    FOREIGN KEY (WorkerID) REFERENCES iCAREWorker(ID),
+    FOREIGN KEY (ModifiedByID) REFERENCES iCAREUser(ID)
 );
-
 -- ModificationHistory manages history of PDF documents --
 CREATE TABLE ModificationHistory (
 	DocID VARCHAR(255) PRIMARY KEY,
@@ -84,3 +96,15 @@ CREATE TABLE DrugsDictionary (
 	ID VARCHAR(255) PRIMARY KEY,
 	Name VARCHAR(255)
 );
+
+INSERT INTO iCAREUser (ID, Name) 
+VALUES
+	('1', 'Admin');
+
+INSERT INTO iCAREAdmin (ID, AdminEmail) 
+VALUES
+	('1', 'g@g.com');
+
+INSERT INTO UserPassword (ID, UserName, EncryptedPassword, PasswordExpiryTime, UserAccountExpriyDate)
+VALUES
+	('1', 'ADMIN', 'ADMIN', 90, '2025-01-01');

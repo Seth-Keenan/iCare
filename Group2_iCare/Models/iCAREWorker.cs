@@ -14,9 +14,20 @@ namespace Group2_iCare.Models
     
     public partial class iCAREWorker
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public iCAREWorker()
+        {
+            this.PatientRecord = new HashSet<PatientRecord>();
+            this.DocumentMetadata = new HashSet<DocumentMetadata>();
+        }
+    
         public string ID { get; set; }
         public string Profession { get; set; }
     
         public virtual iCAREUser iCAREUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PatientRecord> PatientRecord { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DocumentMetadata> DocumentMetadata { get; set; }
     }
 }

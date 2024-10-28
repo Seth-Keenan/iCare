@@ -120,7 +120,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\GeoCodesController.cs" />
+    <Compile Include="Controllers\AssignPatientController.cs" />
+    <Compile Include="Controllers\DisplayPaletteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\iCAREAdminsController.cs" />
     <Compile Include="Controllers\iCAREBoardController.cs" />
@@ -282,6 +283,12 @@
     <Content Include="Views\UserRoles\Edit.cshtml" />
     <Content Include="Views\UserRoles\Index.cshtml" />
     <Content Include="Views\ManageAccounts\AdminDashboard.cshtml" />
+    <Content Include="Views\AssignPatient\AssignPatientForm.cshtml" />
+    <Content Include="Views\DisplayPalette\Create.cshtml" />
+    <Content Include="Views\DisplayPalette\Delete.cshtml" />
+    <Content Include="Views\DisplayPalette\Details.cshtml" />
+    <Content Include="Views\DisplayPalette\Edit.cshtml" />
+    <Content Include="Views\DisplayPalette\Index.cshtml" />
     <Content Include="Views\PatientRecords\Create.cshtml" />
     <Content Include="Views\PatientRecords\Delete.cshtml" />
     <Content Include="Views\PatientRecords\Details.cshtml" />
