@@ -21,26 +21,33 @@ namespace Group2_iCare.Controllers
         // POST: AssignPatient
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AssignPatientForm(List<string> selectedPatientIds, string workerId)
+        public ActionResult AssignPatientForm(List<string> selectedPatientIds/*, workerId*/)
         {
+            var user = Session["User"] as iCAREUser;
+
+            if (user == null)
+            {
+                return RedirectToAction("LoginForm", "UserAuthentication");
+            }
+
             if (selectedPatientIds == null || !selectedPatientIds.Any())
             {
                 ModelState.AddModelError("", "No patients selected.");
                 return RedirectToAction("AssignPatientForm");
             }
 
-            if (string.IsNullOrEmpty(workerId))
-            {
-                ModelState.AddModelError("", "Worker ID is required.");
-                return RedirectToAction("AssignPatientForm");
-            }
+            //if (string.IsNullOrEmpty(workerId))
+            //{
+            //    ModelState.AddModelError("", "Worker ID is required.");
+            //    return RedirectToAction("AssignPatientForm");
+            //}
 
             foreach (var patientId in selectedPatientIds)
             {
                 var patient = db.PatientRecord.Find(patientId);
                 if (patient != null)
                 {
-                    patient.WorkerID = workerId;
+                    patient.WorkerID = user.ID;
                 }
             }
 

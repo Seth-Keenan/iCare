@@ -121,6 +121,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AssignPatientController.cs" />
+    <Compile Include="Controllers\DisplayMyBoardController.cs" />
     <Compile Include="Controllers\DisplayPaletteController.cs" />
     <Compile Include="Controllers\GeoCodesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -303,6 +304,7 @@
     <Content Include="Views\PatientRecords\Details.cshtml" />
     <Content Include="Views\PatientRecords\Edit.cshtml" />
     <Content Include="Views\PatientRecords\Index.cshtml" />
+    <Content Include="Views\DisplayMyBoard\DisplayMyBoard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

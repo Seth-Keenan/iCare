@@ -43,20 +43,5 @@ namespace Group2_iCare.Controllers
 
             return View(patientRecords);
         }
-
-        // GET: PatientRecords/Details
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PatientRecord patientRecord = db.PatientRecord.Find(id);
-            if (patientRecord == null)
-            {
-                return HttpNotFound();
-            }
-            return View(patientRecord);
-        }
     }
 }
