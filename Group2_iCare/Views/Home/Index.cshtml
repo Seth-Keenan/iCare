@@ -2,24 +2,50 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>iCARE</h1>
-    <p class="lead">iCARE is a healthcare management application.</p>
+<head>
+    <link href="~/Content/home.css" rel="stylesheet" type="text/css" />
+</head>
 
 
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("UserAuthentication", "LoginForm", "UserAuthentication")</h2>
-        <p>
-            Login Here.
-        </p>
+<main class="home-container">
+    <img src="~/Content/Images/hex.jpg" class="back-img" alt="...">
+    <div class="title-1 text-center">Welcome to iCARE</div>
+    <div class="title-2 text-center">
+        Managing your health system has never been easier.
     </div>
-    @*<div class="col-md-4">
-            <h2>@Html.ActionLink("iCAREUsers", "Index", "iCAREUsers")</h2> TEMPLATE FOR ADDING MORE LINKS TO VIEWS FROM HOME
-            <p>
-                Login to iCARE.
-            </p>
-        </div>*@
-</div>
+    <div>
+        @Html.ActionLink("Learn about our Team", "Contact", "Home", new { area = "" }, new { @class = "btn btn-primary team-btn" })
+    </div>
+</main>
+    <div class="gradient-background">
+        <div>An all enclusive application that allows for full control over the management system.</div>
+    </div>
+    <div class="features-container">
+        <h1>Some of our Features</h1>
+        <div class="cards-container">
+            <div class="card feature-card shadow-lg" style="width: 18rem;">
+                <img src="~/Content/Images/workers.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Workers</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            <div class="card feature-card shadow-lg" style="width: 18rem;">
+                <img src="~/Content/Images/asPatient.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Access Patient Data</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            <div class="card feature-card shadow-lg" style="width: 18rem;">
+                <img src="~/Content/Images/documents.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Import/Export Documents</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>

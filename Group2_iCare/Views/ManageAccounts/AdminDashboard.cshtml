@@ -1,81 +1,84 @@
 ﻿@model Group2_iCare.Models.iCAREUser
 
-<div class="jumbotron">
-    <h1>iCARE Admin Dashboard</h1>
-    <p class="lead">Hello, @Model.Name. Use this page to manage users.</p>
-</div>
+<head>
+    <link href="~/Content/admindashboard.css" rel="stylesheet" type="text/css" />
+</head>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("iCARE Users", "Index", "iCAREUsers")</h2>
-        <p>
-            Manage Users
-        </p>
-    </div>
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("iCARE Workers", "Index", "iCAREWorkers")</h2>
-        <p>
-            Manage Workers
-        </p>
-    </div>
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("iCARE Admin", "Index", "iCAREAdmins")</h2>
-        <p>
-            Manage Your Account
-        </p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("iCARE User Passwords", "Index", "UserPasswords")</h2>
-        <p>
-            Manage Passwords
-        </p>
-    </div>
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("iCARE User Roles", "Index", "UserRoles")</h2>
-        <p>
-            Manage User Roles
-        </p>
-    </div>
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("Assign Patient", "AssignPatientForm", "AssignPatient")</h2>
-        <p>
-            Assign Patients to Workers
-        </p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("Display Palette", "Index", "DisplayPalette")</h2>
-        <p>
-            Display GUI Window showing document metadata (e.g. patient info)
-        </p>
-    </div>
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("Manage Patient Records", "Index", "PatientRecords")</h2>
-        <p>
-            Manage Patient Records
-        </p>
-    </div>
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("Manage GeoCodes", "Index", "GeoCodes")</h2>
-        <p>
-            Manage Geographic Codes
-        </p>
-    </div>
-</div>
+@{
+    var message = TempData["LoginMessage"] as string;
+    if (!string.IsNullOrEmpty(message))
+    {
+        <div class="alert alert-success alert-dismissible" role="alert">
+            @message
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+}
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("Manage Docs", "Index", "DocumentMetadatas")</h2>
-        <p>
-            Manage Documents
-        </p>
+<body class="admin-container">
+    <div class="jumbotron">
+        <h1>Admin Dashboard</h1>
     </div>
-</div>
 
-<div>
-    <p></p>
-    @Html.ActionLink("Logout", "Logout", "UserAuthentication", new { }, new { @class = "btn btn-outline-primary" })
-</div>
+    <div class="item-container">
+        <a href="@Url.Action("Index", "iCAREUsers")" class="card text-decoration-none text-dark item-card">
+            <div class="card-body">
+                <h5 class="card-title">iCARE Users</h5>
+                <p class="card-text">Manage Users</p>
+            </div>
+        </a>
+        <a href="@Url.Action("Index", "iCAREWorkers")" class="card text-decoration-none text-dark item-card">
+            <div class="card-body">
+                <h5 class="card-title">iCARE Workers</h5>
+                <p class="card-text">Manage Workers</p>
+            </div>
+        </a>
+        <a href="@Url.Action("Index", "iCAREAdmins")" class="card text-decoration-none text-dark item-card">
+            <div class="card-body">
+                <h5 class="card-title">iCARE Admin</h5>
+                <p class="card-text">Manage Your Account</p>
+            </div>
+        </a>
+            <a href="@Url.Action("Index", "UserPasswords")" class="card text-decoration-none text-dark item-card">
+                <div class="card-body">
+                    <h5 class="card-title">iCARE User Passwords</h5>
+                    <p class="card-text">Manage Passwords</p>
+                </div>
+            </a>
+            <a href="@Url.Action("Index", "UserRoles")" class="card text-decoration-none text-dark item-card">
+                <div class="card-body">
+                    <h5 class="card-title">iCARE User Roles</h5>
+                    <p class="card-text">Manage User Roles</p>
+                </div>
+            </a>
+            <a href="@Url.Action("AssignPatientForm", "AssignPatient")" class="card text-decoration-none text-dark item-card">
+                <div class="card-body">
+                    <h5 class="card-title">Assign Patient</h5>
+                    <p class="card-text">Assign Patients to Workers</p>
+                </div>
+            </a>
+            <a href="@Url.Action("Index", "DisplayPalette")" class="card text-decoration-none text-dark item-card">
+                <div class="card-body">
+                    <h5 class="card-title">Display Palette</h5>
+                    <p class="card-text">Display GUI Window showing document metadata (e.g. patient info)</p>
+                </div>
+            </a>
+            <a href="@Url.Action("Index", "PatientRecords")" class="card text-decoration-none text-dark item-card">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Patient Records</h5>
+                    <p class="card-text">Manage Patient Records</p>
+                </div>
+            </a>
+            <a href="@Url.Action("Index", "GeoCodes")" class="card text-decoration-none text-dark item-card">
+                <div class="card-body">
+                    <h5 class="card-title">Manage GeoCodes</h5>
+                    <p class="card-text">Manage Geographic Codes</p>
+                </div>
+            </a>
+    </div>
+
+    <div>
+        <p></p>
+        @Html.ActionLink("Logout", "Logout", "UserAuthentication", new { }, new { @class = "btn btn-outline-primary" })
+    </div>
+</body>

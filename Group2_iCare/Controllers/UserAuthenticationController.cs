@@ -43,14 +43,14 @@ namespace Group2_iCare.Controllers
                     // Set role in session and redirect based on role
                     if (isAdmin)
                     {
-                        Session["UserRole"] = "Admin";
-                        Session["User"] = db.iCAREUser.Find(userPassword.ID);
+                        Session["User"] = db.iCAREUser.Find(userPassword.ID); // Store worker in Session
+                        TempData["LoginMessage"] = "Logged in Successfully";
                         return RedirectToAction("AdminDashboard", "ManageAccounts");
                     }
-                    else
+                    else if (worker != null) // Check if the user is a worker
                     {
-                        Session["UserRole"] = "Worker";
-                        Session["User"] = db.iCAREUser.Find(userPassword.ID);
+                        Session["User"] = db.iCAREUser.Find(userPassword.ID); // Store worker in Session
+                        TempData["LoginMessage"] = "Logged in Successfully";
                         return RedirectToAction("Index", "WorkerDashboard");
                     }
                 }

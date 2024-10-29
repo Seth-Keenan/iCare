@@ -1,11 +1,41 @@
-﻿@{
-    ViewBag.Title = "Contact";
+﻿
+@{
+
+    ViewBag.Title = "Contact Us";
+
 }
+
 <main aria-labelledby="title">
-    <h1 id="title">@ViewBag.Title</h1>
+    <h1 class="text-white" id="title">@ViewBag.Title</h1>
     <h3>Group2 Emails</h3>
-    <address>
-        <strong>Seth Ek: </strong><a href="mailto:sgebm6@mail.missouri.edu">sgebm6@mail.missouri.edu</a><br />
-        <strong>Seth Keenan: </strong><a href="mailto:sjkgfr@umsystem.edu">sjkgfr@umsystem.edu</a><br />
-    </address>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Seth Ek</td>
+                <td>sgebm6@mail.missouri.edu</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Seth Keenan</td>
+                <td>sjkgfr@umsystem.edu</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Jake Morgan</td>
+                <td>jkmh3n@umsystem.edu</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
 </main>
