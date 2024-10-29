@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Group2_iCAREDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Group2_iCAREDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DocumentMetadata">
           <Key>
             <PropertyRef Name="DocID" />
@@ -34,8 +34,9 @@
           <Property Name="FileName" Type="varchar" MaxLength="255" />
           <Property Name="ContentType" Type="nvarchar" MaxLength="255" />
           <Property Name="Data" Type="varbinary(max)" />
-          <Property Name="UploadedByID" Type="varchar" MaxLength="255" />
+          <Property Name="Descript" Type="varchar" MaxLength="255" />
           <Property Name="UploadDate" Type="date" />
+          <Property Name="UploadedByID" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="GeoCodes">
           <Key>
@@ -290,8 +291,7 @@
             <End Role="UserPassword" EntitySet="UserPassword" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Group2_iCAREDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -331,6 +331,7 @@
           <Property Name="UploadedByID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="UploadDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="iCAREUser" Relationship="Self.FK__Files__UploadedB__5535A963" FromRole="Files" ToRole="iCAREUser" />
+          <Property Name="Descript" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="GeoCodes">
           <Key>
@@ -632,6 +633,7 @@
           <EntitySetMapping Name="Files">
             <EntityTypeMapping TypeName="Group2_iCAREDBModel.Files">
               <MappingFragment StoreEntitySet="Files">
+                <ScalarProperty Name="Descript" ColumnName="Descript" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="ContentType" ColumnName="ContentType" />

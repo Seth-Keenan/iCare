@@ -18,9 +18,9 @@ namespace Group2_iCare.Models
         public string FileName { get; set; }
         public string ContentType { get; set; }
         public byte[] Data { get; set; }
+        public string Descript { get; set; }
         public string UploadedByID { get; set; }
         public Nullable<System.DateTime> UploadDate { get; set; }
-    
         public virtual iCAREUser iCAREUser { get; set; }
     }
 }

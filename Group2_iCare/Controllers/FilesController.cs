@@ -48,7 +48,7 @@ namespace Group2_iCare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FileName,ContentType,Data,UploadedByID,UploadDate")] Files files)
+        public ActionResult Create([Bind(Include = "ID,FileName,ContentType,Data,UploadedByID,UploadDate,Descript")] Files files)
         {
             if (ModelState.IsValid)
             {
