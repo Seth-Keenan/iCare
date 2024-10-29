@@ -21,6 +21,8 @@ namespace Group2_iCare.Models
         }
     
         public string ID { get; set; }
+        public string WorkerID { get; set; }
+        public string GeoCodeID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public Nullable<System.DateTime> DateOfBirth { get; set; }
@@ -29,12 +31,10 @@ namespace Group2_iCare.Models
         public string BloodGroup { get; set; }
         public string BedID { get; set; }
         public string TreatmentArea { get; set; }
-        public string GeoCodeID { get; set; }
-        public string WorkerID { get; set; }
     
-        public virtual GeoCodes GeoCodes { get; set; }
-        public virtual iCAREWorker iCAREWorker { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DocumentMetadata> DocumentMetadata { get; set; }
+        public virtual GeoCodes GeoCodes { get; set; }
+        public virtual iCAREWorker iCAREWorker { get; set; }
     }
 }

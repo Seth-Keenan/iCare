@@ -18,15 +18,18 @@ namespace Group2_iCare.Models
         public iCAREUser()
         {
             this.DocumentMetadata = new HashSet<DocumentMetadata>();
+            this.Files = new HashSet<Files>();
         }
     
         public string ID { get; set; }
         public string Name { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DocumentMetadata> DocumentMetadata { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Files> Files { get; set; }
         public virtual iCAREAdmin iCAREAdmin { get; set; }
         public virtual iCAREWorker iCAREWorker { get; set; }
         public virtual UserPassword UserPassword { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DocumentMetadata> DocumentMetadata { get; set; }
     }
 }

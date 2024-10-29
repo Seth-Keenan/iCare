@@ -27,6 +27,7 @@ namespace Group2_iCare.Models
     
         public virtual DbSet<DocumentMetadata> DocumentMetadata { get; set; }
         public virtual DbSet<DrugsDictionary> DrugsDictionary { get; set; }
+        public virtual DbSet<Files> Files { get; set; }
         public virtual DbSet<GeoCodes> GeoCodes { get; set; }
         public virtual DbSet<iCAREAdmin> iCAREAdmin { get; set; }
         public virtual DbSet<iCAREUser> iCAREUser { get; set; }

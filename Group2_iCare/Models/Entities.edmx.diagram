@@ -4,27 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0863aca3ce414c498b1164d0a876417a" Name="Diagram1">
-        <EntityTypeShape EntityType="Group2_iCAREDBModel.DocumentMetadata" Width="1.5" PointX="5.375" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_iCAREDBModel.DrugsDictionary" Width="1.5" PointX="7.375" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_iCAREDBModel.GeoCodes" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_iCAREDBModel.iCAREAdmin" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_iCAREDBModel.iCAREUser" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_iCAREDBModel.iCAREWorker" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_iCAREDBModel.ModificationHistory" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_iCAREDBModel.PatientRecord" Width="1.5" PointX="10.25" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_iCAREDBModel.TreatmentRecord" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_iCAREDBModel.UserPassword" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Group2_iCAREDBModel.UserRole" Width="1.5" PointX="10.375" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="Group2_iCAREDBModel.FK__Modificat__DocID__4BAC3F29" ManuallyRouted="false" />
-        <AssociationConnector ManuallyRouted="false" Association="Group2_iCAREDBModel.FK__iCAREAdmin__ID__3C69FB99" />
-        <AssociationConnector ManuallyRouted="false" Association="Group2_iCAREDBModel.FK__iCAREWorker__ID__398D8EEE" />
-        <AssociationConnector ManuallyRouted="false" Association="Group2_iCAREDBModel.FK__UserPassword__ID__3F466844" />
-        <AssociationConnector Association="Group2_iCAREDBModel.FK__PatientRe__GeoCo__45F365D3" />
-        <AssociationConnector Association="Group2_iCAREDBModel.FK__PatientRe__Worke__45F365D3" />
-        <AssociationConnector Association="Group2_iCAREDBModel.FK__DocumentM__Modif__4D94879B" />
-        <AssociationConnector Association="Group2_iCAREDBModel.FK__DocumentM__Patie__4BAC3F29" />
-        <AssociationConnector Association="Group2_iCAREDBModel.FK__DocumentM__Worke__4CA06362" />
+      <Diagram DiagramId="a96048e4e1744d27969cfaca8aba06c5" Name="Diagram1">
+        <EntityTypeShape EntityType="Group2_iCAREDBModel.DocumentMetadata" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_iCAREDBModel.DrugsDictionary" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_iCAREDBModel.Files" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_iCAREDBModel.GeoCodes" Width="1.5" PointX="3" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_iCAREDBModel.iCAREAdmin" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_iCAREDBModel.iCAREUser" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_iCAREDBModel.iCAREWorker" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_iCAREDBModel.ModificationHistory" Width="1.5" PointX="7.5" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_iCAREDBModel.PatientRecord" Width="1.5" PointX="5.25" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_iCAREDBModel.TreatmentRecord" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_iCAREDBModel.UserPassword" Width="1.5" PointX="3" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Group2_iCAREDBModel.UserRole" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="Group2_iCAREDBModel.FK__DocumentM__Modif__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="Group2_iCAREDBModel.FK__DocumentM__Patie__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="Group2_iCAREDBModel.FK__DocumentM__Worke__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="Group2_iCAREDBModel.FK__Modificat__DocID__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="Group2_iCAREDBModel.FK__Files__UploadedB__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="Group2_iCAREDBModel.FK__PatientRe__GeoCo__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="Group2_iCAREDBModel.FK__iCAREAdmin__ID__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="Group2_iCAREDBModel.FK__iCAREWorker__ID__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="Group2_iCAREDBModel.FK__UserPassword__ID__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="Group2_iCAREDBModel.FK__PatientRe__Worke__45F365D3" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

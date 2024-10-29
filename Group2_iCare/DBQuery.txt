@@ -97,6 +97,17 @@ CREATE TABLE DrugsDictionary (
 	Name VARCHAR(255)
 );
 
+-- Files stores files uploaded by users
+CREATE TABLE Files (
+	ID VARCHAR(255) PRIMARY KEY,
+	FileName VARCHAR(255),
+	ContentType NVARCHAR(255),
+	Data VARBINARY(MAX),
+	UploadDate DATE,
+	UploadedByID VARCHAR(255),
+	FOREIGN KEY (UploadedByID) REFERENCES iCAREUser(ID)
+);
+
 INSERT INTO iCAREUser (ID, Name) 
 VALUES
 	('1', 'Admin');
