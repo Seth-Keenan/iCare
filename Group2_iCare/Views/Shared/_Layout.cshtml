@@ -3,28 +3,37 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - iCARE System</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/navigationBar.css" rel="stylesheet" type="text/css" />
 </head>
+
+@{ 
+    var cssClass = ViewBag.Title == "Home Page" ? "" : "container body-content";
+}
+
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("iCARE | Group2", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+    
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-container">
+            <div class="d-flex flex-row">
+                <img src="~/Content/Images/hospIcon.png" alt="Logo" style="height: 40px;" />
+                <h2 class="fw-bold nav-title">i<span>CARE</span></h2>
+            </div>
+            <div class="">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link nav-item" })</li>
+                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link nav-item" })</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link nav-item" })</li>
+                    <li class="ps-1">
+                        @Html.ActionLink("Log In", "LoginForm", "UserAuthentication", null, new { @class = "btn btn-primary login-btn" })
+                    </li>
                 </ul>
             </div>
-        </div>
+
     </nav>
-    <div class="container body-content">
+    <div class="@cssClass">
+
         @RenderBody()
         <hr />
         <footer>

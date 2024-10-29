@@ -42,11 +42,13 @@ namespace Group2_iCare.Controllers
                     if (admin != null) // Check if the user is the Admin
                     {
                         Session["User"] = db.iCAREUser.Find(userPassword.ID); // Store worker in Session
+                        TempData["LoginMessage"] = "Logged in Successfully";
                         return RedirectToAction("AdminDashboard", "ManageAccounts");
                     }
                     else if (worker != null) // Check if the user is a worker
                     {
                         Session["User"] = db.iCAREUser.Find(userPassword.ID); // Store worker in Session
+                        TempData["LoginMessage"] = "Logged in Successfully";
                         return RedirectToAction("Index", "WorkerDashboard");
                     }
                 }
