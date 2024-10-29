@@ -19,34 +19,38 @@ namespace Group2_iCare.Controllers
         }
 
         // POST: User/Login
-        [HttpPost] // Needed for taking info in from user, not posting to the DB
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LoginForm(UserAuthentication user)
         {
             if (ModelState.IsValid)
             {
+                // Check if the user exists in the UserPassword table by username
                 UserPassword userPassword = db.UserPassword.FirstOrDefault(up => up.UserName == user.UserName);
                 if (userPassword == null)
                 {
                     ModelState.AddModelError("", "Account does not exist with username: " + user.UserName);
                     return View(user);
                 }
-                
+
+                // Verify the password
                 if (userPassword.EncryptedPassword == user.Password && userPassword.UserName == user.UserName)
                 {
-                    // RedirectToAction for the user based on their role
+                    // Check if the user is an Admin
+                    bool isAdmin = db.iCAREAdmin.Any(a => a.ID == userPassword.ID);
+                    //bool isWorker = db.iCAREWorker.Any(w => w.ID == userPassword.ID);
 
-                    iCAREAdmin admin = db.iCAREAdmin.Find(userPassword.ID); // if null, user is not admin
-                    iCAREWorker worker = db.iCAREWorker.Find(userPassword.ID); // if null, user is not worker
-
-                    if (admin != null) // Check if the user is the Admin
+                    // Set role in session and redirect based on role
+                    if (isAdmin)
                     {
-                        Session["User"] = db.iCAREUser.Find(userPassword.ID); // Store worker in Session
+                        Session["UserRole"] = "Admin";
+                        Session["User"] = db.iCAREUser.Find(userPassword.ID);
                         return RedirectToAction("AdminDashboard", "ManageAccounts");
                     }
-                    else if (worker != null) // Check if the user is a worker
+                    else
                     {
-                        Session["User"] = db.iCAREUser.Find(userPassword.ID); // Store worker in Session
+                        Session["UserRole"] = "Worker";
+                        Session["User"] = db.iCAREUser.Find(userPassword.ID);
                         return RedirectToAction("Index", "WorkerDashboard");
                     }
                 }
@@ -63,8 +67,8 @@ namespace Group2_iCare.Controllers
         public ActionResult Logout()
         {
             Session.Clear(); // Clear all session data
-            return RedirectToAction("Index", "Home"); // Redirect to login page or home page
+            return RedirectToAction("Index", "Home"); // Redirect to the home page or login page
         }
-
     }
 }
+

@@ -119,3 +119,12 @@ VALUES
 INSERT INTO UserPassword (ID, UserName, EncryptedPassword, PasswordExpiryTime, UserAccountExpriyDate)
 VALUES
 	('1', 'ADMIN', 'ADMIN', 90, '2025-01-01');
+
+
+INSERT INTO iCAREUser (ID, Name) 
+VALUES
+	('2', 'Worker');
+
+INSERT INTO UserPassword (ID, UserName, EncryptedPassword, PasswordExpiryTime, UserAccountExpriyDate)
+VALUES
+	('2', 'WORKER', 'WORKER', 90, '2025-01-01');

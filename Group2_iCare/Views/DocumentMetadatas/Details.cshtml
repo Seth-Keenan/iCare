@@ -1,0 +1,90 @@
+﻿@model Group2_iCare.Models.DocumentMetadata
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DocumentMetadata</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DocName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfCreation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfCreation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifyDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifyDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descript)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descript)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModificationHistory.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModificationHistory.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iCAREUser.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iCAREUser.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PatientRecord.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PatientRecord.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iCAREWorker.Profession)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iCAREWorker.Profession)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DocID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

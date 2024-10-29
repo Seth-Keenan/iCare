@@ -123,6 +123,7 @@
     <Compile Include="Controllers\AssignPatientController.cs" />
     <Compile Include="Controllers\DisplayMyBoardController.cs" />
     <Compile Include="Controllers\DisplayPaletteController.cs" />
+    <Compile Include="Controllers\DocumentMetadatasController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\GeoCodesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -309,11 +310,6 @@
     <Content Include="Views\PatientRecords\Edit.cshtml" />
     <Content Include="Views\PatientRecords\Index.cshtml" />
     <Content Include="Views\DisplayMyBoard\DisplayMyBoard.cshtml" />
-    <Content Include="Views\Files\Create.cshtml" />
-    <Content Include="Views\Files\Delete.cshtml" />
-    <Content Include="Views\Files\Details.cshtml" />
-    <Content Include="Views\Files\Edit.cshtml" />
-    <Content Include="Views\Files\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

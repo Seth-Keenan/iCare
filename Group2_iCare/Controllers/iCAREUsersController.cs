@@ -114,6 +114,11 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
+            var userPasswords = db.UserPassword.Where(up => up.ID == id).ToList();
+            foreach (var userPassword in userPasswords)
+            {
+                db.UserPassword.Remove(userPassword);
+            }
             iCAREUser iCAREUser = db.iCAREUser.Find(id);
             db.iCAREUser.Remove(iCAREUser);
             db.SaveChanges();
