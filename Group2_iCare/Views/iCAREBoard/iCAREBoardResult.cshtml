@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Group2_iCare.Models.PatientRecord>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Patient Records";
 }
 
-<h2>Patient Records located in </h2>
+<h2>Patient Records located in @ViewBag.SelectedGeoCode</h2>
 
 <table class="table">
     <tr>
@@ -31,9 +31,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TreatmentArea)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GeoCodes.Description)
         </th>
     </tr>
 
@@ -64,17 +61,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TreatmentArea)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GeoCodes.Descriptoin)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { id = item.ID })
-            </td>
         </tr>
     }
 
 </table>
 
+<div>
+    <p></p>
+    @Html.ActionLink("Back to Lookup Form", "iCAREBoardForm", "iCAREBoard")
+</div>
 <div>
     <p></p>
     @Html.ActionLink("Back to Worker Dashboard", "Index", "WorkerDashboard")

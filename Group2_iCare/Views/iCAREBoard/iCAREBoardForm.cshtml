@@ -1,6 +1,6 @@
 ﻿@model Group2_iCare.Models.GeoCodes
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("iCAREBoardResult", "iCAREBoard", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -15,7 +15,7 @@
             <label asp-for="GeoCodeId" class="col-md-2 control-label">Select a GeoCode</label>
             <p></p>
             <div class="col-md-10">
-                @Html.DropDownList("GeoCodeId", ViewBag.GeoCodeList as List<SelectListItem>, "Select a GeoCode", new { @class = "form-control" })
+                @Html.DropDownList("ID", ViewBag.GeoCodeList as List<SelectListItem>, "Select a GeoCode", new { @class = "form-control" })
             </div>
         </div>
         <p></p>

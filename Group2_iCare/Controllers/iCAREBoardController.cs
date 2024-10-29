@@ -1,6 +1,7 @@
 ﻿using Group2_iCare.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -29,10 +30,18 @@ namespace Group2_iCare.Controllers
             return View();
         }
 
-        // GET: iCAREBoardResults
-        public ActionResult iCAREBoardResult(GeoCodes code)
+        // POST: From iCAREBoardForm
+        [HttpPost] // Needed for taking info in from user, not posting to the DB
+        [ValidateAntiForgeryToken]
+        public ActionResult iCAREBoardResult(string ID)
         {
-            return View(db.PatientRecord.ToList());
+            GeoCodes gc = db.GeoCodes.Find(ID);
+
+            var patientRecords = db.PatientRecord.Where(pr => pr.GeoCodeID == ID).ToList();
+
+            ViewBag.SelectedGeoCode = gc.Description;
+
+            return View(patientRecords);
         }
 
         // GET: PatientRecords/Details
