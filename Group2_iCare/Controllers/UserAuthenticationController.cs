@@ -47,7 +47,7 @@ namespace Group2_iCare.Controllers
                         TempData["LoginMessage"] = "Logged in Successfully";
                         return RedirectToAction("AdminDashboard", "ManageAccounts");
                     }
-                    else if (worker != null) // Check if the user is a worker
+                    else
                     {
                         Session["User"] = db.iCAREUser.Find(userPassword.ID); // Store worker in Session
                         TempData["LoginMessage"] = "Logged in Successfully";
