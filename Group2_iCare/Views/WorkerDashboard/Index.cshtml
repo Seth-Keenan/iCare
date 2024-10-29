@@ -28,6 +28,21 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Manage Patient Records", "Index", "PatientRecords")</h2>
+        <p>
+            Manage Patient Records
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Display Palette", "Index", "DisplayPalette")</h2>
+        <p>
+            Display GUI Window showing document metadata (e.g. patient info)
+        </p>
+    </div>
+</div>
+
 <div>
     <p></p>
     @Html.ActionLink("Logout", "Logout", "UserAuthentication", new { }, new { @class = "btn btn-outline-primary" })
