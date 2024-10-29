@@ -25,6 +25,7 @@ namespace Group2_iCare.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Check if the user exists in the UserPassword table by username
                 UserPassword userPassword = db.UserPassword.FirstOrDefault(up => up.UserName == user.UserName);
                 if (userPassword == null)
                 {
@@ -32,22 +33,24 @@ namespace Group2_iCare.Controllers
                     return View(user);
                 }
 
+                // Verify the password
                 if (userPassword.EncryptedPassword == user.Password && userPassword.UserName == user.UserName)
                 {
-                    // Check for Admin role
-                    iCAREAdmin admin = db.iCAREAdmin.Find(userPassword.ID);
-                    iCAREWorker worker = db.iCAREWorker.Find(userPassword.ID);
+                    // Check if the user is an Admin
+                    bool isAdmin = db.iCAREAdmin.Any(a => a.ID == userPassword.ID);
+                    //bool isWorker = db.iCAREWorker.Any(w => w.ID == userPassword.ID);
 
-                    if (admin != null) 
+                    // Set role in session and redirect based on role
+                    if (isAdmin)
                     {
+                        Session["UserRole"] = "Admin";
                         Session["User"] = db.iCAREUser.Find(userPassword.ID);
-                        Session["UserRole"] = "Admin"; 
                         return RedirectToAction("AdminDashboard", "ManageAccounts");
                     }
-                    else if (worker != null)
+                    else
                     {
+                        Session["UserRole"] = "Worker";
                         Session["User"] = db.iCAREUser.Find(userPassword.ID);
-                        Session["UserRole"] = "Worker"; 
                         return RedirectToAction("Index", "WorkerDashboard");
                     }
                 }
@@ -68,3 +71,4 @@ namespace Group2_iCare.Controllers
         }
     }
 }
+
