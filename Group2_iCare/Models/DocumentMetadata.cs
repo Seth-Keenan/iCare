@@ -24,9 +24,9 @@ namespace Group2_iCare.Models
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public string Descript { get; set; }
     
-        public virtual ModificationHistory ModificationHistory { get; set; }
         public virtual iCAREUser iCAREUser { get; set; }
         public virtual PatientRecord PatientRecord { get; set; }
         public virtual iCAREWorker iCAREWorker { get; set; }
+        public virtual ModificationHistory ModificationHistory { get; set; }
     }
 }

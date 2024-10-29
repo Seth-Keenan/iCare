@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Group2_iCAREDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Group2_iCAREDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DocumentMetadata">
           <Key>
             <PropertyRef Name="DocID" />
@@ -25,6 +25,17 @@
           </Key>
           <Property Name="ID" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Files">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="255" />
+          <Property Name="ContentType" Type="nvarchar" MaxLength="255" />
+          <Property Name="Data" Type="varbinary(max)" />
+          <Property Name="UploadedByID" Type="varchar" MaxLength="255" />
+          <Property Name="UploadDate" Type="date" />
         </EntityType>
         <EntityType Name="GeoCodes">
           <Key>
@@ -141,6 +152,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Files__UploadedB__5535A963">
+          <End Role="iCAREUser" Type="Self.iCAREUser" Multiplicity="0..1" />
+          <End Role="Files" Type="Self.Files" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iCAREUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Files">
+              <PropertyRef Name="UploadedByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__iCAREAdmin__ID__3C69FB99">
           <End Role="iCAREUser" Type="Self.iCAREUser" Multiplicity="1" />
           <End Role="iCAREAdmin" Type="Self.iCAREAdmin" Multiplicity="0..1" />
@@ -216,6 +239,7 @@
         <EntityContainer Name="Group2_iCAREDBModelStoreContainer">
           <EntitySet Name="DocumentMetadata" EntityType="Self.DocumentMetadata" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DrugsDictionary" EntityType="Self.DrugsDictionary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Files" EntityType="Self.Files" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GeoCodes" EntityType="Self.GeoCodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="iCAREAdmin" EntityType="Self.iCAREAdmin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="iCAREUser" EntityType="Self.iCAREUser" Schema="dbo" store:Type="Tables" />
@@ -236,6 +260,10 @@
           <AssociationSet Name="FK__DocumentM__Worke__4CA06362" Association="Self.FK__DocumentM__Worke__4CA06362">
             <End Role="iCAREWorker" EntitySet="iCAREWorker" />
             <End Role="DocumentMetadata" EntitySet="DocumentMetadata" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Files__UploadedB__5535A963" Association="Self.FK__Files__UploadedB__5535A963">
+            <End Role="iCAREUser" EntitySet="iCAREUser" />
+            <End Role="Files" EntitySet="Files" />
           </AssociationSet>
           <AssociationSet Name="FK__iCAREAdmin__ID__3C69FB99" Association="Self.FK__iCAREAdmin__ID__3C69FB99">
             <End Role="iCAREUser" EntitySet="iCAREUser" />
@@ -262,7 +290,8 @@
             <End Role="UserPassword" EntitySet="UserPassword" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Group2_iCAREDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -273,16 +302,16 @@
           <Property Name="DocID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DocName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="DateOfCreation" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ModificationHistory" Relationship="Self.FK__Modificat__DocID__4BAC3F29" FromRole="DocumentMetadata" ToRole="ModificationHistory" />
           <Property Name="PatientID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="WorkerID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="ModifiedByID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="CreationDate" Type="DateTime" Precision="0" />
           <Property Name="ModifyDate" Type="DateTime" Precision="0" />
           <Property Name="Descript" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="iCAREUser" Relationship="Group2_iCAREDBModel.FK__DocumentM__Modif__4D94879B" FromRole="DocumentMetadata" ToRole="iCAREUser" />
-          <NavigationProperty Name="PatientRecord" Relationship="Group2_iCAREDBModel.FK__DocumentM__Patie__4BAC3F29" FromRole="DocumentMetadata" ToRole="PatientRecord" />
-          <NavigationProperty Name="iCAREWorker" Relationship="Group2_iCAREDBModel.FK__DocumentM__Worke__4CA06362" FromRole="DocumentMetadata" ToRole="iCAREWorker" />
+          <NavigationProperty Name="iCAREUser" Relationship="Self.FK__DocumentM__Modif__4D94879B" FromRole="DocumentMetadata" ToRole="iCAREUser" />
+          <NavigationProperty Name="PatientRecord" Relationship="Self.FK__DocumentM__Patie__4BAC3F29" FromRole="DocumentMetadata" ToRole="PatientRecord" />
+          <NavigationProperty Name="iCAREWorker" Relationship="Self.FK__DocumentM__Worke__4CA06362" FromRole="DocumentMetadata" ToRole="iCAREWorker" />
+          <NavigationProperty Name="ModificationHistory" Relationship="Self.FK__Modificat__DocID__5070F446" FromRole="DocumentMetadata" ToRole="ModificationHistory" />
         </EntityType>
         <EntityType Name="DrugsDictionary">
           <Key>
@@ -291,19 +320,31 @@
           <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Files">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContentType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Data" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="UploadedByID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UploadDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="iCAREUser" Relationship="Self.FK__Files__UploadedB__5535A963" FromRole="Files" ToRole="iCAREUser" />
+        </EntityType>
         <EntityType Name="GeoCodes">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PatientRecord" Relationship="Group2_iCAREDBModel.FK__PatientRe__GeoCo__45F365D3" FromRole="GeoCodes" ToRole="PatientRecord" />
+          <NavigationProperty Name="PatientRecord" Relationship="Self.FK__PatientRe__GeoCo__46E78A0C" FromRole="GeoCodes" ToRole="PatientRecord" />
         </EntityType>
         <EntityType Name="iCAREAdmin">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="AdminEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="DateHired" Type="DateTime" Precision="0" />
           <Property Name="DateFinished" Type="DateTime" Precision="0" />
@@ -315,20 +356,21 @@
           </Key>
           <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DocumentMetadata" Relationship="Self.FK__DocumentM__Modif__4D94879B" FromRole="iCAREUser" ToRole="DocumentMetadata" />
+          <NavigationProperty Name="Files" Relationship="Self.FK__Files__UploadedB__5535A963" FromRole="iCAREUser" ToRole="Files" />
           <NavigationProperty Name="iCAREAdmin" Relationship="Self.FK__iCAREAdmin__ID__3C69FB99" FromRole="iCAREUser" ToRole="iCAREAdmin" />
           <NavigationProperty Name="iCAREWorker" Relationship="Self.FK__iCAREWorker__ID__398D8EEE" FromRole="iCAREUser" ToRole="iCAREWorker" />
           <NavigationProperty Name="UserPassword" Relationship="Self.FK__UserPassword__ID__3F466844" FromRole="iCAREUser" ToRole="UserPassword" />
-          <NavigationProperty Name="DocumentMetadata" Relationship="Group2_iCAREDBModel.FK__DocumentM__Modif__4D94879B" FromRole="iCAREUser" ToRole="DocumentMetadata" />
         </EntityType>
         <EntityType Name="iCAREWorker">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Profession" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DocumentMetadata" Relationship="Self.FK__DocumentM__Worke__4CA06362" FromRole="iCAREWorker" ToRole="DocumentMetadata" />
           <NavigationProperty Name="iCAREUser" Relationship="Self.FK__iCAREWorker__ID__398D8EEE" FromRole="iCAREWorker" ToRole="iCAREUser" />
-          <NavigationProperty Name="PatientRecord" Relationship="Group2_iCAREDBModel.FK__PatientRe__Worke__45F365D3" FromRole="iCAREWorker" ToRole="PatientRecord" />
-          <NavigationProperty Name="DocumentMetadata" Relationship="Group2_iCAREDBModel.FK__DocumentM__Worke__4CA06362" FromRole="iCAREWorker" ToRole="DocumentMetadata" />
+          <NavigationProperty Name="PatientRecord" Relationship="Self.FK__PatientRe__Worke__45F365D3" FromRole="iCAREWorker" ToRole="PatientRecord" />
         </EntityType>
         <EntityType Name="ModificationHistory">
           <Key>
@@ -337,13 +379,15 @@
           <Property Name="DocID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="dateOfModification" Type="DateTime" Precision="0" />
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DocumentMetadata" Relationship="Self.FK__Modificat__DocID__4BAC3F29" FromRole="ModificationHistory" ToRole="DocumentMetadata" />
+          <NavigationProperty Name="DocumentMetadata" Relationship="Self.FK__Modificat__DocID__5070F446" FromRole="ModificationHistory" ToRole="DocumentMetadata" />
         </EntityType>
         <EntityType Name="PatientRecord">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WorkerID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="GeoCodeID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
@@ -352,11 +396,9 @@
           <Property Name="BloodGroup" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="BedID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="TreatmentArea" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="GeoCodeID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="GeoCodes" Relationship="Group2_iCAREDBModel.FK__PatientRe__GeoCo__45F365D3" FromRole="PatientRecord" ToRole="GeoCodes" />
-          <Property Name="WorkerID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="iCAREWorker" Relationship="Group2_iCAREDBModel.FK__PatientRe__Worke__45F365D3" FromRole="PatientRecord" ToRole="iCAREWorker" />
-          <NavigationProperty Name="DocumentMetadata" Relationship="Group2_iCAREDBModel.FK__DocumentM__Patie__4BAC3F29" FromRole="PatientRecord" ToRole="DocumentMetadata" />
+          <NavigationProperty Name="DocumentMetadata" Relationship="Self.FK__DocumentM__Patie__4BAC3F29" FromRole="PatientRecord" ToRole="DocumentMetadata" />
+          <NavigationProperty Name="GeoCodes" Relationship="Self.FK__PatientRe__GeoCo__46E78A0C" FromRole="PatientRecord" ToRole="GeoCodes" />
+          <NavigationProperty Name="iCAREWorker" Relationship="Self.FK__PatientRe__Worke__45F365D3" FromRole="PatientRecord" ToRole="iCAREWorker" />
         </EntityType>
         <EntityType Name="TreatmentRecord">
           <Key>
@@ -384,7 +426,43 @@
           <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RoleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK__Modificat__DocID__4BAC3F29">
+        <Association Name="FK__DocumentM__Modif__4D94879B">
+          <End Role="iCAREUser" Type="Self.iCAREUser" Multiplicity="0..1" />
+          <End Role="DocumentMetadata" Type="Self.DocumentMetadata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iCAREUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DocumentMetadata">
+              <PropertyRef Name="ModifiedByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DocumentM__Patie__4BAC3F29">
+          <End Role="PatientRecord" Type="Self.PatientRecord" Multiplicity="0..1" />
+          <End Role="DocumentMetadata" Type="Self.DocumentMetadata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientRecord">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DocumentMetadata">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DocumentM__Worke__4CA06362">
+          <End Role="iCAREWorker" Type="Self.iCAREWorker" Multiplicity="0..1" />
+          <End Role="DocumentMetadata" Type="Self.DocumentMetadata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iCAREWorker">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DocumentMetadata">
+              <PropertyRef Name="WorkerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Modificat__DocID__5070F446">
           <End Role="DocumentMetadata" Type="Self.DocumentMetadata" Multiplicity="1" />
           <End Role="ModificationHistory" Type="Self.ModificationHistory" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -396,9 +474,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Files__UploadedB__5535A963">
+          <End Role="iCAREUser" Type="Self.iCAREUser" Multiplicity="0..1" />
+          <End Role="Files" Type="Self.Files" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iCAREUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Files">
+              <PropertyRef Name="UploadedByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PatientRe__GeoCo__46E78A0C">
+          <End Role="GeoCodes" Type="Self.GeoCodes" Multiplicity="0..1" />
+          <End Role="PatientRecord" Type="Self.PatientRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GeoCodes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PatientRecord">
+              <PropertyRef Name="GeoCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__iCAREAdmin__ID__3C69FB99">
-          <End Type="Self.iCAREUser" Multiplicity="1" Role="iCAREUser" />
-          <End Type="Self.iCAREAdmin" Multiplicity="0..1" Role="iCAREAdmin" />
+          <End Role="iCAREUser" Type="Self.iCAREUser" Multiplicity="1" />
+          <End Role="iCAREAdmin" Type="Self.iCAREAdmin" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="iCAREUser">
               <PropertyRef Name="ID" />
@@ -409,8 +511,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__iCAREWorker__ID__398D8EEE">
-          <End Type="Self.iCAREUser" Multiplicity="1" Role="iCAREUser" />
-          <End Type="Self.iCAREWorker" Multiplicity="0..1" Role="iCAREWorker" />
+          <End Role="iCAREUser" Type="Self.iCAREUser" Multiplicity="1" />
+          <End Role="iCAREWorker" Type="Self.iCAREWorker" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="iCAREUser">
               <PropertyRef Name="ID" />
@@ -421,8 +523,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__UserPassword__ID__3F466844">
-          <End Type="Self.iCAREUser" Multiplicity="1" Role="iCAREUser" />
-          <End Type="Self.UserPassword" Multiplicity="0..1" Role="UserPassword" />
+          <End Role="iCAREUser" Type="Self.iCAREUser" Multiplicity="1" />
+          <End Role="UserPassword" Type="Self.UserPassword" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="iCAREUser">
               <PropertyRef Name="ID" />
@@ -432,9 +534,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__PatientRe__Worke__45F365D3">
+          <End Role="iCAREWorker" Type="Self.iCAREWorker" Multiplicity="0..1" />
+          <End Role="PatientRecord" Type="Self.PatientRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iCAREWorker">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PatientRecord">
+              <PropertyRef Name="WorkerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Group2_iCAREDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="DocumentMetadata" EntityType="Self.DocumentMetadata" />
           <EntitySet Name="DrugsDictionary" EntityType="Self.DrugsDictionary" />
+          <EntitySet Name="Files" EntityType="Self.Files" />
           <EntitySet Name="GeoCodes" EntityType="Self.GeoCodes" />
           <EntitySet Name="iCAREAdmin" EntityType="Self.iCAREAdmin" />
           <EntitySet Name="iCAREUser" EntityType="Self.iCAREUser" />
@@ -444,103 +559,47 @@
           <EntitySet Name="TreatmentRecord" EntityType="Self.TreatmentRecord" />
           <EntitySet Name="UserPassword" EntityType="Self.UserPassword" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" />
-          <AssociationSet Name="FK__Modificat__DocID__4BAC3F29" Association="Self.FK__Modificat__DocID__4BAC3F29">
-            <End Role="DocumentMetadata" EntitySet="DocumentMetadata" />
-            <End Role="ModificationHistory" EntitySet="ModificationHistory" />
-          </AssociationSet>
-          <AssociationSet Name="FK__iCAREAdmin__ID__3C69FB99" Association="Self.FK__iCAREAdmin__ID__3C69FB99">
-            <End EntitySet="iCAREUser" Role="iCAREUser" />
-            <End EntitySet="iCAREAdmin" Role="iCAREAdmin" />
-          </AssociationSet>
-          <AssociationSet Name="FK__iCAREWorker__ID__398D8EEE" Association="Self.FK__iCAREWorker__ID__398D8EEE">
-            <End EntitySet="iCAREUser" Role="iCAREUser" />
-            <End EntitySet="iCAREWorker" Role="iCAREWorker" />
-          </AssociationSet>
-          <AssociationSet Name="FK__UserPassword__ID__3F466844" Association="Self.FK__UserPassword__ID__3F466844">
-            <End EntitySet="iCAREUser" Role="iCAREUser" />
-            <End EntitySet="UserPassword" Role="UserPassword" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PatientRe__GeoCo__45F365D3" Association="Group2_iCAREDBModel.FK__PatientRe__GeoCo__45F365D3">
-            <End Role="GeoCodes" EntitySet="GeoCodes" />
-            <End Role="PatientRecord" EntitySet="PatientRecord" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PatientRe__Worke__45F365D3" Association="Group2_iCAREDBModel.FK__PatientRe__Worke__45F365D3">
-            <End Role="iCAREWorker" EntitySet="iCAREWorker" />
-            <End Role="PatientRecord" EntitySet="PatientRecord" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DocumentM__Modif__4D94879B" Association="Group2_iCAREDBModel.FK__DocumentM__Modif__4D94879B">
+          <AssociationSet Name="FK__DocumentM__Modif__4D94879B" Association="Self.FK__DocumentM__Modif__4D94879B">
             <End Role="iCAREUser" EntitySet="iCAREUser" />
             <End Role="DocumentMetadata" EntitySet="DocumentMetadata" />
           </AssociationSet>
-          <AssociationSet Name="FK__DocumentM__Patie__4BAC3F29" Association="Group2_iCAREDBModel.FK__DocumentM__Patie__4BAC3F29">
+          <AssociationSet Name="FK__DocumentM__Patie__4BAC3F29" Association="Self.FK__DocumentM__Patie__4BAC3F29">
             <End Role="PatientRecord" EntitySet="PatientRecord" />
             <End Role="DocumentMetadata" EntitySet="DocumentMetadata" />
           </AssociationSet>
-          <AssociationSet Name="FK__DocumentM__Worke__4CA06362" Association="Group2_iCAREDBModel.FK__DocumentM__Worke__4CA06362">
+          <AssociationSet Name="FK__DocumentM__Worke__4CA06362" Association="Self.FK__DocumentM__Worke__4CA06362">
             <End Role="iCAREWorker" EntitySet="iCAREWorker" />
             <End Role="DocumentMetadata" EntitySet="DocumentMetadata" />
           </AssociationSet>
+          <AssociationSet Name="FK__Modificat__DocID__5070F446" Association="Self.FK__Modificat__DocID__5070F446">
+            <End Role="DocumentMetadata" EntitySet="DocumentMetadata" />
+            <End Role="ModificationHistory" EntitySet="ModificationHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Files__UploadedB__5535A963" Association="Self.FK__Files__UploadedB__5535A963">
+            <End Role="iCAREUser" EntitySet="iCAREUser" />
+            <End Role="Files" EntitySet="Files" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PatientRe__GeoCo__46E78A0C" Association="Self.FK__PatientRe__GeoCo__46E78A0C">
+            <End Role="GeoCodes" EntitySet="GeoCodes" />
+            <End Role="PatientRecord" EntitySet="PatientRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK__iCAREAdmin__ID__3C69FB99" Association="Self.FK__iCAREAdmin__ID__3C69FB99">
+            <End Role="iCAREUser" EntitySet="iCAREUser" />
+            <End Role="iCAREAdmin" EntitySet="iCAREAdmin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__iCAREWorker__ID__398D8EEE" Association="Self.FK__iCAREWorker__ID__398D8EEE">
+            <End Role="iCAREUser" EntitySet="iCAREUser" />
+            <End Role="iCAREWorker" EntitySet="iCAREWorker" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserPassword__ID__3F466844" Association="Self.FK__UserPassword__ID__3F466844">
+            <End Role="iCAREUser" EntitySet="iCAREUser" />
+            <End Role="UserPassword" EntitySet="UserPassword" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PatientRe__Worke__45F365D3" Association="Self.FK__PatientRe__Worke__45F365D3">
+            <End Role="iCAREWorker" EntitySet="iCAREWorker" />
+            <End Role="PatientRecord" EntitySet="PatientRecord" />
+          </AssociationSet>
         </EntityContainer>
-        <Association Name="FK__PatientRe__GeoCo__45F365D3">
-          <End Type="Group2_iCAREDBModel.GeoCodes" Role="GeoCodes" Multiplicity="0..1" />
-          <End Type="Group2_iCAREDBModel.PatientRecord" Role="PatientRecord" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GeoCodes">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PatientRecord">
-              <PropertyRef Name="GeoCodeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__PatientRe__Worke__45F365D3">
-          <End Type="Group2_iCAREDBModel.iCAREWorker" Role="iCAREWorker" Multiplicity="0..1" />
-          <End Type="Group2_iCAREDBModel.PatientRecord" Role="PatientRecord" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="iCAREWorker">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PatientRecord">
-              <PropertyRef Name="WorkerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DocumentM__Modif__4D94879B">
-          <End Type="Group2_iCAREDBModel.iCAREUser" Role="iCAREUser" Multiplicity="0..1" />
-          <End Type="Group2_iCAREDBModel.DocumentMetadata" Role="DocumentMetadata" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="iCAREUser">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="DocumentMetadata">
-              <PropertyRef Name="ModifiedByID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DocumentM__Patie__4BAC3F29">
-          <End Type="Group2_iCAREDBModel.PatientRecord" Role="PatientRecord" Multiplicity="0..1" />
-          <End Type="Group2_iCAREDBModel.DocumentMetadata" Role="DocumentMetadata" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PatientRecord">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="DocumentMetadata">
-              <PropertyRef Name="PatientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DocumentM__Worke__4CA06362">
-          <End Type="Group2_iCAREDBModel.iCAREWorker" Role="iCAREWorker" Multiplicity="0..1" />
-          <End Type="Group2_iCAREDBModel.DocumentMetadata" Role="DocumentMetadata" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="iCAREWorker">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="DocumentMetadata">
-              <PropertyRef Name="WorkerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -550,15 +609,15 @@
           <EntitySetMapping Name="DocumentMetadata">
             <EntityTypeMapping TypeName="Group2_iCAREDBModel.DocumentMetadata">
               <MappingFragment StoreEntitySet="DocumentMetadata">
-                <ScalarProperty Name="Descript" ColumnName="Descript" />
-                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
-                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-                <ScalarProperty Name="ModifiedByID" ColumnName="ModifiedByID" />
-                <ScalarProperty Name="WorkerID" ColumnName="WorkerID" />
-                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
                 <ScalarProperty Name="DocID" ColumnName="DocID" />
                 <ScalarProperty Name="DocName" ColumnName="DocName" />
                 <ScalarProperty Name="DateOfCreation" ColumnName="DateOfCreation" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="WorkerID" ColumnName="WorkerID" />
+                <ScalarProperty Name="ModifiedByID" ColumnName="ModifiedByID" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="Descript" ColumnName="Descript" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -567,6 +626,18 @@
               <MappingFragment StoreEntitySet="DrugsDictionary">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Files">
+            <EntityTypeMapping TypeName="Group2_iCAREDBModel.Files">
+              <MappingFragment StoreEntitySet="Files">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="UploadedByID" ColumnName="UploadedByID" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -616,9 +687,9 @@
           <EntitySetMapping Name="PatientRecord">
             <EntityTypeMapping TypeName="Group2_iCAREDBModel.PatientRecord">
               <MappingFragment StoreEntitySet="PatientRecord">
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="WorkerID" ColumnName="WorkerID" />
                 <ScalarProperty Name="GeoCodeID" ColumnName="GeoCodeID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />

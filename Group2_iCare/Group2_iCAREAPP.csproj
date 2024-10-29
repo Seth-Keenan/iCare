@@ -139,7 +139,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserAuthentication.cs" />
     <Compile Include="Models\DocumentMetadata.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
@@ -160,6 +159,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Entities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Files.cs">
+      <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GeoCodes.cs">
       <DependentUpon>Entities.tt</DependentUpon>
@@ -182,6 +184,7 @@
     <Compile Include="Models\TreatmentRecord.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserAuthentication.cs" />
     <Compile Include="Models\UserPassword.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
