@@ -9,31 +9,65 @@
     <link href="~/Content/navigationBar.css" rel="stylesheet" type="text/css" />
 </head>
 
-@{ 
-    var cssClass = ViewBag.Title == "Home Page" ? "" : "container body-content";
+@{
+    var title = ViewBag.Title;
+
+    var cssClass = "";
+    if (ViewBag.Title == "Home Page")
+    {
+        cssClass = "";
+    }
+    else if(ViewBag.Title == "Log In")
+    {
+        cssClass = "";
+    }
+    else
+    {
+        cssClass = "container body-content";
+    }
 }
 
 <body>
-    
+
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-container">
-            <div class="d-flex flex-row">
-                <img src="~/Content/Images/hospIcon.png" alt="Logo" style="height: 40px;" />
-                <h2 class="fw-bold nav-title">i<span>CARE</span></h2>
-            </div>
-            <div class="">
+        <div class="d-flex flex-row">
+            <img src="~/Content/Images/hospIcon.png" alt="Logo" style="height: 40px;" />
+            <h2 class="fw-bold nav-title">i<span>CARE</span></h2>
+        </div>
+        <div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link nav-item" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link nav-item" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link nav-item" })</li>
-                    <li class="ps-1">
-                        @Html.ActionLink("Log In", "LoginForm", "UserAuthentication", null, new { @class = "btn btn-primary login-btn" })
+                    <li class="nav-item">
+                        @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
                     </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+
+                    @if (title == "Home Page" || title == "About iCARE" || title == "Contact Us" || title == "Log In")
+                    {
+                        <li class="nav-item ps-1">
+                            @Html.ActionLink("Log In", "LoginForm", "UserAuthentication", null, new { @class = "btn btn-primary login-btn" })
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item ps-1">
+                            @Html.ActionLink("Log Out", "Index", "Home", null, new { @class = "btn btn-primary login-btn" })
+                        </li>
+                    }
                 </ul>
             </div>
+        </div>
 
     </nav>
     <div class="@cssClass">
-
         @RenderBody()
         <hr />
         <footer>
@@ -41,10 +75,13 @@
         </footer>
     </div>
 
+
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
+
 </html>

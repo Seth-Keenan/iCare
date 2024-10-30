@@ -218,6 +218,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\home.css" />
+    <Content Include="Content\login.css" />
     <Content Include="Content\navbar.css" />
     <Content Include="Content\navigationBar.css" />
     <Content Include="DBQuery.txt" />

@@ -1,6 +1,4 @@
-﻿body {
-}
-
+﻿
 .nav-title {
     margin-left: 10px;
     color: #ff4a4a;
@@ -21,15 +19,20 @@
 .login-btn {
     border-radius: 20px;
     width: 150px;
-    background: linear-gradient(to right, #ff4a4a, #e20059); /* Change colors as needed */
+    background: linear-gradient(34deg, #ff4a4a, #e20059);
     border: 0px;
     margin-left: 10px;
-    height: 45px;
+    height: 40px;
     align-content: center;
+    transition: 0.5s ease-in-out;
+}
+
+.login-btn:hover {
+    background-position-x: 150px;
 }
 
 .nav-item:hover {
-    color: blue;
+    color: #e20059;
 }
 
 
