@@ -131,13 +131,13 @@
     <Compile Include="Controllers\DisplayMyBoardController.cs" />
     <Compile Include="Controllers\DisplayPaletteController.cs" />
     <Compile Include="Controllers\DocumentMetadatasController.cs" />
-    <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\GeoCodesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\iCAREAdminsController.cs" />
     <Compile Include="Controllers\iCAREBoardController.cs" />
     <Compile Include="Controllers\iCAREUsersController.cs" />
     <Compile Include="Controllers\iCAREWorkersController.cs" />
+    <Compile Include="Controllers\ImportImageController.cs" />
     <Compile Include="Controllers\ManageAccountsController.cs" />
     <Compile Include="Controllers\PatientRecordsController.cs" />
     <Compile Include="Controllers\UserAuthenticationController.cs" />
@@ -321,10 +321,15 @@
     <Content Include="Views\PatientRecords\Edit.cshtml" />
     <Content Include="Views\PatientRecords\Index.cshtml" />
     <Content Include="Views\DisplayMyBoard\DisplayMyBoard.cshtml" />
+    <Content Include="Views\ImportImageWindow\Create.cshtml" />
+    <Content Include="Views\ImportImageWindow\Delete.cshtml" />
+    <Content Include="Views\ImportImageWindow\Details.cshtml" />
+    <Content Include="Views\ImportImageWindow\Edit.cshtml" />
+    <Content Include="Views\ImportImageWindow\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\App_LocalResources\" />
+    <Folder Include="Repository\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
