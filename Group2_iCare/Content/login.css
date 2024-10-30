@@ -1,18 +1,19 @@
 ﻿
+
 .form-container {
     display: flex;
     flex-direction: column;
     background: linear-gradient(34deg, #ff4a4a, #e20059);
     align-items: center;
     justify-content: center;
-    height: 700px;
+    height: 800px;
 }
 .login-form {
     align-content: center;
     background-color: white;
     padding: 60px;
     width: 400px;
-    height: 500px;
+    height: auto;
 }
 
 .submit-btn {

@@ -93,6 +93,11 @@ main {
 .feature-card {
     border-radius: 10px;
     border: 0;
+    transition: 0.3s ease-in-out;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
 }
 
 .card-btn {
@@ -103,7 +108,7 @@ main {
     margin-left: 10px;
     height: 40px;
     align-content: center;
-    transition: 0.5s ease-in-out; /* Specify the background property */
+    transition: 0.5s ease-in-out; 
 }
 
     .card-btn:hover {
