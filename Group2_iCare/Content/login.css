@@ -1,0 +1,47 @@
+﻿
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(34deg, #ff4a4a, #e20059);
+    align-items: center;
+    justify-content: center;
+    height: 800px;
+}
+.login-form {
+    align-content: center;
+    background-color: white;
+    padding: 60px;
+    width: 400px;
+    height: auto;
+}
+
+.submit-btn {
+    border-radius: 4px;
+    background: linear-gradient(34deg, #ff4a4a, #e20059);
+    width: 400px;
+    border: 0px;
+    height: 40px;
+    align-content: center;
+    transition: 0.5s ease-in-out;
+    margin-top: 30px;
+}
+
+    .submit-btn:hover {
+        background-position-x: 280px;
+    }
+
+.form-text {
+    width: 400px;
+}
+
+.form-inputs {
+    width: 400px;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    margin-top: 10px;
+    border-radius: 4px;
+    width: 280px;
+}

@@ -5,16 +5,24 @@
     background-color: white;
     height: 150px;
     width: 300px;
-    margin: 5px;
+    margin: 10px;
     color: white;
-}
-
-.item-card:hover {
-    opacity: 0.7;
+    border: 0;
 }
 
 .item-container {
     display: flex;
     flex: 1 1 calc(33.333% - 20px);
     flex-wrap: wrap;
+}
+
+.dash-title {
+    font-weight: bold;
+    font-size: 50px;
+    color: white;
+    padding: 10px;
+    background: linear-gradient(34deg, #ff4a4a, #e20059);
+    border-radius: 20px;
+    margin-bottom: 20px;
+    padding-left: 30px;
 }
