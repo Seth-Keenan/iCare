@@ -78,5 +78,19 @@ main {
 .feature-card {
     border-radius: 10px;
     border: 0;
-    height: 450px;
 }
+
+.card-btn {
+    border-radius: 20px;
+    width: 120px;
+    background: linear-gradient(34deg, #ff4a4a, #e20059);
+    border: 0px;
+    margin-left: 10px;
+    height: 40px;
+    align-content: center;
+    transition: 0.5s ease-in-out; /* Specify the background property */
+}
+
+    .card-btn:hover {
+        background-position-x: 150px;
+    }

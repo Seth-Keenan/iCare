@@ -22,12 +22,28 @@
             </div>
             <div class="">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link nav-item" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link nav-item" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link nav-item" })</li>
-                    <li class="ps-1">
-                        @Html.ActionLink("Log In", "LoginForm", "UserAuthentication", null, new { @class = "btn btn-primary login-btn" })
+                    <li class="nav-item">
+                        @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
                     </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+
+                    @if (title == "Home Page" || title == "About iCARE" || title == "Contact Us" || title == "Log In")
+                    {
+                        <li class="nav-item ps-1">
+                            @Html.ActionLink("Log In", "LoginForm", "UserAuthentication", null, new { @class = "btn btn-primary login-btn" })
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item ps-1">
+                            @Html.ActionLink("Log Out", "Index", "Home", null, new { @class = "btn btn-primary login-btn" })
+                        </li>
+                    }
                 </ul>
             </div>
 
