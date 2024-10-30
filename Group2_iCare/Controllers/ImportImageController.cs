@@ -11,112 +11,129 @@ using Group2_iCare.Models;
 
 namespace Group2_iCare.Controllers
 {
-    public class DisplayPaletteController : Controller
+    public class ImportImageController : Controller
     {
         private Group2_iCAREDBEntities db = new Group2_iCAREDBEntities();
 
-        // GET: DisplayPalette
+        // GET: ImportImage
         public ActionResult Index()
         {
-            var documentMetadata = db.DocumentMetadata.Include(d => d.ModificationHistory);
-            return View(documentMetadata.ToList());
+            var files = db.Files.Include(f => f.iCAREUser);
+            return View(files.ToList());
         }
 
-        // GET: DisplayPalette/Details/5
+        // GET: ImportImage/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DocumentMetadata documentMetadata = db.DocumentMetadata.Find(id);
-            if (documentMetadata == null)
+            Files files = db.Files.Find(id);
+            if (files == null)
             {
                 return HttpNotFound();
             }
-            return View(documentMetadata);
+            return View(files);
         }
 
-        // GET: DisplayPalette/Create
+        // GET: ImportImage/Create
         public ActionResult Create()
         {
-            ViewBag.DocID = new SelectList(db.ModificationHistory, "DocID", "Description");
+            ViewBag.UploadedByID = new SelectList(db.iCAREUser, "ID", "Name");
             return View();
         }
 
-        // POST: DisplayPalette/Create
+        // POST: ImportImage/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DocID,DocName,DateOfCreation,Descript")] DocumentMetadata documentMetadata, HttpPostedFileBase file)
+        public ActionResult Create(HttpPostedFileBase fileUpload, string patientId)
         {
-            if (ModelState.IsValid)
+            if (fileUpload != null && fileUpload.ContentLength > 0)
             {
-                db.DocumentMetadata.Add(documentMetadata);
+                var file = new Files
+                {
+                    FileName = Path.GetFileName(fileUpload.FileName),
+                    ContentType = fileUpload.ContentType,
+                    Data = ConvertToBytes(fileUpload),
+                    UploadedByID = patientId // Assuming UploadedByID is the foreign key to the patient record
+                };
+
+                db.Files.Add(file);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "DisplayPalette");
             }
 
-            ViewBag.DocID = new SelectList(db.ModificationHistory, "DocID", "Description", documentMetadata.DocID);
-            return View(documentMetadata);
+            return View();
         }
 
-        // GET: DisplayPalette/Edit/5
+        private byte[] ConvertToBytes(HttpPostedFileBase file)
+        {
+            byte[] fileBytes = null;
+            using (var binaryReader = new BinaryReader(file.InputStream))
+            {
+                fileBytes = binaryReader.ReadBytes(file.ContentLength);
+            }
+            return fileBytes;
+        }
+
+        // GET: ImportImage/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DocumentMetadata documentMetadata = db.DocumentMetadata.Find(id);
-            if (documentMetadata == null)
+            Files files = db.Files.Find(id);
+            if (files == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.DocID = new SelectList(db.ModificationHistory, "DocID", "Description", documentMetadata.DocID);
-            return View(documentMetadata);
+            ViewBag.UploadedByID = new SelectList(db.iCAREUser, "ID", "Name", files.UploadedByID);
+            return View(files);
         }
 
-        // POST: DisplayPalette/Edit/5
+        // POST: ImportImage/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DocID,DocName,DateOfCreation")] DocumentMetadata documentMetadata)
+        public ActionResult Edit([Bind(Include = "ID,FileName,ContentType,Data,UploadedByID,UploadDate,Descript")] Files files)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(documentMetadata).State = EntityState.Modified;
+                db.Entry(files).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.DocID = new SelectList(db.ModificationHistory, "DocID", "Description", documentMetadata.DocID);
-            return View(documentMetadata);
+            ViewBag.UploadedByID = new SelectList(db.iCAREUser, "ID", "Name", files.UploadedByID);
+            return View(files);
         }
 
-        // GET: DisplayPalette/Delete/5
+        // GET: ImportImage/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DocumentMetadata documentMetadata = db.DocumentMetadata.Find(id);
-            if (documentMetadata == null)
+            Files files = db.Files.Find(id);
+            if (files == null)
             {
                 return HttpNotFound();
             }
-            return View(documentMetadata);
+            return View(files);
         }
 
-        // POST: DisplayPalette/Delete/5
+        // POST: ImportImage/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            DocumentMetadata documentMetadata = db.DocumentMetadata.Find(id);
-            db.DocumentMetadata.Remove(documentMetadata);
+            Files files = db.Files.Find(id);
+            db.Files.Remove(files);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
