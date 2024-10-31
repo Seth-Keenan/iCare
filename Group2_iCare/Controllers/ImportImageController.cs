@@ -19,7 +19,6 @@ namespace Group2_iCare.Controllers
         public ActionResult Index()
         {
             var files = db.Files.Include(f => f.iCAREUser);
-
             return View(files.ToList());
         }
 

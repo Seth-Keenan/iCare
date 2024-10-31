@@ -8,15 +8,6 @@
     margin: 10px;
     color: white;
     border: 0;
-    transition: 0.3s ease-in-out;
-}
-
-.item-card:hover {
-    transform: translateY(2px);
-}
-
-.item-card:active {
-    transform: translateY(5px);
 }
 
 .item-container {
