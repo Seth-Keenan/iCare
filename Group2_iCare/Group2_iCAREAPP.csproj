@@ -223,6 +223,7 @@
     <Content Include="Content\login.css" />
     <Content Include="Content\navbar.css" />
     <Content Include="Content\navigationBar.css" />
+    <Content Include="Content\workerdashboard.css" />
     <Content Include="DBQuery.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
