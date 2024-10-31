@@ -37,5 +37,7 @@ namespace Group2_iCare.Models
         public virtual DbSet<TreatmentRecord> TreatmentRecord { get; set; }
         public virtual DbSet<UserPassword> UserPassword { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
+
+        public System.Data.Entity.DbSet<Group2_iCare.Models.AdminCreateUser> AdminCreateUsers { get; set; }
     }
 }

@@ -127,11 +127,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminCreateUsersController.cs" />
     <Compile Include="Controllers\AssignPatientController.cs" />
     <Compile Include="Controllers\DisplayMyBoardController.cs" />
     <Compile Include="Controllers\DisplayPaletteController.cs" />
     <Compile Include="Controllers\DocumentMetadatasController.cs" />
-    <Compile Include="Controllers\GeoCodesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\iCAREAdminsController.cs" />
     <Compile Include="Controllers\iCAREBoardController.cs" />
@@ -147,6 +147,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminCreateUser.cs" />
     <Compile Include="Models\DocumentMetadata.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
@@ -199,6 +200,7 @@
     <Compile Include="Models\UserRole.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\WorkerCreateUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +225,7 @@
     <Content Include="Content\login.css" />
     <Content Include="Content\navbar.css" />
     <Content Include="Content\navigationBar.css" />
+    <Content Include="Content\workerdashboard.css" />
     <Content Include="DBQuery.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -308,11 +311,6 @@
     <Content Include="Views\DisplayPalette\Details.cshtml" />
     <Content Include="Views\DisplayPalette\Edit.cshtml" />
     <Content Include="Views\DisplayPalette\Index.cshtml" />
-    <Content Include="Views\GeoCodes\Create.cshtml" />
-    <Content Include="Views\GeoCodes\Delete.cshtml" />
-    <Content Include="Views\GeoCodes\Details.cshtml" />
-    <Content Include="Views\GeoCodes\Edit.cshtml" />
-    <Content Include="Views\GeoCodes\Index.cshtml" />
     <Content Include="Views\iCAREBoard\iCAREBoardResult.cshtml" />
     <Content Include="Views\WorkerDashboard\Index.cshtml" />
     <Content Include="Views\iCAREBoard\iCAREBoardForm.cshtml" />
@@ -327,6 +325,11 @@
     <Content Include="Views\ImportImageWindow\Details.cshtml" />
     <Content Include="Views\ImportImageWindow\Edit.cshtml" />
     <Content Include="Views\ImportImageWindow\Index.cshtml" />
+    <Content Include="Views\AdminCreateUsers\Create.cshtml" />
+    <Content Include="Views\AdminCreateUsers\Delete.cshtml" />
+    <Content Include="Views\AdminCreateUsers\Details.cshtml" />
+    <Content Include="Views\AdminCreateUsers\Edit.cshtml" />
+    <Content Include="Views\AdminCreateUsers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\App_LocalResources\" />
