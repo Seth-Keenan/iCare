@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Show Uploaded File";
+    var fileName = ViewBag.FileName as string;
+}
+
+<body>
+    <div class="container">
+        <h1>Uploaded File</h1>
+        @if (!string.IsNullOrEmpty(fileName))
+        {
+            <p class="message">File uploaded successfully: @fileName</p>
+            <embed src="@Url.Action("ShowUploadedFile", "ImportImage", new { fileName = fileName })" width="800px" height="2100px" />
+        }
+        else
+        {
+            <p class="message">No file uploaded.</p>
+        }
+    </div>
+</body>

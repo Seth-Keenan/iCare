@@ -320,16 +320,13 @@
     <Content Include="Views\PatientRecords\Edit.cshtml" />
     <Content Include="Views\PatientRecords\Index.cshtml" />
     <Content Include="Views\DisplayMyBoard\DisplayMyBoard.cshtml" />
-    <Content Include="Views\ImportImageWindow\Create.cshtml" />
-    <Content Include="Views\ImportImageWindow\Delete.cshtml" />
-    <Content Include="Views\ImportImageWindow\Details.cshtml" />
-    <Content Include="Views\ImportImageWindow\Edit.cshtml" />
-    <Content Include="Views\ImportImageWindow\Index.cshtml" />
     <Content Include="Views\AdminCreateUsers\Create.cshtml" />
     <Content Include="Views\AdminCreateUsers\Delete.cshtml" />
     <Content Include="Views\AdminCreateUsers\Details.cshtml" />
     <Content Include="Views\AdminCreateUsers\Edit.cshtml" />
     <Content Include="Views\AdminCreateUsers\Index.cshtml" />
+    <Content Include="Views\ImportImage\Index.cshtml" />
+    <Content Include="Views\ImportImage\ShowUploadedFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\App_LocalResources\" />
