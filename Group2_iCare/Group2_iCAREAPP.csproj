@@ -223,6 +223,7 @@
     <Content Include="Content\login.css" />
     <Content Include="Content\navbar.css" />
     <Content Include="Content\navigationBar.css" />
+    <Content Include="Content\workerdashboard.css" />
     <Content Include="DBQuery.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -327,6 +328,7 @@
     <Content Include="Views\ImportImageWindow\Details.cshtml" />
     <Content Include="Views\ImportImageWindow\Edit.cshtml" />
     <Content Include="Views\ImportImageWindow\Index.cshtml" />
+    <Content Include="Views\ImportDocuments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\App_LocalResources\" />
