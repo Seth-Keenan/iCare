@@ -328,7 +328,6 @@
     <Content Include="Views\ImportImageWindow\Details.cshtml" />
     <Content Include="Views\ImportImageWindow\Edit.cshtml" />
     <Content Include="Views\ImportImageWindow\Index.cshtml" />
-    <Content Include="Views\ImportDocuments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\App_LocalResources\" />
