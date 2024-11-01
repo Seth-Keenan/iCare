@@ -327,6 +327,9 @@
     <Content Include="Views\AdminCreateUsers\Index.cshtml" />
     <Content Include="Views\ImportImage\Index.cshtml" />
     <Content Include="Views\ImportImage\ShowUploadedFile.cshtml" />
+    <Content Include="Views\ImportImage\BrowseFiles.cshtml" />
+    <Content Include="Views\ImportImage\Scanner.cshtml" />
+    <Content Include="Views\ImportImage\EditFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\App_LocalResources\" />

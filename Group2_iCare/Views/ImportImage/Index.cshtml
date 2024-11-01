@@ -4,12 +4,20 @@
 
 <h2>Import Image</h2>
 
-<form action="/ImportImage/Upload" method="post" enctype="multipart/form-data">
+@using (Html.BeginForm("Upload", "ImportImage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("patientRecordID", ViewBag.PatientRecordID as string)
+
+<div>
+    <button type="button" onclick="location.href='@Url.Action("BrowseFiles", "ImportImage")'">Browse files</button>
+    <button type="button" onclick="location.href='@Url.Action("EditFile", "ImportImage")'">Edit file</button>
+    <button type="button" onclick="location.href='@Url.Action("Scanner", "ImportImage")'">Scanner</button>
+    <button type="button" onclick="location.href='@Url.Action("AdminDashboard", "ManageAccounts")'">No File</button>
+</div>
+
     <div>
-        <label for="file">Choose file to upload:</label>
-        <input type="file" id="file" name="file" />
+        @Html.ActionLink("Back to Admin Dashboard", "AdminDashboard", "ManageAccounts")
     </div>
-    <div>
-        <button type="submit">Submit</button>
-    </div>
-</form>
+
+}

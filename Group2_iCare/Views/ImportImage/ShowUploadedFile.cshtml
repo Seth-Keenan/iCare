@@ -9,6 +9,7 @@
         @if (!string.IsNullOrEmpty(fileName))
         {
             <p class="message">File uploaded successfully: @fileName</p>
+            @Html.ActionLink("Back to Import Image", "Index", "ImportImage")
             <embed src="@Url.Action("ShowUploadedFile", "ImportImage", new { fileName = fileName })" width="800px" height="2100px" />
         }
         else

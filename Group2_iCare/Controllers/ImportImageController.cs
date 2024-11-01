@@ -23,6 +23,22 @@ namespace Group2_iCare.Controllers
         {
             return View();
         }
+        public ActionResult BrowseFiles()
+        {
+            return View();
+        }
+
+        // GET: ImportImage/EditFile
+        public ActionResult EditFile()
+        {
+            return View();
+        }
+
+        // GET: ImportImage/Scanner
+        public ActionResult Scanner()
+        {
+            return View();
+        }
 
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase file)
