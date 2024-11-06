@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Import Image";
+}
+
+<h2>Import Image</h2>
+
+<form action="/ImportImage/Upload" method="post" enctype="multipart/form-data">
+    <div>
+        <label for="file">Choose file to upload:</label>
+        <input type="file" id="file" name="file" />
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
