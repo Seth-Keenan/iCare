@@ -13,18 +13,21 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using System.IO;
 using System.Net;
+using Group2_iCare.Models;
 
 namespace Group2_iCare.Controllers
 {
     public class ImportImageController : Controller
     {
         // GET: ImportImage
-        public ActionResult Index()
+        public ActionResult Index(int PatientRecordID)
         {
+            ViewBag.PatientRecordID = PatientRecordID;
             return View();
         }
-        public ActionResult BrowseFiles()
+        public ActionResult BrowseFiles(int PatientRecordID)
         {
+            ViewBag.PatientRecordID = PatientRecordID;
             return View();
         }
 
@@ -41,8 +44,10 @@ namespace Group2_iCare.Controllers
         }
 
         [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase file)
+        public ActionResult Upload(HttpPostedFileBase file, int PatientRecordID)
         {
+            ViewBag.PatientRecordID = PatientRecordID;
+
             if (file != null && file.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(file.FileName);
@@ -63,29 +68,45 @@ namespace Group2_iCare.Controllers
 
                 var path = Path.Combine(directoryPath, fileName);
                 file.SaveAs(path);
-                ViewBag.FileName = path;
+                ViewBag.FileName = fileName; // Use fileName instead of path
                 ViewBag.Message = "File uploaded successfully";
+
+                // Redirect to ShowUploadedFile with fileName and PatientRecordID
+                return RedirectToAction("ShowUploadedFile", new { fileName, PatientRecordID });
             }
             else
             {
                 ViewBag.Message = "No file selected";
             }
 
-            return View("ShowUploadedFile");
+            return View("Index");
         }
 
-        public ActionResult ShowUploadedFile(string fileName)
+        public ActionResult ShowUploadedFile(string fileName, int PatientRecordID)
         {
+            ViewBag.PatientRecordID = PatientRecordID;
+
+            if (string.IsNullOrEmpty(fileName))
+            {
+                return HttpNotFound("File name is invalid.");
+            }
+
             var directoryPath = Server.MapPath("~/Repository/UploadedFiles");
+            if (directoryPath == null)
+            {
+                return HttpNotFound("Directory path is invalid.");
+            }
+
             var path = Path.Combine(directoryPath, fileName);
 
             if (System.IO.File.Exists(path))
             {
-                var imageBytes = System.IO.File.ReadAllBytes(path);
-                return File(imageBytes, "application/pdf");
+                ViewBag.FilePath = Url.Content($"~/Repository/UploadedFiles/{fileName}");
+                return View();
             }
 
             return HttpNotFound();
         }
+
     }
 }

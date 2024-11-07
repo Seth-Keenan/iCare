@@ -55,8 +55,7 @@ namespace Group2_iCare.Controllers
             {
                 db.PatientRecord.Add(patientRecord);
                 db.SaveChanges();
-                ViewBag.PatientRecordID = patientRecord.ID;
-                return RedirectToAction("Index", "ImportImage", new { userId = patientRecord.ID });
+                return RedirectToAction("Index", "ImportImage", new { PatientRecordID = patientRecord.ID });
             }
 
             ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description", patientRecord.GeoCodeID);
@@ -95,7 +94,7 @@ namespace Group2_iCare.Controllers
             {
                 db.Entry(patientRecord).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", "ImportImage", new { userId = patientRecord.ID });
+                return RedirectToAction("Index", "ImportImage", new { PatientRecordID = patientRecord.ID });
             }
 
             ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description", patientRecord.GeoCodeID);

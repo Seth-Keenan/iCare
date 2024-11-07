@@ -2,6 +2,8 @@
     ViewBag.Title = "Import Image";
 }
 
+@model Group2_iCare.Models.PatientRecord
+
 <h2>Import Image</h2>
 
 @using (Html.BeginForm("Upload", "ImportImage", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -9,16 +11,16 @@
     @Html.AntiForgeryToken()
 
     <h5>Logged-in User ID: @ViewBag.PatientRecordID</h5>
+    @Html.Hidden("PatientRecordID", (int)ViewBag.PatientRecordID)
 
     <div>
-        <button type="button" onclick="location.href='@Url.Action("BrowseFiles", "ImportImage")'">Browse files</button>
+        <button type="button" onclick="location.href='@Url.Action("BrowseFiles", "ImportImage", new { PatientRecordID = ViewBag.PatientRecordID })'">Browse files</button>
         <button type="button" onclick="location.href='@Url.Action("EditFile", "ImportImage")'">Edit file</button>
         <button type="button" onclick="location.href='@Url.Action("Scanner", "ImportImage")'">Scanner</button>
-        <button type="button" onclick="location.href='@Url.Action("AdminDashboard", "ManageAccounts")'">No File</button>
+        <button type="button" onclick="location.href='@Url.Action("Index", "PatientRecords", new { PatientRecordID = ViewBag.PatientRecordID })'">No File</button>
     </div>
 
     <div>
         @Html.ActionLink("Back to Admin Dashboard", "AdminDashboard", "ManageAccounts")
     </div>
-
 }

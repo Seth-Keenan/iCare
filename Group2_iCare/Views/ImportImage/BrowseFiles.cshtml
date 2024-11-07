@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "BrowseFiles";
 }
 
@@ -10,10 +9,13 @@
         <label for="file">Choose file to upload:</label>
         <input type="file" id="file" name="file" />
     </div>
+    <input type="hidden" name="PatientRecordID" value="@ViewBag.PatientRecordID" />
     <div>
         <button type="submit">Submit</button>
     </div>
-    <div>
-        @Html.ActionLink("Back to Import Image", "Index", "ImportImage")
-    </div>
 </form>
+
+
+<div>
+    <button type="button" onclick="location.href='@Url.Action("Index", "ImportImage", new { PatientRecordID = ViewBag.PatientRecordID })'">Back to Import Image</button>
+</div>
