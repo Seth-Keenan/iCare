@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Group2_iCare.Models.AdminCreateUser>
+﻿@model (IEnumerable<Group2_iCare.Models.AdminCreateUser>, IEnumerable<Group2_iCare.Models.AdminCreateUser>)
 
 @{
     ViewBag.Title = "Manage Accounts";
@@ -9,61 +9,59 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Role)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Profession)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AdminEmail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PasswordExpiryTime)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Role)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Profession)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AdminEmail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserAccountExpriyDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+<h3>Admins</h3>
+<div class="table-container">
+    <table class="table w-100 overflow-x-scroll">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Item1.First().Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Item1.First().AdminEmail)</th>
+            <th>@Html.DisplayNameFor(model => model.Item1.First().UserName)</th>
+            <th>@Html.DisplayNameFor(model => model.Item1.First().Password)</th>
+            <th>Actions</th>
+        </tr>
 
-</table>
+        @foreach (var item in Model.Item1) // Item1 contains the admins
+        {
+            <tr>
+                <td>@Html.DisplayFor(_ => item.Name)</td>
+                <td>@Html.DisplayFor(_ => item.AdminEmail)</td>
+                <td>@Html.DisplayFor(_ => item.UserName)</td>
+                <td>@Html.DisplayFor(_ => item.Password)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<h3>Workers</h3>
+<div class="table-container">
+    <table class="table w-100 overflow-x-scroll">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Item2.First().Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Item2.First().Profession)</th>
+            <th>@Html.DisplayNameFor(model => model.Item2.First().UserName)</th>
+            <th>@Html.DisplayNameFor(model => model.Item2.First().Password)</th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model.Item2) // Item2 contains the workers
+        {
+            <tr>
+                <td>@Html.DisplayFor(_ => item.Name)</td>
+                <td>@Html.DisplayFor(_ => item.Profession)</td>
+                <td>@Html.DisplayFor(_ => item.UserName)</td>
+                <td>@Html.DisplayFor(_ => item.Password)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

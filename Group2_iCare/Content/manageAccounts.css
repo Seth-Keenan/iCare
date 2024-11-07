@@ -1,0 +1,13 @@
+﻿
+.table-container {
+    position: relative;
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+.fixed-column {
+    position: sticky;
+    left: 0;
+    background-color: gray;
+    z-index: 1;
+}

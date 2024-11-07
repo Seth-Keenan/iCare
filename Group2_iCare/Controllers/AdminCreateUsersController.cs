@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Web.Mvc;
 using Group2_iCare.Models;
 
@@ -25,39 +26,28 @@ namespace Group2_iCare.Controllers
                     {
                         ID = user.ID,
                         Name = user.Name,
-                        Role = "N/A",
-                        UserName = "N/A",
-                        Password = "N/A",
-                        AdminEmail = "N/A",
-                        Profession = "N/A"
+                        Role = user.iCAREAdmin != null ? "Admin" : (user.iCAREWorker != null ? "Worker" : "N/A"),
+                        UserName = user.UserPassword?.UserName ?? "N/A",
+                        Password = user.UserPassword?.EncryptedPassword ?? "N/A",
+                        AdminEmail = user.iCAREAdmin?.AdminEmail ?? "N/A",
+                        Profession = user.iCAREWorker?.Profession ?? "N/A"
                     };
-
-                    if (user.UserPassword != null)
-                    {
-                        viewModel.UserName = user.UserPassword.UserName;
-                        viewModel.Password = user.UserPassword.EncryptedPassword;
-                    }
-
-                    if (user.iCAREAdmin != null)
-                    {
-                        viewModel.Role = "Admin";
-                        viewModel.AdminEmail = user.iCAREAdmin.AdminEmail;
-                    }
-                    else if (user.iCAREWorker != null)
-                    {
-                        viewModel.Role = "Worker";
-                        viewModel.Profession = user.iCAREWorker.Profession;
-                    }
-
                     return viewModel;
                 }).ToList();
 
-            return View(users);
+            var admins = users.Where(u => u.Role == "Admin").AsEnumerable();
+            var workers = users.Where(u => u.Role == "Worker").AsEnumerable();
+
+
+            return View((admins, workers));
         }
+
 
         // GET: AdminCreateUsers/Create
         public ActionResult Create()
         {
+            var roles = db.UserRole.Select(r => new { r.RoleName }).ToList();
+            ViewBag.RoleList = new SelectList(roles, "RoleName", "RoleName");
             return View();
         }
 
@@ -82,8 +72,8 @@ namespace Group2_iCare.Controllers
                     ID = model.ID,
                     UserName = model.UserName,
                     EncryptedPassword = model.Password,
-                    PasswordExpiryTime = model.PasswordExpiryTime,
-                    UserAccountExpriyDate = model.UserAccountExpriyDate
+                    PasswordExpiryTime = 365,
+                    UserAccountExpriyDate = DateTime.Now.AddYears(1)
                 };
                 db.UserPassword.Add(userPassword);
 
@@ -182,6 +172,9 @@ namespace Group2_iCare.Controllers
                 Profession = worker?.Profession
             };
 
+            var roles = db.UserRole.Select(r => new { r.RoleName }).ToList();
+            ViewBag.RoleList = new SelectList(roles, "RoleName", "RoleName");
+
             return View(viewModel);
         }
 
@@ -200,12 +193,58 @@ namespace Group2_iCare.Controllers
                 }
 
                 var userPassword = db.UserPassword.Find(model.ID);
+                var admin = db.iCAREAdmin.Find(model.ID);
+                var worker = db.iCAREWorker.Find(model.ID);
+
                 if (userPassword != null)
                 {
                     userPassword.UserName = model.UserName;
                     userPassword.EncryptedPassword = model.Password;
                     userPassword.UserAccountExpriyDate = model.PasswordExpiryDate;
                 }
+
+                if(model.Role == "Admin")
+                {
+                    if(worker != null)
+                    {
+                        db.iCAREWorker.Remove(worker);
+                    }
+                    if(admin == null)
+                    {
+                        admin = new iCAREAdmin
+                        {
+                            ID = model.ID,
+                            AdminEmail = model.AdminEmail
+                        };
+                        db.iCAREAdmin.Add(admin);
+                    }
+                    else
+                    {
+                        admin.AdminEmail = model.AdminEmail;
+                    }
+                }
+                else
+                {
+                    if (admin != null)
+                    {
+                        db.iCAREAdmin.Remove(admin);
+                    }
+
+                    if (worker == null)
+                    {
+                        worker = new iCAREWorker
+                        {
+                            ID = model.ID,
+                            Profession = model.Profession
+                        };
+                        db.iCAREWorker.Add(worker);
+                    }
+                    else
+                    {
+                        worker.Profession = model.Profession;
+                    }
+                }
+
 
                 db.SaveChanges();
 

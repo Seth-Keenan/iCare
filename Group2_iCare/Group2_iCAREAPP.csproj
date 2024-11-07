@@ -223,8 +223,10 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\home.css" />
     <Content Include="Content\login.css" />
+    <Content Include="Content\manageAccounts.css" />
     <Content Include="Content\navbar.css" />
     <Content Include="Content\navigationBar.css" />
+    <Content Include="Content\universalStyles.css" />
     <Content Include="Content\workerdashboard.css" />
     <Content Include="DBQuery.txt" />
     <Content Include="favicon.ico" />
