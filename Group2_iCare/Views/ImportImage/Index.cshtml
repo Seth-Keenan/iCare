@@ -7,14 +7,15 @@
 @using (Html.BeginForm("Upload", "ImportImage", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    @Html.Hidden("patientRecordID", ViewBag.PatientRecordID as string)
 
-<div>
-    <button type="button" onclick="location.href='@Url.Action("BrowseFiles", "ImportImage")'">Browse files</button>
-    <button type="button" onclick="location.href='@Url.Action("EditFile", "ImportImage")'">Edit file</button>
-    <button type="button" onclick="location.href='@Url.Action("Scanner", "ImportImage")'">Scanner</button>
-    <button type="button" onclick="location.href='@Url.Action("AdminDashboard", "ManageAccounts")'">No File</button>
-</div>
+    <h5>Logged-in User ID: @ViewBag.PatientRecordID</h5>
+
+    <div>
+        <button type="button" onclick="location.href='@Url.Action("BrowseFiles", "ImportImage")'">Browse files</button>
+        <button type="button" onclick="location.href='@Url.Action("EditFile", "ImportImage")'">Edit file</button>
+        <button type="button" onclick="location.href='@Url.Action("Scanner", "ImportImage")'">Scanner</button>
+        <button type="button" onclick="location.href='@Url.Action("AdminDashboard", "ManageAccounts")'">No File</button>
+    </div>
 
     <div>
         @Html.ActionLink("Back to Admin Dashboard", "AdminDashboard", "ManageAccounts")
