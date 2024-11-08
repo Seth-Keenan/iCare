@@ -128,12 +128,48 @@ VALUES
 
 INSERT INTO iCAREUser (ID, Name, Role) 
 VALUES
-	('2', 'WORKER', 'WORKER');
+	('2', 'DOCTOR', 'DOCTOR');
 
 INSERT INTO iCAREWorker (ID, Profession) 
 VALUES
-	('1', 'Nurse');
+	('2', 'Doctor');
 
 INSERT INTO UserPassword (ID, UserName, EncryptedPassword, PasswordExpiryTime, UserAccountExpriyDate)
 VALUES
-	('2', 'WORKER', 'WORKER', 90, '2025-01-01');
+	('2', 'DOCTOR', 'DOCTOR', 90, '2025-01-01');
+
+INSERT INTO iCAREUser (ID, Name, Role) 
+VALUES
+	('3', 'NURSE', 'NURSE');
+
+INSERT INTO iCAREWorker (ID, Profession) 
+VALUES
+	('3', 'Nurse');
+
+INSERT INTO UserPassword (ID, UserName, EncryptedPassword, PasswordExpiryTime, UserAccountExpriyDate)
+VALUES
+	('3', 'NURSE', 'NURSE', 90, '2025-01-01');
+
+INSERT INTO iCAREUser (ID, Name, Role) 
+VALUES
+	('4', 'NURSE1', 'NURSE');
+
+INSERT INTO iCAREWorker (ID, Profession) 
+VALUES
+	('4', 'Nurse1');
+
+INSERT INTO UserPassword (ID, UserName, EncryptedPassword, PasswordExpiryTime, UserAccountExpriyDate)
+VALUES
+	('4', 'NURSE1', 'NURSE1', 90, '2025-01-01');
+
+INSERT INTO iCAREUser (ID, Name, Role) 
+VALUES
+	('5', 'NURSE2', 'NURSE');
+
+INSERT INTO iCAREWorker (ID, Profession) 
+VALUES
+	('5', 'Nurse2');
+
+INSERT INTO UserPassword (ID, UserName, EncryptedPassword, PasswordExpiryTime, UserAccountExpriyDate)
+VALUES
+	('5', 'NURSE2', 'NURSE2', 90, '2025-01-01');
