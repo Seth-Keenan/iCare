@@ -1,18 +1,17 @@
-﻿using System;
+﻿using Group2_iCare.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using Group2_iCare.Models;
 
 namespace Group2_iCare.Controllers
 {
     public class DocumentsController : Controller
-    { //new db connection
+    {
         private Group2_iCAREDBEntities db = new Group2_iCAREDBEntities();
 
         public ActionResult Index()
-        { // display all doc
+        {
             var documentMetadata = db.DocumentMetadata
                 .Include(d => d.iCAREUser)
                 .Include(d => d.PatientRecord)
@@ -24,7 +23,7 @@ namespace Group2_iCare.Controllers
 
 
         public ActionResult Create()
-        { // create a new doc
+        {
             var documentMetadata = new DocumentMetadata();
             var user = Session["User"] as iCAREUser;
             ViewBag.userID = user.ID;
@@ -36,11 +35,11 @@ namespace Group2_iCare.Controllers
         // GET: Documents/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null) // id is null
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            // find the document
+
             DocumentMetadata documentMetadata = db.DocumentMetadata
                 .Include(d => d.iCAREUser)
                 .Include(d => d.PatientRecord)
@@ -52,14 +51,14 @@ namespace Group2_iCare.Controllers
                 return HttpNotFound();
             }
 
-            return View(documentMetadata); // return the document
+            return View(documentMetadata);
         }
 
         // POST: Documents/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
-        { // find the document and delete it
+        {
             DocumentMetadata documentMetadata = db.DocumentMetadata.Find(id);
             if (documentMetadata != null)
             {
@@ -67,7 +66,7 @@ namespace Group2_iCare.Controllers
                 db.SaveChanges();
             }
 
-            return RedirectToAction("Index"); // return to index
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -91,7 +90,6 @@ namespace Group2_iCare.Controllers
                     ModelState.AddModelError("PatientID", "Patient ID is required");
                 }
 
-            // create a new doc
                 if (string.IsNullOrEmpty(documentMetadata.WorkerID))
                 {
                     ModelState.AddModelError("WorkerID", "Worker ID is required");
@@ -129,21 +127,21 @@ namespace Group2_iCare.Controllers
                 }
             }
 
-            PopulateDropdowns(); // populate dropdowns
+            PopulateDropdowns();
             return View(documentMetadata);
         }
 
         public ActionResult Edit(string id)
         {
-            
+
             var user = Session["User"] as iCAREUser;
-            ViewBag.MID = user.ID; // get the user id
+            ViewBag.MID = user.ID;
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest); // if id is null return error
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            DocumentMetadata documentMetadata = db.DocumentMetadata // find the document
+            DocumentMetadata documentMetadata = db.DocumentMetadata
                 .Include(d => d.iCAREUser)
                 .Include(d => d.PatientRecord)
                 .Include(d => d.iCAREWorker)
@@ -155,19 +153,19 @@ namespace Group2_iCare.Controllers
             }
 
             PopulateDropdowns();
-            return View(documentMetadata); // return the document
+            return View(documentMetadata);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "DocID,DocName,PatientID,WorkerID,ModifiedByID,Descript")] DocumentMetadata documentMetadata)
         {
-            if (ModelState.IsValid) // if model state is valid
+            if (ModelState.IsValid)
             {
                 try
                 {
-                    db.Entry(documentMetadata).State = EntityState.Modified; // edit the document
-                    db.SaveChanges(); // save changes
+                    db.Entry(documentMetadata).State = EntityState.Modified;
+                    db.SaveChanges();
                     return RedirectToAction("Index");
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException ex)
@@ -194,7 +192,7 @@ namespace Group2_iCare.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var documentMetadata = db.DocumentMetadata // find the document
+            var documentMetadata = db.DocumentMetadata
                 .Include(d => d.iCAREUser)
                 .Include(d => d.PatientRecord)
                 .Include(d => d.iCAREWorker)
@@ -205,10 +203,10 @@ namespace Group2_iCare.Controllers
                 return HttpNotFound();
             }
 
-            return View(documentMetadata); // return the document
+            return View(documentMetadata);
         }
 
-        private void PopulateDropdowns() // populate dropdowns
+        private void PopulateDropdowns()
         {
             ViewBag.ModifiedByID = new SelectList(db.iCAREUser, "ID", "Name");
             ViewBag.PatientID = new SelectList(db.PatientRecord, "ID", "Name");
@@ -216,7 +214,7 @@ namespace Group2_iCare.Controllers
         }
 
         protected override void Dispose(bool disposing)
-        { // dispose
+        {
             if (disposing)
             {
                 db.Dispose();

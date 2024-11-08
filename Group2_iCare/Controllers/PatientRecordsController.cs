@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Group2_iCare.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Group2_iCare.Models;
 
 namespace Group2_iCare.Controllers
 {
@@ -28,8 +24,8 @@ namespace Group2_iCare.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PatientRecord patientRecord = db.PatientRecord.Find(id); // find the patient record by id
-            if (patientRecord == null) // if patient record is null return error
+            PatientRecord patientRecord = db.PatientRecord.Find(id);
+            if (patientRecord == null)
             {
                 return HttpNotFound();
             }
@@ -39,18 +35,20 @@ namespace Group2_iCare.Controllers
         // GET: PatientRecords/Create
         public ActionResult Create()
         {
-            var user = Session["User"] as iCAREUser; // get the user session
-            var patientRecord = new PatientRecord // create a new patient record
+            var user = Session["User"] as iCAREUser;
+            var patientRecord = new PatientRecord
             {
                 WorkerID = null
             };
 
-            ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description"); // select the geo code
-            ViewBag.WorkerID = user.ID; // get the worker id
-            return View(patientRecord); // return the patient record
+            ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description");
+            ViewBag.WorkerID = user.ID;
+            return View(patientRecord);
         }
 
         // POST: PatientRecords/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,Address,DateOfBirth,Height,Weight,BloodGroup,BedID,TreatmentArea,GeoCodeID,WorkerID")] PatientRecord patientRecord)
@@ -60,7 +58,7 @@ namespace Group2_iCare.Controllers
                 ModelState.AddModelError("ID", "ID already exists");
             }
 
-            if (string.IsNullOrEmpty(patientRecord.Name)) 
+            if (string.IsNullOrEmpty(patientRecord.Name))
             {
                 ModelState.AddModelError("Name", "Insert Valid name");
             }
@@ -73,8 +71,8 @@ namespace Group2_iCare.Controllers
                 return RedirectToAction("Index", "ImportImage", new { PatientRecordID = patientRecord.ID });
             }
 
-            ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description", patientRecord.GeoCodeID); // select the geo codes
-            ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", patientRecord.WorkerID); // select the worker ids
+            ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description", patientRecord.GeoCodeID);
+            ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", patientRecord.WorkerID);
             return View(patientRecord);
         }
 
@@ -86,18 +84,20 @@ namespace Group2_iCare.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PatientRecord patientRecord = db.PatientRecord.Find(id); // find the patient record by id
-            if (patientRecord == null) // if patient record is null return error
+            PatientRecord patientRecord = db.PatientRecord.Find(id);
+            if (patientRecord == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description", patientRecord.GeoCodeID); // select the geo codes
-            ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", patientRecord.WorkerID); // select the worker ids
-            ViewBag.PatientID = id; // get the patient id
-            return View(patientRecord); // return the patient record
+            ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description", patientRecord.GeoCodeID);
+            ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", patientRecord.WorkerID);
+            ViewBag.PatientID = id;
+            return View(patientRecord);
         }
 
         // POST: PatientRecords/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name,Address,DateOfBirth,Height,Weight,BloodGroup,BedID,TreatmentArea,GeoCodeID,WorkerID")] PatientRecord patientRecord)
@@ -106,13 +106,13 @@ namespace Group2_iCare.Controllers
 
             if (ModelState.IsValid)
             {
-                db.Entry(patientRecord).State = EntityState.Modified; // edit the patient record
-                db.SaveChanges(); // save changes
-                return RedirectToAction("Index", "ImportImage", new { PatientRecordID = patientRecord.ID }); // return to index
+                db.Entry(patientRecord).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index", "ImportImage", new { PatientRecordID = patientRecord.ID });
             }
 
-            ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description", patientRecord.GeoCodeID); // select the geo codes
-            ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", patientRecord.WorkerID); // select the worker ids
+            ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description", patientRecord.GeoCodeID);
+            ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", patientRecord.WorkerID);
             return View(patientRecord);
         }
 
@@ -121,10 +121,10 @@ namespace Group2_iCare.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest); 
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PatientRecord patientRecord = db.PatientRecord.Find(id); // find the patient record by id
-            if (patientRecord == null) // if patient record is null return error
+            PatientRecord patientRecord = db.PatientRecord.Find(id);
+            if (patientRecord == null)
             {
                 return HttpNotFound();
             }
@@ -136,14 +136,14 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            PatientRecord patientRecord = db.PatientRecord.Find(id); // select to delete
-            db.PatientRecord.Remove(patientRecord); // delete the patient record
-            db.SaveChanges(); // save changes
+            PatientRecord patientRecord = db.PatientRecord.Find(id);
+            db.PatientRecord.Remove(patientRecord);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
-        { // dispose
+        {
             if (disposing)
             {
                 db.Dispose();

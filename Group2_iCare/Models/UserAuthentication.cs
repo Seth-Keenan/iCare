@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Group2_iCare.Models
 {
     public class UserAuthentication
-    { // user authentication model
+    {
         [Required(ErrorMessage = "Username field is required")]
         public string UserName { get; set; }
 

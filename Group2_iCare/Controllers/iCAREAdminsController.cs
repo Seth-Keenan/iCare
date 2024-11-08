@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Group2_iCare.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Group2_iCare.Models;
 
 namespace Group2_iCare.Controllers
 {
@@ -16,7 +12,7 @@ namespace Group2_iCare.Controllers
 
         // GET: iCAREAdmins
         public ActionResult Index()
-        { // display all iCAREAdmin
+        {
             var iCAREAdmin = db.iCAREAdmin.Include(i => i.iCAREUser);
             return View(iCAREAdmin.ToList());
         }
@@ -24,11 +20,11 @@ namespace Group2_iCare.Controllers
         // GET: iCAREAdmins/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null) // id is null return error
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            iCAREAdmin iCAREAdmin = db.iCAREAdmin.Find(id); // find the iCAREAdmin by id if null return error
+            iCAREAdmin iCAREAdmin = db.iCAREAdmin.Find(id);
             if (iCAREAdmin == null)
             {
                 return HttpNotFound();
@@ -38,7 +34,7 @@ namespace Group2_iCare.Controllers
 
         // GET: iCAREAdmins/Create
         public ActionResult Create()
-        { // create a new iCAREAdmin
+        {
             ViewBag.ID = new SelectList(db.iCAREUser, "ID", "Name");
             return View();
         }
@@ -50,14 +46,14 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,AdminEmail,DateHired,DateFinished")] iCAREAdmin iCAREAdmin)
         {
-            if (ModelState.IsValid) // if model state is valid
+            if (ModelState.IsValid)
             {
-                db.iCAREAdmin.Add(iCAREAdmin); // add the iCAREAdmin
-                db.SaveChanges(); // save changes
+                db.iCAREAdmin.Add(iCAREAdmin);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID = new SelectList(db.iCAREUser, "ID", "Name", iCAREAdmin.ID); // return the iCAREAdmin
+            ViewBag.ID = new SelectList(db.iCAREUser, "ID", "Name", iCAREAdmin.ID);
             return View(iCAREAdmin);
         }
 
@@ -68,43 +64,45 @@ namespace Group2_iCare.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            iCAREAdmin iCAREAdmin = db.iCAREAdmin.Find(id); // find the iCAREAdmin by id
+            iCAREAdmin iCAREAdmin = db.iCAREAdmin.Find(id);
             if (iCAREAdmin == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID = new SelectList(db.iCAREUser, "ID", "Name", iCAREAdmin.ID); // return the iCAREAdmin
+            ViewBag.ID = new SelectList(db.iCAREUser, "ID", "Name", iCAREAdmin.ID);
             return View(iCAREAdmin);
         }
 
         // POST: iCAREAdmins/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,AdminEmail,DateHired,DateFinished")] iCAREAdmin iCAREAdmin)
-        { 
-            if (ModelState.IsValid) // if model state is valid
+        {
+            if (ModelState.IsValid)
             {
-                db.Entry(iCAREAdmin).State = EntityState.Modified; // edit the iCAREAdmin
+                db.Entry(iCAREAdmin).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID = new SelectList(db.iCAREUser, "ID", "Name", iCAREAdmin.ID); // select list of iCAREUser
-            return View(iCAREAdmin); // return the iCAREAdmin
+            ViewBag.ID = new SelectList(db.iCAREUser, "ID", "Name", iCAREAdmin.ID);
+            return View(iCAREAdmin);
         }
 
         // GET: iCAREAdmins/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null) // if null return error
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            iCAREAdmin iCAREAdmin = db.iCAREAdmin.Find(id); // find the iCAREAdmin by id
+            iCAREAdmin iCAREAdmin = db.iCAREAdmin.Find(id);
             if (iCAREAdmin == null)
             {
                 return HttpNotFound();
             }
-            return View(iCAREAdmin); // return the iCAREAdmin
+            return View(iCAREAdmin);
         }
 
         // POST: iCAREAdmins/Delete/5
@@ -112,14 +110,14 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            iCAREAdmin iCAREAdmin = db.iCAREAdmin.Find(id); // find the iCAREAdmin by id
-            db.iCAREAdmin.Remove(iCAREAdmin); // remove and save
+            iCAREAdmin iCAREAdmin = db.iCAREAdmin.Find(id);
+            db.iCAREAdmin.Remove(iCAREAdmin);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
-        { //dispose
+        {
             if (disposing)
             {
                 db.Dispose();
