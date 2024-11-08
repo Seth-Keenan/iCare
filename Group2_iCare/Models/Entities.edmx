@@ -93,6 +93,7 @@
           <Property Name="BloodGroup" Type="varchar" MaxLength="255" />
           <Property Name="BedID" Type="varchar" MaxLength="255" />
           <Property Name="TreatmentArea" Type="varchar" MaxLength="255" />
+          <Property Name="NID_Array" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="TreatmentRecord">
           <Key>
@@ -388,6 +389,7 @@
           <NavigationProperty Name="DocumentMetadata" Relationship="Self.FK__DocumentM__Patie__4BAC3F29" FromRole="PatientRecord" ToRole="DocumentMetadata" />
           <NavigationProperty Name="GeoCodes" Relationship="Self.FK__PatientRe__GeoCo__46E78A0C" FromRole="PatientRecord" ToRole="GeoCodes" />
           <NavigationProperty Name="iCAREWorker" Relationship="Self.FK__PatientRe__Worke__45F365D3" FromRole="PatientRecord" ToRole="iCAREWorker" />
+          <Property Name="NID_Array" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TreatmentRecord">
           <Key>
@@ -679,6 +681,7 @@
           <EntitySetMapping Name="PatientRecord">
             <EntityTypeMapping TypeName="Group2_iCAREDBModel.PatientRecord">
               <MappingFragment StoreEntitySet="PatientRecord">
+                <ScalarProperty Name="NID_Array" ColumnName="NID_Array" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="WorkerID" ColumnName="WorkerID" />
                 <ScalarProperty Name="GeoCodeID" ColumnName="GeoCodeID" />
@@ -735,7 +738,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

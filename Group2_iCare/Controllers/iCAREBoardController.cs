@@ -1,10 +1,5 @@
 ﻿using Group2_iCare.Models;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Group2_iCare.Controllers
@@ -20,8 +15,8 @@ namespace Group2_iCare.Controllers
             // Fetch the list of geocodes
             var geoCodes = db.GeoCodes.Select(gc => new SelectListItem
             {
-                Value = gc.ID.ToString(), 
-                Text = gc.Description 
+                Value = gc.ID.ToString(),
+                Text = gc.Description
             }).ToList();
 
             // Pass the geocode list to the view using ViewBag
@@ -36,6 +31,17 @@ namespace Group2_iCare.Controllers
         public ActionResult iCAREBoardResult(string ID)
         {
             GeoCodes gc = db.GeoCodes.Find(ID);
+
+            if (gc == null)
+            {
+                ModelState.AddModelError("GeoCode", "Invalid GeoCode selected");
+                return RedirectToAction("iCAREBoardForm");
+            }
+
+            if (string.IsNullOrEmpty(gc.Description))
+            {
+                ModelState.AddModelError("Descripton", "Please choose a GeoCode");
+            }
 
             var patientRecords = db.PatientRecord.Where(pr => pr.GeoCodeID == ID).ToList();
 

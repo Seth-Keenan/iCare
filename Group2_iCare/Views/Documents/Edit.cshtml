@@ -1,0 +1,118 @@
+﻿@model Group2_iCare.Models.DocumentMetadata
+
+@{
+    ViewBag.Title = "Edit Document";
+    Model.ModifiedByID = ViewBag.MID;
+}
+
+<h2>Edit Document</h2>
+<h2>@ViewBag.userID</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Document Metadata</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DocID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DocID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DocName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DocName, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ModifiedByID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ModifiedByID, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.PatientID, (SelectList)ViewBag.PatientID, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.WorkerID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.WorkerID, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descript, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Descript, new { @class = "form-control", id = "descript", rows = 5, placeholder = "Start typing for drug suggestions..." })
+                <div id="suggestions" style="margin-top: 10px;"></div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save Changes" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#descript").on("input", function() {
+            let query = $(this).val().split(" ").pop();
+
+            if (query.length >= 2) {
+                $.ajax({
+                    url: '@Url.Action("GetDrugSuggestions", "Drug")',
+                    data: { query: query },
+                    dataType: 'json',
+                    success: function(data) {
+                        displaySuggestions(data);
+                    }
+                });
+            } else {
+                clearSuggestions();
+            }
+        });
+    });
+
+    function displaySuggestions(suggestions) {
+        clearSuggestions();
+        $.each(suggestions, function(index, suggestion) {
+
+            let suggestionItem = $("<p>")
+                .addClass("suggestion-item")
+                .html("<strong>" + suggestion.DrugName + "</strong>: " + suggestion.DrugDescription);
+            suggestionItem.click(function() {
+                let currentText = $("#descript").val();
+                let lastIndex = currentText.lastIndexOf(" ");
+                let newText = (lastIndex !== -1 ? currentText.substring(0, lastIndex + 1) : "") + suggestion.DrugName + " ";
+                $("#descript").val(newText);
+                clearSuggestions();
+            });
+
+            $("#suggestions").append(suggestionItem);
+        });
+    }
+
+    function clearSuggestions() {
+        $("#suggestions").empty();
+    }
+</script>
+
+<p>
+    @Html.ActionLink("Back to Dashboard", "Index", "WorkerDashboard", null, new { @class = "btn btn-danger" })
+</p>

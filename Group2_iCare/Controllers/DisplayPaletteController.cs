@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Group2_iCare.Models;
 using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Group2_iCare.Models;
 
 namespace Group2_iCare.Controllers
 {

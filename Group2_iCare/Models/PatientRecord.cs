@@ -31,6 +31,7 @@ namespace Group2_iCare.Models
         public string BloodGroup { get; set; }
         public string BedID { get; set; }
         public string TreatmentArea { get; set; }
+        public string NID_Array { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DocumentMetadata> DocumentMetadata { get; set; }

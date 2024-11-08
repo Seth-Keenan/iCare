@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Group2_iCare.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Group2_iCare.Models;
 
 namespace Group2_iCare.Controllers
 {
@@ -39,6 +35,8 @@ namespace Group2_iCare.Controllers
         // GET: ManageDocuments/Create
         public ActionResult Create()
         {
+            var user = Session["User"] as iCAREUser;
+            ViewBag.UID = user.ID;
             ViewBag.ModifiedByID = new SelectList(db.iCAREUser, "ID", "Name");
             ViewBag.PatientID = new SelectList(db.PatientRecord, "ID", "WorkerID");
             ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession");

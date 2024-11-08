@@ -59,6 +59,7 @@ CREATE TABLE PatientRecord (
 	BloodGroup VARCHAR(255),
 	BedID VARCHAR(255),
 	TreatmentArea VARCHAR(255),
+	NID_Array NVARCHAR(MAX),
 	FOREIGN KEY (WorkerID) REFERENCES iCAREWorker(ID),
 	FOREIGN KEY (GeoCodeID) REFERENCES GeoCodes(ID),
 );
@@ -113,11 +114,12 @@ CREATE TABLE Files (
 
 INSERT INTO iCAREUser (ID, Name, Role) 
 VALUES
-	('1', 'Admin', 'Admin');
+	('1', 'ADMIN', 'ADMIN');
 
 INSERT INTO iCAREAdmin (ID, AdminEmail) 
 VALUES
 	('1', 'test@test.com');
+
 
 INSERT INTO UserPassword (ID, UserName, EncryptedPassword, PasswordExpiryTime, UserAccountExpriyDate)
 VALUES
@@ -126,7 +128,11 @@ VALUES
 
 INSERT INTO iCAREUser (ID, Name, Role) 
 VALUES
-	('2', 'Worker', 'Worker');
+	('2', 'WORKER', 'WORKER');
+
+INSERT INTO iCAREWorker (ID, Profession) 
+VALUES
+	('1', 'Nurse');
 
 INSERT INTO UserPassword (ID, UserName, EncryptedPassword, PasswordExpiryTime, UserAccountExpriyDate)
 VALUES

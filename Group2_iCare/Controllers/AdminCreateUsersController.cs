@@ -1,10 +1,8 @@
-﻿using System;
-using System.Data.Entity;
+﻿using Group2_iCare.Models;
+using System;
 using System.Linq;
 using System.Net;
-using System.Runtime.InteropServices;
 using System.Web.Mvc;
-using Group2_iCare.Models;
 
 namespace Group2_iCare.Controllers
 {
@@ -35,16 +33,16 @@ namespace Group2_iCare.Controllers
                     return viewModel;
                 }).ToList();
 
-            var admins = users.Where(u => u.Role == "Admin").AsEnumerable();
-            var workers = users.Where(u => u.Role == "Worker").AsEnumerable();
-            var others = users.Where(u => u.Role != "Admin" && u.Role != "Worker");
+            var admins = users.Where(u => u.Role == "ADMIN").AsEnumerable();
+            var workers = users.Where(u => u.Role != "ADMIN").AsEnumerable();
+            var others = users.Where(u => u.Role == null);
 
 
             return View((admins, workers, others));
         }
 
 
-        // GET: AdminCreateUsers/Create
+
         public ActionResult Create()
         {
             var roles = db.UserRole.Select(r => new { r.RoleName }).ToList();
@@ -53,7 +51,6 @@ namespace Group2_iCare.Controllers
         }
 
 
-        // POST: AdminCreateUsers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
 
@@ -79,7 +76,7 @@ namespace Group2_iCare.Controllers
                 };
                 db.UserPassword.Add(userPassword);
 
-                if (model.Role == "Admin")
+                if (model.Role == "ADMIN")
                 {
                     var admin = new iCAREAdmin
                     {
@@ -89,7 +86,7 @@ namespace Group2_iCare.Controllers
                     };
                     db.iCAREAdmin.Add(admin);
                 }
-                else if (model.Role == "Worker")
+                else
                 {
                     var worker = new iCAREWorker
                     {
@@ -206,13 +203,13 @@ namespace Group2_iCare.Controllers
                     userPassword.UserAccountExpriyDate = model.PasswordExpiryDate;
                 }
 
-                if(model.Role == "Admin")
+                if (model.Role == "ADMIN")
                 {
-                    if(worker != null)
+                    if (worker != null)
                     {
                         db.iCAREWorker.Remove(worker);
                     }
-                    if(admin == null)
+                    if (admin == null)
                     {
                         admin = new iCAREAdmin
                         {
@@ -226,7 +223,7 @@ namespace Group2_iCare.Controllers
                         admin.AdminEmail = model.AdminEmail;
                     }
                 }
-                else
+                else if (model.Role == "WORKER")
                 {
                     if (admin != null)
                     {

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Group2_iCare.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Group2_iCare.Models;
 
 namespace Group2_iCare.Controllers
 {
@@ -39,9 +35,15 @@ namespace Group2_iCare.Controllers
         // GET: PatientRecords/Create
         public ActionResult Create()
         {
+            var user = Session["User"] as iCAREUser;
+            var patientRecord = new PatientRecord
+            {
+                WorkerID = null
+            };
+
             ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description");
-            ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession");
-            return View();
+            ViewBag.WorkerID = user.ID;
+            return View(patientRecord);
         }
 
         // POST: PatientRecords/Create
@@ -51,8 +53,19 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,Address,DateOfBirth,Height,Weight,BloodGroup,BedID,TreatmentArea,GeoCodeID,WorkerID")] PatientRecord patientRecord)
         {
+            if (db.PatientRecord.Find(patientRecord.ID) != null)
+            {
+                ModelState.AddModelError("ID", "ID already exists");
+            }
+
+            if (string.IsNullOrEmpty(patientRecord.Name))
+            {
+                ModelState.AddModelError("Name", "Insert Valid name");
+            }
+
             if (ModelState.IsValid)
             {
+
                 db.PatientRecord.Add(patientRecord);
                 db.SaveChanges();
                 return RedirectToAction("Index", "ImportImage", new { PatientRecordID = patientRecord.ID });
@@ -62,6 +75,7 @@ namespace Group2_iCare.Controllers
             ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", patientRecord.WorkerID);
             return View(patientRecord);
         }
+
 
         // GET: PatientRecords/Edit/5
         public ActionResult Edit(string id)
