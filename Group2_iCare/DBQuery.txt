@@ -113,7 +113,7 @@ CREATE TABLE Files (
 
 INSERT INTO iCAREUser (ID, Name, Role) 
 VALUES
-	('1', 'Admin', 'Admin');
+	('1', 'ADMIN', 'ADMIN');
 
 INSERT INTO iCAREAdmin (ID, AdminEmail) 
 VALUES
@@ -127,7 +127,7 @@ VALUES
 
 INSERT INTO iCAREUser (ID, Name, Role) 
 VALUES
-	('2', 'Worker', 'Worker');
+	('2', 'WORKER', 'WORKER');
 
 INSERT INTO iCAREWorker (ID, Profession) 
 VALUES
