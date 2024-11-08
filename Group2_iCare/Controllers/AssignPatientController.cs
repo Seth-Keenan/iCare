@@ -13,7 +13,7 @@ namespace Group2_iCare.Controllers
 
         // GET: AssignPatient
         public ActionResult AssignPatientForm()
-        {
+        { // assignment
             var user = Session["User"] as iCAREUser;
             var patients = db.PatientRecord.Where(u => u.WorkerID != user.ID && u.WorkerID == null).ToList();
             return View(patients);
@@ -23,14 +23,14 @@ namespace Group2_iCare.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AssignPatientForm(List<string> selectedPatientIds/*, workerId*/)
-        {
+        { // assignment 
             var user = Session["User"] as iCAREUser;
 
-            if (user == null)
+            if (user == null) // if user is not logged in
             {
                 return RedirectToAction("LoginForm", "UserAuthentication");
             }
-
+            // if no patients are selected
             if (selectedPatientIds == null || !selectedPatientIds.Any())
             {
                 ModelState.AddModelError("", "No patients selected.");
@@ -43,7 +43,7 @@ namespace Group2_iCare.Controllers
             //    return RedirectToAction("AssignPatientForm");
             //}
 
-            foreach (var patientId in selectedPatientIds)
+            foreach (var patientId in selectedPatientIds) // assign patients to worker
             {
                 var patient = db.PatientRecord.Find(patientId);
                 if (patient != null)
@@ -52,7 +52,7 @@ namespace Group2_iCare.Controllers
                 }
             }
 
-            db.SaveChanges();
+            db.SaveChanges(); // save changes
             return RedirectToAction("AssignPatientForm");
         }
     }

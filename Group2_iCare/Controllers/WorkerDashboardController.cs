@@ -12,11 +12,11 @@ namespace Group2_iCare.Controllers
         // GET: WorkerDashboard
         public ActionResult Index()
         {
-            var user = Session["User"] as iCAREUser;
-            
+            var user = Session["User"] as iCAREUser; // get user session
+
             if (user == null)
             {
-                return RedirectToAction("LoginForm", "UserAuthentication");
+                return RedirectToAction("LoginForm", "UserAuthentication"); // if user is not logged in
             }
 
             return View(user);

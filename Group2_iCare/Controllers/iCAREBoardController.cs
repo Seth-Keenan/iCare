@@ -35,13 +35,13 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult iCAREBoardResult(string ID)
         {
-            GeoCodes gc = db.GeoCodes.Find(ID);
+            GeoCodes gc = db.GeoCodes.Find(ID); // find the geocode by ID
 
-            var patientRecords = db.PatientRecord.Where(pr => pr.GeoCodeID == ID).ToList();
+            var patientRecords = db.PatientRecord.Where(pr => pr.GeoCodeID == ID).ToList(); // get patient records for the geocode to display
 
-            ViewBag.SelectedGeoCode = gc.Description;
+            ViewBag.SelectedGeoCode = gc.Description; // display the geocode description
 
-            return View(patientRecords);
+            return View(patientRecords); // return the patient records
         }
     }
 }

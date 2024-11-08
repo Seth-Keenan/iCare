@@ -16,9 +16,9 @@ namespace Group2_iCare.Controllers
 
         // GET: iCAREUsers
         public ActionResult Index()
-        {
-            var iCAREUser = db.iCAREUser.Include(i => i.UserPassword);
-            return View(iCAREUser.ToList());
+        { 
+            var iCAREUser = db.iCAREUser.Include(i => i.UserPassword); // display all users
+            return View(iCAREUser.ToList()); // return the users
         }
 
         // GET: iCAREUsers/Details/5
@@ -28,12 +28,12 @@ namespace Group2_iCare.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            iCAREUser iCAREUser = db.iCAREUser.Find(id);
+            iCAREUser iCAREUser = db.iCAREUser.Find(id); // find the user by id
             if (iCAREUser == null)
             {
                 return HttpNotFound();
             }
-            return View(iCAREUser);
+            return View(iCAREUser); // return the user
         }
 
         // GET: iCAREUsers/Create
@@ -44,69 +44,66 @@ namespace Group2_iCare.Controllers
         }
 
         // POST: iCAREUsers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name")] iCAREUser iCAREUser)
         {
             if (ModelState.IsValid)
             {
-                db.iCAREUser.Add(iCAREUser);
-                db.SaveChanges();
+                db.iCAREUser.Add(iCAREUser); // add the user
+                db.SaveChanges(); // save changes
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID = new SelectList(db.UserPassword, "ID", "UserName", iCAREUser.ID);
+            ViewBag.ID = new SelectList(db.UserPassword, "ID", "UserName", iCAREUser.ID); // return the user
             return View(iCAREUser);
         }
 
         // GET: iCAREUsers/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
+            if (id == null) // if id is null return error
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            iCAREUser iCAREUser = db.iCAREUser.Find(id);
+            iCAREUser iCAREUser = db.iCAREUser.Find(id); // find the user by id
             if (iCAREUser == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID = new SelectList(db.UserPassword, "ID", "UserName", iCAREUser.ID);
+            ViewBag.ID = new SelectList(db.UserPassword, "ID", "UserName", iCAREUser.ID); // return the user
             return View(iCAREUser);
         }
 
         // POST: iCAREUsers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name")] iCAREUser iCAREUser)
-        {
+        { // edit the user
             if (ModelState.IsValid)
-            {
+            { // if model state is valid
                 db.Entry(iCAREUser).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID = new SelectList(db.UserPassword, "ID", "UserName", iCAREUser.ID);
+            ViewBag.ID = new SelectList(db.UserPassword, "ID", "UserName", iCAREUser.ID); // return the user
             return View(iCAREUser);
         }
 
         // GET: iCAREUsers/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
+            if (id == null) // if id is null return error
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            iCAREUser iCAREUser = db.iCAREUser.Find(id);
-            if (iCAREUser == null)
+            iCAREUser iCAREUser = db.iCAREUser.Find(id); // find the user by id
+            if (iCAREUser == null) // if user is null
             {
                 return HttpNotFound();
             }
-            return View(iCAREUser);
+            return View(iCAREUser); // return the user
         }
 
         // POST: iCAREUsers/Delete/5
@@ -114,19 +111,19 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            var userPasswords = db.UserPassword.Where(up => up.ID == id).ToList();
+            var userPasswords = db.UserPassword.Where(up => up.ID == id).ToList(); // find the user passwords
             foreach (var userPassword in userPasswords)
             {
-                db.UserPassword.Remove(userPassword);
+                db.UserPassword.Remove(userPassword); // remove the user password
             }
-            iCAREUser iCAREUser = db.iCAREUser.Find(id);
-            db.iCAREUser.Remove(iCAREUser);
+            iCAREUser iCAREUser = db.iCAREUser.Find(id); // find the user
+            db.iCAREUser.Remove(iCAREUser); // remove the user
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index"); // return to index
         }
 
         protected override void Dispose(bool disposing)
-        {
+        { // dispose
             if (disposing)
             {
                 db.Dispose();

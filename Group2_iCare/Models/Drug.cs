@@ -8,6 +8,7 @@ namespace Group2_iCare.Models
 {
     public class Drug
     {
+        // db connections that are used to get drug information from the database
         public String DrugID { get; set; }
         public String DrugName { get; set; }
 

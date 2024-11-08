@@ -5,22 +5,22 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace Group2_iCare.Controllers
-{
+{ // home controller
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index() // index
         {
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult About() // about
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Contact() //contacts
         {
             ViewBag.Message = "Your contact page.";
 

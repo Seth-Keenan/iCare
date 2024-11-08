@@ -15,21 +15,21 @@ namespace Group2_iCare.Controllers
         private Group2_iCAREDBEntities db = new Group2_iCAREDBEntities();
 
         // GET: ManageDocuments
-        public ActionResult Index()
+        public ActionResult Index() // display all documents
         {
-            var documentMetadata = db.DocumentMetadata.Include(d => d.iCAREUser).Include(d => d.PatientRecord).Include(d => d.iCAREWorker).Include(d => d.ModificationHistory);
-            return View(documentMetadata.ToList());
+            var documentMetadata = db.DocumentMetadata.Include(d => d.iCAREUser).Include(d => d.PatientRecord).Include(d => d.iCAREWorker).Include(d => d.ModificationHistory); // include all the documents from the db
+            return View(documentMetadata.ToList()); // return the docs in list
         }
 
         // GET: ManageDocuments/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
+            if (id == null) // id is null return error
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DocumentMetadata documentMetadata = db.DocumentMetadata.Find(id);
-            if (documentMetadata == null)
+            DocumentMetadata documentMetadata = db.DocumentMetadata.Find(id); // find the document by id
+            if (documentMetadata == null) // if the document is null return error
             {
                 return HttpNotFound();
             }
@@ -38,7 +38,7 @@ namespace Group2_iCare.Controllers
 
         // GET: ManageDocuments/Create
         public ActionResult Create()
-        {
+        { //select in db to create a new document
             var user = Session["User"] as iCAREUser;
             ViewBag.UID = user.ID;
             ViewBag.ModifiedByID = new SelectList(db.iCAREUser, "ID", "Name");
@@ -49,19 +49,17 @@ namespace Group2_iCare.Controllers
         }
 
         // POST: ManageDocuments/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DocID,DocName,DateOfCreation,PatientID,WorkerID,ModifiedByID,CreationDate,ModifyDate,Descript")] DocumentMetadata documentMetadata)
+        public ActionResult Create([Bind(Include = "DocID,DocName,DateOfCreation,PatientID,WorkerID,ModifiedByID,CreationDate,ModifyDate,Descript")] DocumentMetadata documentMetadata) // create a new document
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) // if model state is valid 
             {
-                db.DocumentMetadata.Add(documentMetadata);
-                db.SaveChanges();
+                db.DocumentMetadata.Add(documentMetadata); // add the document
+                db.SaveChanges(); // save changes
                 return RedirectToAction("Index");
             }
-
+            // select list of modified by id, patient id, worker id, and doc id
             ViewBag.ModifiedByID = new SelectList(db.iCAREUser, "ID", "Name", documentMetadata.ModifiedByID);
             ViewBag.PatientID = new SelectList(db.PatientRecord, "ID", "WorkerID", documentMetadata.PatientID);
             ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", documentMetadata.WorkerID);
@@ -81,6 +79,7 @@ namespace Group2_iCare.Controllers
             {
                 return HttpNotFound();
             }
+            // select list of modified by id, patient id, worker id, and doc id
             ViewBag.ModifiedByID = new SelectList(db.iCAREUser, "ID", "Name", documentMetadata.ModifiedByID);
             ViewBag.PatientID = new SelectList(db.PatientRecord, "ID", "WorkerID", documentMetadata.PatientID);
             ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", documentMetadata.WorkerID);
@@ -89,18 +88,17 @@ namespace Group2_iCare.Controllers
         }
 
         // POST: ManageDocuments/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "DocID,DocName,DateOfCreation,PatientID,WorkerID,ModifiedByID,CreationDate,ModifyDate,Descript")] DocumentMetadata documentMetadata)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(documentMetadata).State = EntityState.Modified;
-                db.SaveChanges();
+                db.Entry(documentMetadata).State = EntityState.Modified; // edit the document
+                db.SaveChanges(); // save changes
                 return RedirectToAction("Index");
             }
+            // select list of modified by id, patient id, worker id, and doc id
             ViewBag.ModifiedByID = new SelectList(db.iCAREUser, "ID", "Name", documentMetadata.ModifiedByID);
             ViewBag.PatientID = new SelectList(db.PatientRecord, "ID", "WorkerID", documentMetadata.PatientID);
             ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", documentMetadata.WorkerID);
@@ -115,7 +113,7 @@ namespace Group2_iCare.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DocumentMetadata documentMetadata = db.DocumentMetadata.Find(id);
+            DocumentMetadata documentMetadata = db.DocumentMetadata.Find(id); //select to delete
             if (documentMetadata == null)
             {
                 return HttpNotFound();
@@ -128,9 +126,9 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            DocumentMetadata documentMetadata = db.DocumentMetadata.Find(id);
-            db.DocumentMetadata.Remove(documentMetadata);
-            db.SaveChanges();
+            DocumentMetadata documentMetadata = db.DocumentMetadata.Find(id); // fine the document and delete it
+            db.DocumentMetadata.Remove(documentMetadata); // remove the document
+            db.SaveChanges(); // save changes
             return RedirectToAction("Index");
         }
 

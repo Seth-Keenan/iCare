@@ -5,6 +5,7 @@ namespace Group2_iCare.Models
 {
     public class Documents
     {
+        //db connection that includes methods for document id, document name, modified by id, patient id, worker id, description
         public string DocID { get; set; }
 
 

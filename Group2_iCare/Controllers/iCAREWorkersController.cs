@@ -11,7 +11,7 @@ using Group2_iCare.Models;
 namespace Group2_iCare.Controllers
 {
     public class iCAREWorkersController : Controller
-    {
+    { // iCARE workers controller
         private Group2_iCAREDBEntities db = new Group2_iCAREDBEntities();
 
         // GET: iCAREWorkers
@@ -24,16 +24,16 @@ namespace Group2_iCare.Controllers
         // GET: iCAREWorkers/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
+            if (id == null) // id is null
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            iCAREWorker iCAREWorker = db.iCAREWorker.Find(id);
+            iCAREWorker iCAREWorker = db.iCAREWorker.Find(id); // find the iCAREWorker by id
             if (iCAREWorker == null)
             {
                 return HttpNotFound();
             }
-            return View(iCAREWorker);
+            return View(iCAREWorker); // return the iCAREWorker
         }
 
         // GET: iCAREWorkers/Create
@@ -44,69 +44,68 @@ namespace Group2_iCare.Controllers
         }
 
         // POST: iCAREWorkers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Profession")] iCAREWorker iCAREWorker)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) // if model state is valid
             {
-                db.iCAREWorker.Add(iCAREWorker);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                db.iCAREWorker.Add(iCAREWorker); // add the iCAREWorker
+                db.SaveChanges(); // save changes
+                return RedirectToAction("Index"); // return to index
             }
 
             ViewBag.ID = new SelectList(db.iCAREUser, "ID", "Name", iCAREWorker.ID);
-            return View(iCAREWorker);
+            return View(iCAREWorker); // return the iCAREWorker
         }
 
         // GET: iCAREWorkers/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
+            if (id == null) // if id is null return error
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            iCAREWorker iCAREWorker = db.iCAREWorker.Find(id);
+
+            iCAREWorker iCAREWorker = db.iCAREWorker.Find(id); // find the iCAREWorker by id
             if (iCAREWorker == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID = new SelectList(db.iCAREUser, "ID", "Name", iCAREWorker.ID);
+            ViewBag.ID = new SelectList(db.iCAREUser, "ID", "Name", iCAREWorker.ID); // return the iCAREWorker
             return View(iCAREWorker);
         }
 
         // POST: iCAREWorkers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Profession")] iCAREWorker iCAREWorker)
+        public ActionResult Edit([Bind(Include = "ID,Profession")] iCAREWorker iCAREWorker) // edit the iCAREWorker
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) // if model state is valid
             {
-                db.Entry(iCAREWorker).State = EntityState.Modified;
-                db.SaveChanges();
+                db.Entry(iCAREWorker).State = EntityState.Modified; // edit the iCAREWorker
+                db.SaveChanges(); // save changes
                 return RedirectToAction("Index");
             }
-            ViewBag.ID = new SelectList(db.iCAREUser, "ID", "Name", iCAREWorker.ID);
-            return View(iCAREWorker);
+            ViewBag.ID = new SelectList(db.iCAREUser, "ID", "Name", iCAREWorker.ID); // return the iCAREWorker
+            return View(iCAREWorker); // return the iCAREWorker
         }
 
         // GET: iCAREWorkers/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
+            if (id == null) // if id is null return error
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            iCAREWorker iCAREWorker = db.iCAREWorker.Find(id);
-            if (iCAREWorker == null)
+            iCAREWorker iCAREWorker = db.iCAREWorker.Find(id); // find the iCAREWorker by id
+            if (iCAREWorker == null) // if iCAREWorker is null
             {
-                return HttpNotFound();
+                return HttpNotFound(); 
             }
-            return View(iCAREWorker);
+            return View(iCAREWorker); // return the iCAREWorker
         }
 
         // POST: iCAREWorkers/Delete/5
@@ -114,14 +113,14 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            iCAREWorker iCAREWorker = db.iCAREWorker.Find(id);
-            db.iCAREWorker.Remove(iCAREWorker);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            iCAREWorker iCAREWorker = db.iCAREWorker.Find(id); // find the iCAREWorker by id
+            db.iCAREWorker.Remove(iCAREWorker); // remove the iCAREWorker
+            db.SaveChanges(); // save changes
+            return RedirectToAction("Index"); // return to index
         }
 
         protected override void Dispose(bool disposing)
-        {
+        { // dispose
             if (disposing)
             {
                 db.Dispose();
