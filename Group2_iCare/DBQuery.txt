@@ -119,6 +119,7 @@ INSERT INTO iCAREAdmin (ID, AdminEmail)
 VALUES
 	('1', 'test@test.com');
 
+
 INSERT INTO UserPassword (ID, UserName, EncryptedPassword, PasswordExpiryTime, UserAccountExpriyDate)
 VALUES
 	('1', 'ADMIN', 'ADMIN', 90, '2025-01-01');
@@ -127,6 +128,10 @@ VALUES
 INSERT INTO iCAREUser (ID, Name, Role) 
 VALUES
 	('2', 'Worker', 'Worker');
+
+INSERT INTO iCAREWorker (ID, Profession) 
+VALUES
+	('1', 'Nurse');
 
 INSERT INTO UserPassword (ID, UserName, EncryptedPassword, PasswordExpiryTime, UserAccountExpriyDate)
 VALUES

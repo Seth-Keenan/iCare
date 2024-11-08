@@ -4,14 +4,21 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create Patient Record</h2>
 
-@using (Html.BeginForm()) 
+@foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+{
+    <div class="alert alert-danger">
+        @error.ErrorMessage
+    </div>
+}
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
+
     <div class="form-horizontal">
-        <h4>PatientRecord</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -39,39 +46,45 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DateOfBirth, "DOB", htmlAttributes: new { @class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Height, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10 input-group">
                 @Html.EditorFor(model => model.Height, new { htmlAttributes = new { @class = "form-control" } })
+                <span class="input-group-text" id="basic-addon1">cm</span>
                 @Html.ValidationMessageFor(model => model.Height, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Weight, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10 input-group">
                 @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control" } })
+                <span class="input-group-text" id="basic-addon1">lbs</span>
                 @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BloodGroup, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.BloodGroup, "Blood Group", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BloodGroup, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.BloodGroup,
+                    new SelectList(
+                        new List<string> { "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-" }),
+                    "- Select Blood Group -",
+                    new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.BloodGroup, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BedID, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.BedID, "Bed ID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.BedID, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.BedID, "", new { @class = "text-danger" })
@@ -79,15 +92,15 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TreatmentArea, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TreatmentArea, "Treatment Area", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TreatmentArea, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TreatmentArea, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.GeoCodeID, "GeoCodeID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.GeoCodeID, "GeoCode ID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("GeoCodeID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.GeoCodeID, "", new { @class = "text-danger" })
@@ -95,21 +108,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.WorkerID, "WorkerID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("WorkerID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.WorkerID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Continue" class="btn btn-default" />
+                <input type="submit" value="Continue" class="btn btn-outline-success" />
+                @Html.ActionLink("Back to List", "Index", "", new {@class = "btn btn-outline-danger"})
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

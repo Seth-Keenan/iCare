@@ -14,7 +14,8 @@ namespace Group2_iCare.Controllers
         // GET: AssignPatient
         public ActionResult AssignPatientForm()
         {
-            var patients = db.PatientRecord.ToList();
+            var user = Session["User"] as iCAREUser;
+            var patients = db.PatientRecord.Where(u => u.WorkerID != user.ID && u.WorkerID == null).ToList();
             return View(patients);
         }
 

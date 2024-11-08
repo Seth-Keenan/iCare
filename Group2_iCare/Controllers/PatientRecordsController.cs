@@ -39,9 +39,15 @@ namespace Group2_iCare.Controllers
         // GET: PatientRecords/Create
         public ActionResult Create()
         {
+            var user = Session["User"] as iCAREUser;
+            var patientRecord = new PatientRecord
+            {
+                WorkerID = null
+            };
+
             ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description");
-            ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession");
-            return View();
+            ViewBag.WorkerID = user.ID;
+            return View(patientRecord);
         }
 
         // POST: PatientRecords/Create
@@ -51,8 +57,14 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,Address,DateOfBirth,Height,Weight,BloodGroup,BedID,TreatmentArea,GeoCodeID,WorkerID")] PatientRecord patientRecord)
         {
+
             if (ModelState.IsValid)
             {
+                if(db.PatientRecord.Find(patientRecord.ID) != null)
+                {
+                    ModelState.AddModelError("ID", "ID already exists");
+                    return RedirectToAction("Create");
+                }
                 db.PatientRecord.Add(patientRecord);
                 db.SaveChanges();
                 return RedirectToAction("Index", "ImportImage", new { PatientRecordID = patientRecord.ID });

@@ -35,9 +35,9 @@ namespace Group2_iCare.Controllers
                     return viewModel;
                 }).ToList();
 
-            var admins = users.Where(u => u.Role == "Admin").AsEnumerable();
-            var workers = users.Where(u => u.Role == "Worker").AsEnumerable();
-            var others = users.Where(u => u.Role != "Admin" && u.Role != "Worker");
+            var admins = users.Where(u => u.Role == "ADMIN").AsEnumerable();
+            var workers = users.Where(u => u.Role == "WORKER").AsEnumerable();
+            var others = users.Where(u => u.Role != "ADMIN" && u.Role != "WORKER");
 
 
             return View((admins, workers, others));
@@ -79,7 +79,7 @@ namespace Group2_iCare.Controllers
                 };
                 db.UserPassword.Add(userPassword);
 
-                if (model.Role == "Admin")
+                if (model.Role == "ADMIN")
                 {
                     var admin = new iCAREAdmin
                     {
@@ -89,7 +89,7 @@ namespace Group2_iCare.Controllers
                     };
                     db.iCAREAdmin.Add(admin);
                 }
-                else if (model.Role == "Worker")
+                else if (model.Role == "WORKER")
                 {
                     var worker = new iCAREWorker
                     {
@@ -206,7 +206,7 @@ namespace Group2_iCare.Controllers
                     userPassword.UserAccountExpriyDate = model.PasswordExpiryDate;
                 }
 
-                if(model.Role == "Admin")
+                if(model.Role == "ADMIN")
                 {
                     if(worker != null)
                     {
@@ -226,7 +226,7 @@ namespace Group2_iCare.Controllers
                         admin.AdminEmail = model.AdminEmail;
                     }
                 }
-                else
+                else if (model.Role == "WORKER")
                 {
                     if (admin != null)
                     {

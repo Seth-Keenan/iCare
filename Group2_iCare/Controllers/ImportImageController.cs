@@ -46,8 +46,9 @@ namespace Group2_iCare.Controllers
         }
 
         // GET: ImportImage/Scanner
-        public ActionResult Scanner()
+        public ActionResult Scanner(int PatientRecordID)
         {
+            ViewBag.PatientRecordID = PatientRecordID;
             return View();
         }
 
