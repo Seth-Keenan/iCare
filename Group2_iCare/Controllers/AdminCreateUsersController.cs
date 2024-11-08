@@ -26,7 +26,7 @@ namespace Group2_iCare.Controllers
                     {
                         ID = user.ID,
                         Name = user.Name,
-                        Role = user.iCAREAdmin != null ? "Admin" : (user.iCAREWorker != null ? "Worker" : "N/A"),
+                        Role = user.Role,
                         UserName = user.UserPassword?.UserName ?? "N/A",
                         Password = user.UserPassword?.EncryptedPassword ?? "N/A",
                         AdminEmail = user.iCAREAdmin?.AdminEmail ?? "N/A",
@@ -37,9 +37,10 @@ namespace Group2_iCare.Controllers
 
             var admins = users.Where(u => u.Role == "Admin").AsEnumerable();
             var workers = users.Where(u => u.Role == "Worker").AsEnumerable();
+            var others = users.Where(u => u.Role != "Admin" && u.Role != "Worker");
 
 
-            return View((admins, workers));
+            return View((admins, workers, others));
         }
 
 
@@ -63,7 +64,8 @@ namespace Group2_iCare.Controllers
                 var newUser = new iCAREUser
                 {
                     ID = model.ID,
-                    Name = model.Name
+                    Name = model.Name,
+                    Role = model.Role
                 };
                 db.iCAREUser.Add(newUser);
 
@@ -124,7 +126,7 @@ namespace Group2_iCare.Controllers
             var admin = db.iCAREAdmin.Find(id);
             var worker = db.iCAREWorker.Find(id);
 
-            string role = admin != null ? "Admin" : (worker != null ? "Worker" : "None");
+            string role = user.Role;
             string profession = worker?.Profession;
 
             var viewModel = new AdminCreateUser
@@ -167,7 +169,7 @@ namespace Group2_iCare.Controllers
                 UserName = userPassword?.UserName,
                 Password = userPassword?.EncryptedPassword,
                 PasswordExpiryDate = userPassword?.UserAccountExpriyDate ?? DateTime.Now,
-                Role = admin != null ? "Admin" : "Worker",
+                Role = user.Role,
                 AdminEmail = admin?.AdminEmail,
                 Profession = worker?.Profession
             };
@@ -190,6 +192,7 @@ namespace Group2_iCare.Controllers
                 if (user != null)
                 {
                     user.Name = model.Name;
+                    user.Role = model.Role;
                 }
 
                 var userPassword = db.UserPassword.Find(model.ID);
@@ -278,7 +281,7 @@ namespace Group2_iCare.Controllers
                 UserName = userPassword?.UserName,
                 Password = userPassword?.EncryptedPassword,
                 PasswordExpiryDate = userPassword?.UserAccountExpriyDate ?? DateTime.Now,
-                Role = admin != null ? "Admin" : "Worker",
+                Role = user.Role,
                 AdminEmail = admin?.AdminEmail,
                 Profession = worker?.Profession
             };

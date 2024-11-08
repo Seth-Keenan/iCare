@@ -1,9 +1,11 @@
-﻿-- CREATES ALL TABLES --
+﻿
+
 
 -- Parent Table --
 CREATE TABLE iCAREUser (
     ID VARCHAR(255) PRIMARY KEY,
-	Name VARCHAR(255)
+	Name VARCHAR(255),
+	Role VARCHAR(255)
 );
 
 -- Child Table for iCAREWorker (inherits iCAREUser) --
@@ -109,9 +111,9 @@ CREATE TABLE Files (
 	FOREIGN KEY (UploadedByID) REFERENCES iCAREUser(ID)
 );
 
-INSERT INTO iCAREUser (ID, Name) 
+INSERT INTO iCAREUser (ID, Name, Role) 
 VALUES
-	('1', 'Admin');
+	('1', 'Admin', 'Admin');
 
 INSERT INTO iCAREAdmin (ID, AdminEmail) 
 VALUES
@@ -122,9 +124,9 @@ VALUES
 	('1', 'ADMIN', 'ADMIN', 90, '2025-01-01');
 
 
-INSERT INTO iCAREUser (ID, Name) 
+INSERT INTO iCAREUser (ID, Name, Role) 
 VALUES
-	('2', 'Worker');
+	('2', 'Worker', 'Worker');
 
 INSERT INTO UserPassword (ID, UserName, EncryptedPassword, PasswordExpiryTime, UserAccountExpriyDate)
 VALUES

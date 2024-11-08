@@ -1,67 +1,102 @@
-﻿@model (IEnumerable<Group2_iCare.Models.AdminCreateUser>, IEnumerable<Group2_iCare.Models.AdminCreateUser>)
+﻿@model (IEnumerable<Group2_iCare.Models.AdminCreateUser>, IEnumerable<Group2_iCare.Models.AdminCreateUser>, IEnumerable<Group2_iCare.Models.AdminCreateUser>)
 
 @{
     ViewBag.Title = "Manage Accounts";
 }
 
-<h2>Manage Accounts</h2>
+<head>
+    <link href="~/Content/manageAccounts.css" rel="stylesheet" type="text/css" />
+</head>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="acnt-bg">
+    <div class="acnt-container">
+        <h2 style="margin-bottom: 50px;">Manage Accounts</h2>
+        <h3>Admins</h3>
+        <div class="table-container">
+            <table class="table w-100 overflow-x-scroll">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Item1.First().Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item1.First().AdminEmail)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item1.First().UserName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item1.First().Password)</th>
+                    <th>Actions</th>
+                </tr>
 
-<h3>Admins</h3>
-<div class="table-container">
-    <table class="table w-100 overflow-x-scroll">
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Item1.First().Name)</th>
-            <th>@Html.DisplayNameFor(model => model.Item1.First().AdminEmail)</th>
-            <th>@Html.DisplayNameFor(model => model.Item1.First().UserName)</th>
-            <th>@Html.DisplayNameFor(model => model.Item1.First().Password)</th>
-            <th>Actions</th>
-        </tr>
+                @foreach (var item in Model.Item1) // Item1 contains the admins
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(_ => item.Name)</td>
+                        <td>@Html.DisplayFor(_ => item.AdminEmail)</td>
+                        <td>@Html.DisplayFor(_ => item.UserName)</td>
+                        <td>@Html.DisplayFor(_ => item.Password)</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
 
-        @foreach (var item in Model.Item1) // Item1 contains the admins
-        {
-            <tr>
-                <td>@Html.DisplayFor(_ => item.Name)</td>
-                <td>@Html.DisplayFor(_ => item.AdminEmail)</td>
-                <td>@Html.DisplayFor(_ => item.UserName)</td>
-                <td>@Html.DisplayFor(_ => item.Password)</td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>
-            </tr>
-        }
-    </table>
-</div>
+        <h3>Workers</h3>
+        <div class="table-container">
+            <table class="table w-100 overflow-x-scroll">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Item2.First().Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item2.First().Profession)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item2.First().UserName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item2.First().Password)</th>
+                    <th>Actions</th>
+                </tr>
 
-<h3>Workers</h3>
-<div class="table-container">
-    <table class="table w-100 overflow-x-scroll">
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Item2.First().Name)</th>
-            <th>@Html.DisplayNameFor(model => model.Item2.First().Profession)</th>
-            <th>@Html.DisplayNameFor(model => model.Item2.First().UserName)</th>
-            <th>@Html.DisplayNameFor(model => model.Item2.First().Password)</th>
-            <th>Actions</th>
-        </tr>
+                @foreach (var item in Model.Item2) // Item2 contains the workers
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(_ => item.Name)</td>
+                        <td>@Html.DisplayFor(_ => item.Profession)</td>
+                        <td>@Html.DisplayFor(_ => item.UserName)</td>
+                        <td>@Html.DisplayFor(_ => item.Password)</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
 
-        @foreach (var item in Model.Item2) // Item2 contains the workers
-        {
-            <tr>
-                <td>@Html.DisplayFor(_ => item.Name)</td>
-                <td>@Html.DisplayFor(_ => item.Profession)</td>
-                <td>@Html.DisplayFor(_ => item.UserName)</td>
-                <td>@Html.DisplayFor(_ => item.Password)</td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>
-            </tr>
-        }
-    </table>
+        <h3>Other</h3>
+        <div class="table-container">
+            <table class="table w-100 overflow-x-scroll">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Item2.First().Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item2.First().Profession)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item2.First().UserName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item2.First().Password)</th>
+                    <th>Actions</th>
+                </tr>
+
+                @foreach (var item in Model.Item3) // Item3 contains the others
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(_ => item.Name)</td>
+                        <td>@Html.DisplayFor(_ => item.Profession)</td>
+                        <td>@Html.DisplayFor(_ => item.UserName)</td>
+                        <td>@Html.DisplayFor(_ => item.Password)</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <div class="create-btn">
+            @Html.ActionLink("Create New", "Create", new { area = "" }, new { @class = "btn btn-primary grad-btn create-btn" })
+        </div>
+    </div>
 </div>
