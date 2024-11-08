@@ -64,6 +64,14 @@
             <td>
                 @Html.ActionLink("View Documents", "Index", "ImportImage", new { PatientRecordID = item.ID }, new { @class = "btn btn-outline-primary" })
             </td>
+            <td>
+                @using (Html.BeginForm("ReleasePatient", "DisplayMyBoard", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("patientID", item.ID)
+                    <button type="submit" class="btn btn-outline-warning">Release</button>
+                }
+            </td>
         </tr>
     }
 

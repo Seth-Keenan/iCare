@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Newtonsoft.Json;
 using Group2_iCare.Models;
 using Newtonsoft.Json.Linq;
+using System;
 
 namespace Group2_iCare.Controllers
 {
@@ -27,7 +28,7 @@ namespace Group2_iCare.Controllers
             {
                 patients = db.PatientRecord
                     .ToList()
-                    .Where(u => (string.IsNullOrEmpty(u.NID_Array) || JArray.Parse(u.NID_Array).Count < 3) && (string.IsNullOrEmpty(u.NID_Array) || !JArray.Parse(u.NID_Array).Contains(user.ID)))
+                    .Where(u => (string.IsNullOrEmpty(u.NID_Array) || JArray.Parse(u.NID_Array).Count < 3) && (string.IsNullOrEmpty(u.NID_Array) || !JArray.Parse(u.NID_Array).Any(id => id.ToString() == user.ID.ToString())))
                     .ToList();
             }
             return View(patients);

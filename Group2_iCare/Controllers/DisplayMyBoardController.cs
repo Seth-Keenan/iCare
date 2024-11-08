@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace Group2_iCare.Controllers
 {
@@ -35,5 +36,35 @@ namespace Group2_iCare.Controllers
 
             return View(patientRecords);
         }
+
+        public ActionResult ReleasePatient(string patientID)
+        {
+            var user = Session["User"] as iCAREUser;
+
+            if (user == null)
+            {
+                return RedirectToAction("LoginForm", "UserAuthentication");
+            }
+
+            if (user.Role == "DOCTOR")
+            {
+                var patient = db.PatientRecord.Find(patientID);
+                patient.WorkerID = null;
+
+            } else
+            {
+                var patient = db.PatientRecord.Find(patientID);
+                var nurses = JArray.Parse(patient.NID_Array).ToList();
+                nurses.Remove(user.ID);
+                patient.NID_Array = JsonConvert.SerializeObject(nurses);
+            }
+
+            db.SaveChanges();
+
+
+            return RedirectToAction("DisplayMyBoard", "DisplayMyBoard");
+
+        }
+
     }
 }
