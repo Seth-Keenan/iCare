@@ -25,8 +25,12 @@ namespace Group2_iCare.Controllers
 
         public ActionResult Create()
         {
+            var documentMetadata = new DocumentMetadata();
+            var user = Session["User"] as iCAREUser;
+            ViewBag.userID = user.ID;
+            documentMetadata.WorkerID = user.ID;
             PopulateDropdowns();
-            return View();
+            return View(documentMetadata);
         }
 
         // GET: Documents/Delete/5
@@ -66,11 +70,11 @@ namespace Group2_iCare.Controllers
             return RedirectToAction("Index");
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "DocID,DocName,PatientID,WorkerID,ModifiedByID,Descript")] DocumentMetadata documentMetadata)
         {
+
             if (ModelState.IsValid)
             {
                 try
@@ -98,6 +102,9 @@ namespace Group2_iCare.Controllers
 
         public ActionResult Edit(string id)
         {
+
+            var user = Session["User"] as iCAREUser;
+            ViewBag.MID = user.ID;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

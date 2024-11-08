@@ -39,6 +39,8 @@ namespace Group2_iCare.Controllers
         // GET: ManageDocuments/Create
         public ActionResult Create()
         {
+            var user = Session["User"] as iCAREUser;
+            ViewBag.UID = user.ID;
             ViewBag.ModifiedByID = new SelectList(db.iCAREUser, "ID", "Name");
             ViewBag.PatientID = new SelectList(db.PatientRecord, "ID", "WorkerID");
             ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession");

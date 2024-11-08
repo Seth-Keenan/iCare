@@ -60,5 +60,6 @@
 </table>
 
 <p>
-    @Html.ActionLink("Create New Document", "Create")
+    @Html.ActionLink("Create New Document", "Create", "", new { @class = "btn btn-success" })
+    @Html.ActionLink("Back to Dashboard", "Index", "WorkerDashboard", null, new { @class = "btn btn-danger" })
 </p>

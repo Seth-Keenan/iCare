@@ -2,9 +2,11 @@
 
 @{
     ViewBag.Title = "Edit Document";
+    Model.ModifiedByID = ViewBag.MID;
 }
 
 <h2>Edit Document</h2>
+<h2>@ViewBag.userID</h2>
 
 @using (Html.BeginForm())
 {
@@ -32,21 +34,21 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ModifiedByID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ModifiedByID, (SelectList)ViewBag.ModifiedByID, "Select User", new { @class = "form-control" })
+                @Html.EditorFor(model => model.ModifiedByID, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.PatientID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.PatientID, (SelectList)ViewBag.PatientID, "Select Patient", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.PatientID, (SelectList)ViewBag.PatientID, new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.WorkerID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.WorkerID, (SelectList)ViewBag.WorkerID, "Select Worker", new { @class = "form-control" })
+                @Html.EditorFor(model => model.WorkerID, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
 

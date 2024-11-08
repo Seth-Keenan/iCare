@@ -14,7 +14,7 @@
         "Index",
         "PatientRecords",
         null,
-        new {@class = "btn btn-danger"}
+        new {@class = "btn btn-outline-danger"}
     )
 </div>
 <hr />
@@ -51,7 +51,7 @@
     "Index",
     "ManageDocuments",
     null,
-    new {@class = "btn btn-danger"}
+    new {@class = "btn btn-outline-danger"}
     )
 </div>
 <hr />
@@ -73,3 +73,6 @@
         </tr>
     }
 </table>
+<div class="mb-3 d-flex justify-content-end">
+    @Html.ActionLink("Back to Dashboard", "Index", "WorkerDashboard", null, new { @class = "btn btn-outline-danger" })
+</div>
