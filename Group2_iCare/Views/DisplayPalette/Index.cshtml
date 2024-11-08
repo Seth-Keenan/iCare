@@ -4,11 +4,8 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Display Pallete</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -45,6 +42,6 @@
 </table>
 
 <div>
-    <p></p>
-    @Html.ActionLink("Back to Worker Dashboard", "Index", "WorkerDashboard")
+    @Html.ActionLink("Create New", "Create", "", new {@class = "btn btn-outline-success"})
+    @Html.ActionLink("Back to Worker Dashboard", "Index", "WorkerDashboard", null, new { @class = "btn btn-outline-danger" })
 </div>

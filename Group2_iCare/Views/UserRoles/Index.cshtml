@@ -4,35 +4,39 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Manage User Roles</h2>
+<head>
+    <link href="~/Content/userRoles.css" rel="stylesheet" type="text/css" />
+</head>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2>User Roles</h2>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.RoleName)
+            Role
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.RoleName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
 
+
 <div>
-    <p></p>
-    @Html.ActionLink("Back to Admin Dashboard", "AdminDashboard", "ManageAccounts")
+    @Html.ActionLink("Create New", "Create", "", new { @class = "btn btn-outline-success" })
+    <a href="/ManageAccounts/AdminDashboard" class="btn btn-outline-danger">Back to Admin Dashboard</a>
+
 </div>

@@ -1,0 +1,13 @@
+﻿.images-bg {
+    background: linear-gradient(34deg, #ff4a4a, #e20059);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.images-container {
+    background-color: white;
+    padding: 30px;
+    width: 900px;
+    margin: 80px;
+}
