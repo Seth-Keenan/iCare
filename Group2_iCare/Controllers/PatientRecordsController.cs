@@ -57,14 +57,19 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,Address,DateOfBirth,Height,Weight,BloodGroup,BedID,TreatmentArea,GeoCodeID,WorkerID")] PatientRecord patientRecord)
         {
+            if (db.PatientRecord.Find(patientRecord.ID) != null)
+            {
+                ModelState.AddModelError("ID", "ID already exists");
+            }
+
+            if (string.IsNullOrEmpty(patientRecord.Name)) 
+            {
+                ModelState.AddModelError("Name", "Insert Valid name");
+            }
 
             if (ModelState.IsValid)
             {
-                if(db.PatientRecord.Find(patientRecord.ID) != null)
-                {
-                    ModelState.AddModelError("ID", "ID already exists");
-                    return RedirectToAction("Create");
-                }
+
                 db.PatientRecord.Add(patientRecord);
                 db.SaveChanges();
                 return RedirectToAction("Index", "ImportImage", new { PatientRecordID = patientRecord.ID });
@@ -74,6 +79,7 @@ namespace Group2_iCare.Controllers
             ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", patientRecord.WorkerID);
             return View(patientRecord);
         }
+
 
         // GET: PatientRecords/Edit/5
         public ActionResult Edit(string id)

@@ -48,6 +48,16 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Description")] GeoCodes geoCodes)
         {
+            if (string.IsNullOrEmpty(geoCodes.ID))
+            {
+                ModelState.AddModelError("ID", "ID is required");
+            }
+
+            if (string.IsNullOrEmpty(geoCodes.Description)) 
+            {
+                ModelState.AddModelError("Description", "Description is required");
+            }
+
             if (ModelState.IsValid)
             {
                 db.GeoCodes.Add(geoCodes);
@@ -80,6 +90,11 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Description")] GeoCodes geoCodes)
         {
+            if (string.IsNullOrEmpty(geoCodes.Description))
+            {
+                ModelState.AddModelError("Description", "Description is required");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(geoCodes).State = EntityState.Modified;
