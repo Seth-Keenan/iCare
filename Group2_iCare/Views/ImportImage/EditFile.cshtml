@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "EditFile";
 }
 
@@ -23,6 +22,7 @@
                 <td>@file.UploadDate</td>
                 <td>
                     @Html.ActionLink("View", "ShowUploadedFile", new { fileName = file.FileName, PatientRecordID = ViewBag.PatientRecordID })
+                    @Html.ActionLink("Delete", "DeleteFile", new { fileName = file.FileName, PatientRecordID = ViewBag.PatientRecordID }, new { onclick = "return confirm('Are you sure you want to delete this file?')"})   
                 </td>
             </tr>
         }

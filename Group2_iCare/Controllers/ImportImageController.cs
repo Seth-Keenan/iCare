@@ -145,5 +145,39 @@ namespace Group2_iCare.Controllers
             return HttpNotFound();
         }
 
+        public ActionResult DeleteFile(string fileName, int PatientRecordID)
+        {
+            ViewBag.PatientRecordID = PatientRecordID;
+
+            if (string.IsNullOrEmpty(fileName))
+            {
+                return HttpNotFound("File name is invalid.");
+            }
+
+            var directoryPath = Server.MapPath("~/Repository/UploadedFiles");
+            if (directoryPath == null)
+            {
+                return HttpNotFound("Directory path is invalid.");
+            }
+
+            var path = Path.Combine(directoryPath, fileName);
+
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+                ViewBag.Message = "File deleted successfully";
+
+                var file = db.Files.FirstOrDefault(f => f.FileName == fileName);
+                if (file != null)
+                {
+                    db.Files.Remove(file);
+                    db.SaveChanges();
+                }
+
+                return RedirectToAction("Index", new { PatientRecordID });
+            }
+
+            return HttpNotFound();
+        }
     }
 }
