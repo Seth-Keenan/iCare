@@ -33,8 +33,9 @@
           <Property Name="ID" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="FileName" Type="varchar" MaxLength="255" />
           <Property Name="ContentType" Type="nvarchar" MaxLength="255" />
+          <Property Name="FilePath" Type="nvarchar" MaxLength="255" />
+          <Property Name="Descript" Type="nvarchar" MaxLength="255" />
           <Property Name="Data" Type="varbinary(max)" />
-          <Property Name="Descript" Type="varchar" MaxLength="255" />
           <Property Name="UploadDate" Type="date" />
           <Property Name="UploadedByID" Type="varchar" MaxLength="255" />
         </EntityType>
@@ -153,18 +154,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Files__UploadedB__5535A963">
-          <End Role="iCAREUser" Type="Self.iCAREUser" Multiplicity="0..1" />
-          <End Role="Files" Type="Self.Files" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="iCAREUser">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Files">
-              <PropertyRef Name="UploadedByID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__iCAREAdmin__ID__3C69FB99">
           <End Role="iCAREUser" Type="Self.iCAREUser" Multiplicity="1" />
           <End Role="iCAREAdmin" Type="Self.iCAREAdmin" Multiplicity="0..1" />
@@ -262,10 +251,6 @@
             <End Role="iCAREWorker" EntitySet="iCAREWorker" />
             <End Role="DocumentMetadata" EntitySet="DocumentMetadata" />
           </AssociationSet>
-          <AssociationSet Name="FK__Files__UploadedB__5535A963" Association="Self.FK__Files__UploadedB__5535A963">
-            <End Role="iCAREUser" EntitySet="iCAREUser" />
-            <End Role="Files" EntitySet="Files" />
-          </AssociationSet>
           <AssociationSet Name="FK__iCAREAdmin__ID__3C69FB99" Association="Self.FK__iCAREAdmin__ID__3C69FB99">
             <End Role="iCAREUser" EntitySet="iCAREUser" />
             <End Role="iCAREAdmin" EntitySet="iCAREAdmin" />
@@ -331,7 +316,8 @@
           <Property Name="UploadedByID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="UploadDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="iCAREUser" Relationship="Self.FK__Files__UploadedB__5535A963" FromRole="Files" ToRole="iCAREUser" />
-          <Property Name="Descript" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Descript" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FilePath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="GeoCodes">
           <Key>
@@ -633,6 +619,7 @@
           <EntitySetMapping Name="Files">
             <EntityTypeMapping TypeName="Group2_iCAREDBModel.Files">
               <MappingFragment StoreEntitySet="Files">
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
                 <ScalarProperty Name="Descript" ColumnName="Descript" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />

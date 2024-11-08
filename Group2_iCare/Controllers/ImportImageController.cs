@@ -14,15 +14,20 @@ using System.Web.UI.HtmlControls;
 using System.IO;
 using System.Net;
 using Group2_iCare.Models;
+using System.Data.Entity.Core.Objects;
 
 namespace Group2_iCare.Controllers
 {
     public class ImportImageController : Controller
     {
+        private Group2_iCAREDBEntities db = new Group2_iCAREDBEntities();
+
         // GET: ImportImage
         public ActionResult Index(int PatientRecordID)
         {
             ViewBag.PatientRecordID = PatientRecordID;
+            var files = db.Files.Where(f => f.UploadedByID == PatientRecordID.ToString()).ToList();
+            ViewBag.UploadedFiles = files;
             return View();
         }
         public ActionResult BrowseFiles(int PatientRecordID)
@@ -32,8 +37,11 @@ namespace Group2_iCare.Controllers
         }
 
         // GET: ImportImage/EditFile
-        public ActionResult EditFile()
+        public ActionResult EditFile(int PatientRecordID)
         {
+            ViewBag.PatientRecordID = PatientRecordID;
+            var files = db.Files.Where(f => f.UploadedByID == PatientRecordID.ToString()).ToList();
+            ViewBag.UploadedFiles = files;
             return View();
         }
 
@@ -71,7 +79,36 @@ namespace Group2_iCare.Controllers
                 ViewBag.FileName = fileName; // Use fileName instead of path
                 ViewBag.Message = "File uploaded successfully";
 
-                // Redirect to ShowUploadedFile with fileName and PatientRecordID
+                byte[] fileData;
+                using (var binaryReader = new BinaryReader(file.InputStream))
+                {
+                    fileData = binaryReader.ReadBytes(file.ContentLength);
+                }
+
+                // Random ID because we will not be calling it 
+                int newId;
+                Random random = new Random();
+                do
+                {
+                    newId = random.Next(1, int.MaxValue);
+                } while (db.Files.Any(f => f.ID == newId.ToString()));
+
+                var currentUser = db.iCAREWorker.FirstOrDefault();
+
+                db.Files.Add(new Files
+                {
+                    ID = newId.ToString(),
+                    FileName = fileName,
+                    ContentType = file.ContentType,
+                    FilePath = $"~/Repository/UploadedFiles/{fileName}",
+                    Data = fileData,
+                    UploadedByID = PatientRecordID.ToString(),
+                    UploadDate = DateTime.Now,
+                    Descript = "Uploaded file"
+                });
+
+                db.SaveChanges();
+
                 return RedirectToAction("ShowUploadedFile", new { fileName, PatientRecordID });
             }
             else

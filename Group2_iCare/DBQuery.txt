@@ -106,8 +106,7 @@ CREATE TABLE Files (
 	Descript NVARCHAR(255),
 	Data VARBINARY(MAX),
 	UploadDate DATE,
-	UploadedByID VARCHAR(255),
-	FOREIGN KEY (UploadedByID) REFERENCES iCAREUser(ID)
+	UploadedByID VARCHAR(255)
 );
 
 INSERT INTO iCAREUser (ID, Name) 
