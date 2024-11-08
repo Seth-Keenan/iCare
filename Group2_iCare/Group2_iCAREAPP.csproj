@@ -165,6 +165,7 @@
     <Compile Include="Controllers\iCAREWorkersController.cs" />
     <Compile Include="Controllers\ImportImageController.cs" />
     <Compile Include="Controllers\ManageAccountsController.cs" />
+    <Compile Include="Controllers\ManageDocumentsController.cs" />
     <Compile Include="Controllers\PatientRecordsController.cs" />
     <Compile Include="Controllers\UserAuthenticationController.cs" />
     <Compile Include="Controllers\UserPasswordsController.cs" />
@@ -353,6 +354,11 @@
     <Content Include="Views\DocumentMetadata\Details.cshtml" />
     <Content Include="Views\DocumentMetadata\Edit.cshtml" />
     <Content Include="Views\DocumentMetadata\Index.cshtml" />
+    <Content Include="Views\ManageDocuments\Create.cshtml" />
+    <Content Include="Views\ManageDocuments\Delete.cshtml" />
+    <Content Include="Views\ManageDocuments\Details.cshtml" />
+    <Content Include="Views\ManageDocuments\Edit.cshtml" />
+    <Content Include="Views\ManageDocuments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\App_LocalResources\" />
