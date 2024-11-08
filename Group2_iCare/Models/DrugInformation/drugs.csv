@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿DrugID,DrugName,DrugDescription
+=======
+DrugID,DrugName,DrugDescription
+>>>>>>> master
 1,Tylenol,a pain reliever and fever reducer. It is thought to work to relieve minor aches and pains by elevating the body's overall pain threshold so you feel less pain
 2,Benadryl,an antihistamine that reduces the effects of natural chemical histamine in the body. Histamine can produce symptoms of sneezing, itching, watery eyes, and runny nose
 3,Pepcid,a histamine-2 blocker that works by decreasing the amount of acid the stomach produces. It is used to treat and prevent ulcers in the stomach and intestines
@@ -10,6 +14,10 @@
 9,Adderall,a central nervous system stimulant that affects chemicals in the brain and nerves that contribute to hyperactivity and impulse control
 10,Melatonin,a drug that is produced by the pineal gland in animals and regulates sleep and wakefulness
 11,Mucinex,a medication that thins and loosens mucus in the airways, making it easier to cough up the mucus
+<<<<<<< HEAD
 12,Cortizone,a corticosteroid that prevents the release of substances in the body that cause inflammation. It is used to treat conditions such as arthritis, blood disorders, breathing problems, severe allergies, skin diseases, cancer, eye problems, and immune system disorders
 
 
+=======
+12,Cortizone,a corticosteroid that prevents the release of substances in the body that cause inflammation. It is used to treat conditions such as arthritis, blood disorders, breathing problems, severe allergies, skin diseases
+>>>>>>> master

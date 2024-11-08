@@ -10,17 +10,18 @@ using Group2_iCare.Models;
 
 namespace Group2_iCare.Controllers
 {
-    public class DisplayPaletteController : Controller
+    public class ManageDocumentsController : Controller
     {
         private Group2_iCAREDBEntities db = new Group2_iCAREDBEntities();
 
+        // GET: ManageDocuments
         public ActionResult Index()
         {
-            var files = db.Files.AsEnumerable();
-            var documentMetadata = db.DocumentMetadata.Include(d => d.iCAREUser).Include(d => d.PatientRecord).Include(d => d.iCAREWorker).Include(d => d.ModificationHistory).AsEnumerable();
-            return View((documentMetadata, files));
+            var documentMetadata = db.DocumentMetadata.Include(d => d.iCAREUser).Include(d => d.PatientRecord).Include(d => d.iCAREWorker).Include(d => d.ModificationHistory);
+            return View(documentMetadata.ToList());
         }
 
+        // GET: ManageDocuments/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -35,6 +36,7 @@ namespace Group2_iCare.Controllers
             return View(documentMetadata);
         }
 
+        // GET: ManageDocuments/Create
         public ActionResult Create()
         {
             ViewBag.ModifiedByID = new SelectList(db.iCAREUser, "ID", "Name");
@@ -44,6 +46,9 @@ namespace Group2_iCare.Controllers
             return View();
         }
 
+        // POST: ManageDocuments/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "DocID,DocName,DateOfCreation,PatientID,WorkerID,ModifiedByID,CreationDate,ModifyDate,Descript")] DocumentMetadata documentMetadata)
@@ -62,6 +67,7 @@ namespace Group2_iCare.Controllers
             return View(documentMetadata);
         }
 
+        // GET: ManageDocuments/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -80,6 +86,9 @@ namespace Group2_iCare.Controllers
             return View(documentMetadata);
         }
 
+        // POST: ManageDocuments/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "DocID,DocName,DateOfCreation,PatientID,WorkerID,ModifiedByID,CreationDate,ModifyDate,Descript")] DocumentMetadata documentMetadata)
@@ -97,6 +106,7 @@ namespace Group2_iCare.Controllers
             return View(documentMetadata);
         }
 
+        // GET: ManageDocuments/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -111,7 +121,7 @@ namespace Group2_iCare.Controllers
             return View(documentMetadata);
         }
 
-
+        // POST: ManageDocuments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)

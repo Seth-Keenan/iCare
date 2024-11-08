@@ -42,15 +42,18 @@
     </table>
 
     @*<div class="form-group">
-            <label for="workerId">Worker ID:</label>
-            <input type="text" name="workerId" id="workerId" class="form-control" required />
-    </div>*@
+                <label for="workerId">Worker ID:</label>
+                <input type="text" name="workerId" id="workerId" class="form-control" required />
+        </div>*@
 
     <p></p>
-    <button type="submit" class="btn btn-primary">Assign Selected Patients</button>
+
+    <button type="submit" class="btn btn-outline-success">Assign Selected Patients</button>
+    @Html.ActionLink("Back to Worker Dashboard", "Index", "WorkerDashboard", null, new { @class = "btn btn-outline-danger" })
+
 }
 
 <div>
     <p></p>
-    @Html.ActionLink("Back to Worker Dashboard", "Index", "WorkerDashboard")
+
 </div>

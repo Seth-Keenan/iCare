@@ -6,9 +6,6 @@
 
 <h2>Patient Records</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -87,6 +84,6 @@
 </table>
 
 <div>
-    <p></p>
-    @Html.ActionLink("Back to Worker Dashboard", "Index", "WorkerDashboard")
+    @Html.ActionLink("Create New", "Create", "", new { @class = "btn btn-outline-success" })
+    @Html.ActionLink("Back to Worker Dashboard", "Index", "WorkerDashboard", null, new {@class = "btn btn-outline-danger"})
 </div>

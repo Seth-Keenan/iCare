@@ -45,4 +45,8 @@ namespace Group2_iCare.Models
             return suggestions;
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master

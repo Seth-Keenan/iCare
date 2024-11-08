@@ -12,7 +12,7 @@
         <hr />
 
         <div class="form-group">
-            <label asp-for="GeoCodeId" class="col-md-2 control-label">Select a GeoCode</label>
+            <label asp-for="GeoCodeId" class="col-md-2 control-label"></label>
             <p></p>
             <div class="col-md-10">
                 @Html.DropDownList("ID", ViewBag.GeoCodeList as List<SelectListItem>, "Select a GeoCode", new { @class = "form-control" })
@@ -22,6 +22,8 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Search" class="btn btn-outline-primary" />
+                    @Html.ActionLink("Back to Worker Dashboard", "Index", "WorkerDashboard", null, new { @class = "btn btn-outline-danger" })
+
             </div>
         </div>
     </div>
@@ -29,5 +31,4 @@
 
 <div>
     <p></p>
-    @Html.ActionLink("Back to Worker Dashboard", "Index", "WorkerDashboard")
 </div>

@@ -157,7 +157,12 @@
     <Compile Include="Controllers\DisplayMyBoardController.cs" />
     <Compile Include="Controllers\DisplayPaletteController.cs" />
     <Compile Include="Controllers\DocumentMetadatasController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\DrugsAutoSuggestController.cs" />
+=======
+    <Compile Include="Controllers\DrugAutoSuggestController.cs" />
+    <Compile Include="Controllers\GeoCodeController.cs" />
+>>>>>>> master
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\iCAREAdminsController.cs" />
     <Compile Include="Controllers\iCAREBoardController.cs" />
@@ -165,6 +170,7 @@
     <Compile Include="Controllers\iCAREWorkersController.cs" />
     <Compile Include="Controllers\ImportImageController.cs" />
     <Compile Include="Controllers\ManageAccountsController.cs" />
+    <Compile Include="Controllers\ManageDocumentsController.cs" />
     <Compile Include="Controllers\PatientRecordsController.cs" />
     <Compile Include="Controllers\UserAuthenticationController.cs" />
     <Compile Include="Controllers\UserPasswordsController.cs" />
@@ -179,6 +185,8 @@
     <Compile Include="Models\DocumentMetadata.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Drug.cs" />
+    <Compile Include="Models\DrugDictionary.cs" />
     <Compile Include="Models\DrugsDictionary.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
@@ -253,11 +261,13 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\home.css" />
+    <Content Include="Content\importimages.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\manageAccounts.css" />
     <Content Include="Content\navbar.css" />
     <Content Include="Content\navigationBar.css" />
     <Content Include="Content\universalStyles.css" />
+    <Content Include="Content\userRoles.css" />
     <Content Include="Content\workerdashboard.css" />
     <Content Include="DBQuery.txt" />
     <Content Include="favicon.ico" />
@@ -287,6 +297,7 @@
     <Content Include="Models\Entities.edmx.diagram">
       <DependentUpon>Entities.edmx</DependentUpon>
     </Content>
+    <Content Include="Models\DrugInformation\drugs.csv" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -325,11 +336,6 @@
     <Content Include="Views\UserRoles\Index.cshtml" />
     <Content Include="Views\ManageAccounts\AdminDashboard.cshtml" />
     <Content Include="Views\AssignPatient\AssignPatientForm.cshtml" />
-    <Content Include="Views\DisplayPalette\Create.cshtml" />
-    <Content Include="Views\DisplayPalette\Delete.cshtml" />
-    <Content Include="Views\DisplayPalette\Details.cshtml" />
-    <Content Include="Views\DisplayPalette\Edit.cshtml" />
-    <Content Include="Views\DisplayPalette\Index.cshtml" />
     <Content Include="Views\iCAREBoard\iCAREBoardResult.cshtml" />
     <Content Include="Views\WorkerDashboard\Index.cshtml" />
     <Content Include="Views\iCAREBoard\iCAREBoardForm.cshtml" />
@@ -349,11 +355,35 @@
     <Content Include="Views\ImportImage\BrowseFiles.cshtml" />
     <Content Include="Views\ImportImage\Scanner.cshtml" />
     <Content Include="Views\ImportImage\EditFile.cshtml" />
+    <Content Include="Views\DocumentMetadata\Create.cshtml" />
+    <Content Include="Views\DocumentMetadata\Delete.cshtml" />
+    <Content Include="Views\DocumentMetadata\Details.cshtml" />
+    <Content Include="Views\DocumentMetadata\Edit.cshtml" />
+    <Content Include="Views\DocumentMetadata\Index.cshtml" />
+    <Content Include="Views\ManageDocuments\Create.cshtml" />
+    <Content Include="Views\ManageDocuments\Delete.cshtml" />
+    <Content Include="Views\ManageDocuments\Details.cshtml" />
+    <Content Include="Views\ManageDocuments\Edit.cshtml" />
+    <Content Include="Views\ManageDocuments\Index.cshtml" />
+    <Content Include="Views\DisplayPalette\Create.cshtml" />
+    <Content Include="Views\DisplayPalette\Delete.cshtml" />
+    <Content Include="Views\DisplayPalette\Details.cshtml" />
+    <Content Include="Views\DisplayPalette\Edit.cshtml" />
+    <Content Include="Views\DisplayPalette\Index.cshtml" />
+    <Content Include="Views\GeoCode\Create.cshtml" />
+    <Content Include="Views\GeoCode\Delete.cshtml" />
+    <Content Include="Views\GeoCode\Details.cshtml" />
+    <Content Include="Views\GeoCode\Edit.cshtml" />
+    <Content Include="Views\GeoCode\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\App_LocalResources\" />
     <Folder Include="Repository\" />
+<<<<<<< HEAD
     <Folder Include="Views\DrugsAutoSuggest\" />
+=======
+    <Folder Include="Views\DrugAutoSuggest\" />
+>>>>>>> master
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

@@ -2,7 +2,7 @@
     ViewBag.Title = "EditFile";
 }
 
-<h2>EditFile</h2>
+<h2>Edit Files</h2>
 
 <table class="table">
     <thead>
@@ -30,5 +30,5 @@
 </table>
 
 <div>
-    <button type="button" onclick="location.href='@Url.Action("Index", "ImportImage", new { PatientRecordID = ViewBag.PatientRecordID })'">Back to Import Image</button>
+    <button class="btn btn-outline-danger" type="button" onclick="location.href='@Url.Action("Index", "ImportImage", new { PatientRecordID = ViewBag.PatientRecordID })'">Back to Import Image</button>
 </div>
