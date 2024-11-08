@@ -53,21 +53,6 @@ namespace Group2_iCare.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (file != null && file.ContentLength > 0)
-                {
-                    var fileName = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/App_Data/Uploads"), fileName);
-
-                    // Ensure the directory exists and if not will create one to store the file
-                    var directory = Path.GetDirectoryName(path);
-                    if (!Directory.Exists(directory))
-                    {
-                        Directory.CreateDirectory(directory);
-                    }
-
-                    file.SaveAs(path);
-                }
-
                 db.DocumentMetadata.Add(documentMetadata);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -5,6 +5,9 @@
 </head>
 
 @{
+
+    ViewBag.Title = "Admin Dashboard";
+
     var message = TempData["LoginMessage"] as string;
     if (!string.IsNullOrEmpty(message))
     {
@@ -16,69 +19,45 @@
 }
 
 <body class="admin-container">
-    <div class="jumbotron">
-        <h1>Admin Dashboard</h1>
-    </div>
+
+    <div class="dash-title">Admin Dashboard</div>
 
     <div class="item-container">
-        <a href="@Url.Action("Index", "iCAREUsers")" class="card text-decoration-none text-dark item-card">
+        <a href="@Url.Action("Index", "UserRoles")" class="card text-decoration-none text-dark item-card shadow-lg">
             <div class="card-body">
-                <h5 class="card-title">iCARE Users</h5>
-                <p class="card-text">Manage Users</p>
+                <h5 class="card-title">iCARE User Roles</h5>
+                <p class="card-text">Manage User Roles</p>
             </div>
         </a>
-        <a href="@Url.Action("Index", "iCAREWorkers")" class="card text-decoration-none text-dark item-card">
+        <a href="@Url.Action("AssignPatientForm", "AssignPatient")" class="card text-decoration-none text-dark item-card shadow-lg">
             <div class="card-body">
-                <h5 class="card-title">iCARE Workers</h5>
-                <p class="card-text">Manage Workers</p>
+                <h5 class="card-title">Assign Patient</h5>
+                <p class="card-text">Assign Patients to Workers</p>
             </div>
         </a>
-        <a href="@Url.Action("Index", "iCAREAdmins")" class="card text-decoration-none text-dark item-card">
+        <a href="@Url.Action("Index", "DisplayPalette")" class="card text-decoration-none text-dark item-card shadow-lg">
             <div class="card-body">
-                <h5 class="card-title">iCARE Admin</h5>
-                <p class="card-text">Manage Your Account</p>
+                <h5 class="card-title">Display Palette</h5>
+                <p class="card-text">Display GUI Window showing document metadata (e.g. patient info)</p>
             </div>
         </a>
-            <a href="@Url.Action("Index", "UserPasswords")" class="card text-decoration-none text-dark item-card">
-                <div class="card-body">
-                    <h5 class="card-title">iCARE User Passwords</h5>
-                    <p class="card-text">Manage Passwords</p>
-                </div>
-            </a>
-            <a href="@Url.Action("Index", "UserRoles")" class="card text-decoration-none text-dark item-card">
-                <div class="card-body">
-                    <h5 class="card-title">iCARE User Roles</h5>
-                    <p class="card-text">Manage User Roles</p>
-                </div>
-            </a>
-            <a href="@Url.Action("AssignPatientForm", "AssignPatient")" class="card text-decoration-none text-dark item-card">
-                <div class="card-body">
-                    <h5 class="card-title">Assign Patient</h5>
-                    <p class="card-text">Assign Patients to Workers</p>
-                </div>
-            </a>
-            <a href="@Url.Action("Index", "DisplayPalette")" class="card text-decoration-none text-dark item-card">
-                <div class="card-body">
-                    <h5 class="card-title">Display Palette</h5>
-                    <p class="card-text">Display GUI Window showing document metadata (e.g. patient info)</p>
-                </div>
-            </a>
-            <a href="@Url.Action("Index", "PatientRecords")" class="card text-decoration-none text-dark item-card">
-                <div class="card-body">
-                    <h5 class="card-title">Manage Patient Records</h5>
-                    <p class="card-text">Manage Patient Records</p>
-                </div>
-            </a>
-            <a href="@Url.Action("Index", "GeoCodes")" class="card text-decoration-none text-dark item-card">
-                <div class="card-body">
-                    <h5 class="card-title">Manage GeoCodes</h5>
-                    <p class="card-text">Manage Geographic Codes</p>
-                </div>
-            </a>
-    </div>
-
-    <div>
-        <p></p>
-        @Html.ActionLink("Logout", "Logout", "UserAuthentication", new { }, new { @class = "btn btn-outline-primary" })
+        <a href="@Url.Action("Index", "PatientRecords")" class="card text-decoration-none text-dark item-card shadow-lg">
+            <div class="card-body">
+                <h5 class="card-title">Manage Patient Records</h5>
+                <p class="card-text">Manage Patient Records</p>
+            </div>
+        </a>
+        <a href="@Url.Action("Index", "GeoCodes")" class="card text-decoration-none text-dark item-card shadow-lg">
+            <div class="card-body">
+                <h5 class="card-title">Manage GeoCodes</h5>
+                <p class="card-text">Manage Geographic Codes</p>
+            </div>
+        </a>
+        <a href="@Url.Action("Index", "AdminCreateUsers")" class="card text-decoration-none text-dark item-card shadow-lg">
+            <div class="card-body">
+                <h5 class="card-title">Accounts</h5>
+                <p class="card-text">Manage Accounts</p>
+            </div>
+        </a>
     </div>
 </body>

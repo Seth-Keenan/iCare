@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Show Uploaded File";
+}
+
+<h2>Uploaded File</h2>
+
+<div>
+    <iframe src="@ViewBag.FilePath" width="100%" height="600px"></iframe>
+</div>
+
+<div>
+    @Html.ActionLink("Import Another Image", "Index", new { PatientRecordID = ViewBag.PatientRecordID })
+</div>

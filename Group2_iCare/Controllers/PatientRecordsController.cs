@@ -55,7 +55,7 @@ namespace Group2_iCare.Controllers
             {
                 db.PatientRecord.Add(patientRecord);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "ImportImage", new { PatientRecordID = patientRecord.ID });
             }
 
             ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description", patientRecord.GeoCodeID);
@@ -77,6 +77,7 @@ namespace Group2_iCare.Controllers
             }
             ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description", patientRecord.GeoCodeID);
             ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", patientRecord.WorkerID);
+            ViewBag.PatientID = id;
             return View(patientRecord);
         }
 
@@ -87,12 +88,15 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name,Address,DateOfBirth,Height,Weight,BloodGroup,BedID,TreatmentArea,GeoCodeID,WorkerID")] PatientRecord patientRecord)
         {
+            ViewBag.PatientRecordID = patientRecord.ID;
+
             if (ModelState.IsValid)
             {
                 db.Entry(patientRecord).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "ImportImage", new { PatientRecordID = patientRecord.ID });
             }
+
             ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description", patientRecord.GeoCodeID);
             ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", patientRecord.WorkerID);
             return View(patientRecord);

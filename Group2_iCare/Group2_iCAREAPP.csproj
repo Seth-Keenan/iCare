@@ -127,17 +127,17 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminCreateUsersController.cs" />
     <Compile Include="Controllers\AssignPatientController.cs" />
     <Compile Include="Controllers\DisplayMyBoardController.cs" />
     <Compile Include="Controllers\DisplayPaletteController.cs" />
     <Compile Include="Controllers\DocumentMetadatasController.cs" />
-    <Compile Include="Controllers\FilesController.cs" />
-    <Compile Include="Controllers\GeoCodesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\iCAREAdminsController.cs" />
     <Compile Include="Controllers\iCAREBoardController.cs" />
     <Compile Include="Controllers\iCAREUsersController.cs" />
     <Compile Include="Controllers\iCAREWorkersController.cs" />
+    <Compile Include="Controllers\ImportImageController.cs" />
     <Compile Include="Controllers\ManageAccountsController.cs" />
     <Compile Include="Controllers\PatientRecordsController.cs" />
     <Compile Include="Controllers\UserAuthenticationController.cs" />
@@ -147,6 +147,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminCreateUser.cs" />
     <Compile Include="Models\DocumentMetadata.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
@@ -199,6 +200,7 @@
     <Compile Include="Models\UserRole.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\WorkerCreateUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -220,8 +222,12 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\home.css" />
+    <Content Include="Content\login.css" />
+    <Content Include="Content\manageAccounts.css" />
     <Content Include="Content\navbar.css" />
     <Content Include="Content\navigationBar.css" />
+    <Content Include="Content\universalStyles.css" />
+    <Content Include="Content\workerdashboard.css" />
     <Content Include="DBQuery.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -274,27 +280,12 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\iCAREUsers\Create.cshtml" />
-    <Content Include="Views\iCAREUsers\Delete.cshtml" />
-    <Content Include="Views\iCAREUsers\Details.cshtml" />
-    <Content Include="Views\iCAREUsers\Edit.cshtml" />
-    <Content Include="Views\iCAREUsers\Index.cshtml" />
     <Content Include="Views\UserPasswords\Create.cshtml" />
     <Content Include="Views\UserPasswords\Delete.cshtml" />
     <Content Include="Views\UserPasswords\Details.cshtml" />
     <Content Include="Views\UserPasswords\Edit.cshtml" />
     <Content Include="Views\UserPasswords\Index.cshtml" />
     <Content Include="Views\UserAuthentication\LoginForm.cshtml" />
-    <Content Include="Views\iCAREAdmins\Create.cshtml" />
-    <Content Include="Views\iCAREAdmins\Delete.cshtml" />
-    <Content Include="Views\iCAREAdmins\Details.cshtml" />
-    <Content Include="Views\iCAREAdmins\Edit.cshtml" />
-    <Content Include="Views\iCAREAdmins\Index.cshtml" />
-    <Content Include="Views\iCAREWorkers\Create.cshtml" />
-    <Content Include="Views\iCAREWorkers\Delete.cshtml" />
-    <Content Include="Views\iCAREWorkers\Details.cshtml" />
-    <Content Include="Views\iCAREWorkers\Edit.cshtml" />
-    <Content Include="Views\iCAREWorkers\Index.cshtml" />
     <Content Include="Views\UserRoles\Create.cshtml" />
     <Content Include="Views\UserRoles\Delete.cshtml" />
     <Content Include="Views\UserRoles\Details.cshtml" />
@@ -307,11 +298,6 @@
     <Content Include="Views\DisplayPalette\Details.cshtml" />
     <Content Include="Views\DisplayPalette\Edit.cshtml" />
     <Content Include="Views\DisplayPalette\Index.cshtml" />
-    <Content Include="Views\GeoCodes\Create.cshtml" />
-    <Content Include="Views\GeoCodes\Delete.cshtml" />
-    <Content Include="Views\GeoCodes\Details.cshtml" />
-    <Content Include="Views\GeoCodes\Edit.cshtml" />
-    <Content Include="Views\GeoCodes\Index.cshtml" />
     <Content Include="Views\iCAREBoard\iCAREBoardResult.cshtml" />
     <Content Include="Views\WorkerDashboard\Index.cshtml" />
     <Content Include="Views\iCAREBoard\iCAREBoardForm.cshtml" />
@@ -321,10 +307,20 @@
     <Content Include="Views\PatientRecords\Edit.cshtml" />
     <Content Include="Views\PatientRecords\Index.cshtml" />
     <Content Include="Views\DisplayMyBoard\DisplayMyBoard.cshtml" />
+    <Content Include="Views\AdminCreateUsers\Create.cshtml" />
+    <Content Include="Views\AdminCreateUsers\Delete.cshtml" />
+    <Content Include="Views\AdminCreateUsers\Details.cshtml" />
+    <Content Include="Views\AdminCreateUsers\Edit.cshtml" />
+    <Content Include="Views\AdminCreateUsers\Index.cshtml" />
+    <Content Include="Views\ImportImage\Index.cshtml" />
+    <Content Include="Views\ImportImage\ShowUploadedFile.cshtml" />
+    <Content Include="Views\ImportImage\BrowseFiles.cshtml" />
+    <Content Include="Views\ImportImage\Scanner.cshtml" />
+    <Content Include="Views\ImportImage\EditFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\App_LocalResources\" />
+    <Folder Include="Repository\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

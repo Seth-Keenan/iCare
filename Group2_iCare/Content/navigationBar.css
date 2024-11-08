@@ -1,6 +1,4 @@
-﻿body {
-}
-
+﻿
 .nav-title {
     margin-left: 10px;
     color: #ff4a4a;
@@ -16,23 +14,27 @@
     justify-content: space-between;
     align-items: center;
     background-color: white;
+    height: 100px;
 }
 
 .login-btn {
     border-radius: 20px;
     width: 150px;
-    background: linear-gradient(to right, #ff4a4a, #e20059); /* Change colors as needed */
+    background: linear-gradient(34deg, #ff4a4a, #e20059);
     border: 0px;
     margin-left: 10px;
-    height: 45px;
+    height: 40px;
     align-content: center;
+    transition: 0.5s ease-in-out;
+}
+
+.login-btn:hover {
+    background-position-x: 150px;
 }
 
 .nav-item:hover {
-    color: blue;
+    color: #e20059;
 }
-
-
 
 .gradient {
     background-image: linear-gradient( 45deg, hsl(0deg 33% 1%) 0%, hsl(0deg 55% 24%) 7%, hsl(0deg 55% 34%) 14%, hsl(0deg 55% 42%) 21%, hsl(0deg 55% 49%) 29%, hsl(0deg 66% 55%) 36%, hsl(0deg 82% 60%) 43%, hsl(0deg 100% 65%) 50%, hsl(357deg 96% 63%) 57%, hsl(355deg 92% 61%) 64%, hsl(352deg 89% 59%) 71%, hsl(349deg 86% 56%) 78%, hsl(346deg 83% 54%) 86%, hsl(342deg 80% 51%) 93%, hsl(336deg 100% 44%) 100% );

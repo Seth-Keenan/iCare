@@ -5,6 +5,7 @@
     justify-content: center;
     align-items: center;
     background-color: transparent;
+    height: 500px;
 }
 
 main {
@@ -17,11 +18,15 @@ main {
 }
 
 .title-1 {
-    font-size: 5vw;
-    font-weight: bold;
+    font-size: 5vmax;
+    font-weight: bolder;
+}
+.title-2 {
+    font-size: 1.5vmax;
 }
 
 .team-btn {
+    margin-top: 20px;
     border-radius: 20px;
     width: 220px;
     background: linear-gradient(to right, #ff4a4a, #e20059); /* Change colors as needed */
@@ -29,24 +34,33 @@ main {
     margin-left: 10px;
     height: 45px;
     align-content: center;
+    transition: 0.5s ease-in-out; /* Specify the background property */
+}
+
+.team-btn:hover {
+    background-position-x: 220px;
 }
 
 .gradient-background {
     background: linear-gradient(45deg, #ff4a4a, #e20059); /* Change colors as needed */
-    height: 200px;
+    padding-block: 100px;
     color: white;
-    font-size: 35px;
+    font-size: 2vmax;
     padding-inline: 100px;
     font-weight: bold;
     text-align: center;
     align-content: center;
 }
 
+.body {
+
+}
+
 .back-img {
     position: absolute;
     object-fit: cover;
     z-index: -1;
-    top: 0;
+    top: 100px;
     left: 0;
     width: 100%;
     height: 500px;
@@ -58,7 +72,6 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 700px;
     background-color: white;
 
 
@@ -70,14 +83,21 @@ main {
 }
 
 .cards-container {
+    padding: 20px;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 40px;
 }
 
 .feature-card {
     border-radius: 10px;
     border: 0;
+    transition: 0.3s ease-in-out;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
 }
 
 .card-btn {
@@ -88,7 +108,7 @@ main {
     margin-left: 10px;
     height: 40px;
     align-content: center;
-    transition: 0.5s ease-in-out; /* Specify the background property */
+    transition: 0.5s ease-in-out; 
 }
 
     .card-btn:hover {

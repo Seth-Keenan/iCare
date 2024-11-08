@@ -1,49 +1,73 @@
 ﻿@model Group2_iCare.Models.iCAREUser
 
-<div class="jumbotron">
-    <h1>iCARE Worker Dashboard</h1>
-    <p class="lead">Hello, @Model.Name. Use this page to manage your patients and documents.</p>
+<head>
+    <link href="~/Content/workerdashboard.css" rel="stylesheet" type="text/css" />
+</head>
 
+@{
+    var message = TempData["LoginMessage"] as string;
+    if (!string.IsNullOrEmpty(message))
+    {
+        <div class="alert alert-success alert-dismissible" role="alert">
+            @message
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+}
 
-</div>
+<!--
+    Change from admin container to container??? idk css protocall to much    
+-->
+<body class="admin-container">
+    <div class="dash-title">Worker Dashboard</div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("iCARE Board", "iCAREBoardForm", "iCAREBoard")</h2>
-        <p>
-            View Patients at a Specific Location
-        </p>
+    <div class="item-container">
+        <a href="@Url.Action("iCAREBoardForm", "iCAREBoard")" class="card text-decoration-none text-dark item-card shadow-lg">
+            <div class="card-body">
+                <h5 class="card-title">iCARE Board</h5>
+                <p class="card-text">
+                    View Patients at a Specific Location
+                </p>
+            </div>
+        </a>
+        <a href="@Url.Action("AssignPatientForm", "AssignPatient")" class="card text-decoration-none text-dark item-card shadow-lg">
+            <div class="card-body">
+                <h5 class="card-title">Assign Patient</h5>
+                <p class="card-text">
+                    Assign Patients to yourself
+                </p>
+            </div>
+        </a>
+        <a href="@Url.Action("DisplayMyBoard", "DisplayMyBoard")" class="card text-decoration-none text-dark item-card shadow-lg">
+            <div class="card-body">
+                <h5 class="card-title">Display My Board</h5>
+                <p class="card-text">
+                    View Patients Assigned to You
+                </p>
+            </div>
+        </a>
+        <a href="@Url.Action("Index", "PatientRecords")" class="card text-decoration-none text-dark item-card shadow-lg">
+            <div class="card-body">
+                <h5 class="card-title">Manage Patient Records</h5>
+                <p class="card-text">
+                    Manage Patient Records
+                </p>
+            </div>
+        </a>
+        <a href="@Url.Action("Index", "DisplayPalette")" class="card text-decoration-none text-dark item-card shadow-lg">
+            <div class="card-body">
+                <h5 class="card-title">Display Palette</h5>
+                <p class="card-text">
+                    Display GUI Window showing document metadata (e.g. patient info)
+                </p>
+            </div>
+        </a>
+        <a href="@Url.Action("Index", "ImportDocuments")" class="card text-decoration-none text-dark item-card shadow-lg">
+            <div class="card-body">
+                <h5 class="card-title">Import/Export Documents</h5>
+                <p class="card-text">
+                </p>
+            </div>
+        </a>
     </div>
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("Assign Patient", "AssignPatientForm", "AssignPatient")</h2>
-        <p>
-            Assign Patients to yourself
-        </p>
-    </div>
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("Display My Board", "DisplayMyBoard", "DisplayMyBoard")</h2>
-        <p>
-            View Patients Assigned to You
-        </p>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("Manage Patient Records", "Index", "PatientRecords")</h2>
-        <p>
-            Manage Patient Records
-        </p>
-    </div>
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("Display Palette", "Index", "DisplayPalette")</h2>
-        <p>
-            Display GUI Window showing document metadata (e.g. patient info)
-        </p>
-    </div>
-</div>
-
-<div>
-    <p></p>
-    @Html.ActionLink("Logout", "Logout", "UserAuthentication", new { }, new { @class = "btn btn-outline-primary" })
-</div>
+</body>

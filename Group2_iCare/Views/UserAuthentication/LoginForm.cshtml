@@ -1,5 +1,13 @@
 ﻿@model Group2_iCare.Models.UserAuthentication
 
+@{ 
+    ViewBag.Title = "Log In";
+}
+
+<head>
+    <link href="~/Content/login.css" rel="stylesheet" type="text/css" />
+</head>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -7,38 +15,38 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
-    <div class="form-horizontal">
-        <h4>UserAuthentication</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div class="form-container">
+        <div class="login-form">
+            <h2>Welcome Back!</h2>
+            <p>Enter to get access to the management system.</p>
+            <div class="form">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group form-section">
+                    <div>Username</div>
+                    <div>
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control form-inputs" })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-group">
+                    <div>Password</div>
+                    <div class="">
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <p></p>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Login" class="btn btn-outline-primary" />
+                <p></p>
+                <div class="form-group">
+                    <div>
+                        <input type="submit" value="Login" class="btn btn-primary submit-btn" />
+                        @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-outline-dark back-btn" })
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
 
 }
-
-<div>
-    <p></p>
-    @Html.ActionLink("Back to Home", "Index", "Home")
-</div>
