@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -140,6 +141,30 @@ namespace Group2_iCare.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult ShowUploadedFile(string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                return HttpNotFound("File name is invalid.");
+            }
+
+            var directoryPath = Server.MapPath("~/Repository/UploadedFiles");
+            if (directoryPath == null)
+            {
+                return HttpNotFound("Directory path is invalid.");
+            }
+
+            var path = Path.Combine(directoryPath, fileName);
+
+            if (System.IO.File.Exists(path))
+            {
+                ViewBag.FilePath = Url.Content($"~/Repository/UploadedFiles/{fileName}");
+                return View();
+            }
+
+            return HttpNotFound();
         }
     }
 }

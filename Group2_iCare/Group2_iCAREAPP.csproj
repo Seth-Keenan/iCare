@@ -365,6 +365,7 @@
     <Content Include="Views\GeoCode\Details.cshtml" />
     <Content Include="Views\GeoCode\Edit.cshtml" />
     <Content Include="Views\GeoCode\Index.cshtml" />
+    <Content Include="Views\DisplayPalette\ShowUploadedFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\App_LocalResources\" />
