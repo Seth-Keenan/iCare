@@ -12,7 +12,7 @@ namespace Group2_iCare.Controllers
 {
     public class UserRolesController : Controller
     {
-        private Group2_iCAREDBEntities db = new Group2_iCAREDBEntities();
+        private Group2_iCAREDBEntities db = new Group2_iCAREDBEntities(); // db connection
 
         // GET: UserRoles
         public ActionResult Index()
@@ -27,7 +27,7 @@ namespace Group2_iCare.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserRole userRole = db.UserRole.Find(id);
+            UserRole userRole = db.UserRole.Find(id); // find the user role by id
             if (userRole == null)
             {
                 return HttpNotFound();
@@ -48,11 +48,21 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,RoleName")] UserRole userRole)
         {
+            if (string.IsNullOrEmpty(userRole.ID))
+            {
+                ModelState.AddModelError("ID", "ID is required");
+            }
+
+            if (string.IsNullOrEmpty(userRole.RoleName))
+            {
+                ModelState.AddModelError("RoleName", "RoleName is required");
+            }
+
             if (ModelState.IsValid)
             {
-                db.UserRole.Add(userRole);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                db.UserRole.Add(userRole); // add the user role
+                db.SaveChanges(); // save changes
+                return RedirectToAction("Index"); // return to index
             }
 
             return View(userRole);
@@ -65,12 +75,12 @@ namespace Group2_iCare.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserRole userRole = db.UserRole.Find(id);
+            UserRole userRole = db.UserRole.Find(id); // find the user role by id
             if (userRole == null)
             {
                 return HttpNotFound();
             }
-            return View(userRole);
+            return View(userRole); // return the user role
         }
 
         // POST: UserRoles/Edit/5
@@ -80,13 +90,18 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,RoleName")] UserRole userRole)
         {
+            if (string.IsNullOrEmpty(userRole.RoleName)) 
+            {
+                ModelState.AddModelError("RoleName", "Insert a valid role");
+            }
+            
             if (ModelState.IsValid)
             {
-                db.Entry(userRole).State = EntityState.Modified;
+                db.Entry(userRole).State = EntityState.Modified; // edit the user role
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(userRole);
+            return View(userRole); // return the user role
         }
 
         // GET: UserRoles/Delete/5
@@ -109,9 +124,9 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            UserRole userRole = db.UserRole.Find(id);
+            UserRole userRole = db.UserRole.Find(id); // find the user role by id
             db.UserRole.Remove(userRole);
-            db.SaveChanges();
+            db.SaveChanges(); // save changes
             return RedirectToAction("Index");
         }
 

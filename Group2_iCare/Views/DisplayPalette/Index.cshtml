@@ -17,7 +17,7 @@
         "Index",
         "PatientRecords",
         null,
-        new {@class = "btn btn-danger"}
+        new {@class = "btn btn-outline-danger"}
     )
 </div>
 <hr />
@@ -30,6 +30,7 @@
             <th>Content Type</th>
             <th>Upload Date</th>
             <th>Uploaded By ID</th>
+            <th>Action</th>
         </tr>
     </thead>
     @foreach (var file in Model.Item2)
@@ -40,12 +41,7 @@
             <td>@file.UploadDate</td>
             <td>@file.UploadedByID</td>
             <td>
-                @Html.ActionLink(
-               "View Document",
-               "Index",
-               "ImportImage",
-               new {PatientRecordID = 10
-               })
+                @Html.ActionLink("View", "ShowUploadedFile", new { fileName = file.FileName }, new { @class = "btn btn-primary" })
             </td>
         </tr>
     }
@@ -57,13 +53,12 @@
     @Html.ActionLink(
     "Manage Other Documents",
     "Index",
-    "ManageDocuments",
+    "Documents",
     null,
-    new {@class = "btn btn-danger"}
+    new {@class = "btn btn-outline-danger"}
     )
 </div>
 <hr />
-
 
 <table class="table">
     <thead>
@@ -81,7 +76,7 @@
             <td>@Html.DisplayFor(_ => documentMetadata.Descript)</td>
         </tr>
     }
-    <hr />
 </table>
-
-
+<div class="mb-3 d-flex justify-content-end">
+    @Html.ActionLink("Back to Dashboard", "Index", "WorkerDashboard", null, new { @class = "btn btn-outline-danger" })
+</div>

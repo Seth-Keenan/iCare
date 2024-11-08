@@ -350,7 +350,6 @@
           <NavigationProperty Name="iCAREWorker" Relationship="Self.FK__iCAREWorker__ID__398D8EEE" FromRole="iCAREUser" ToRole="iCAREWorker" />
           <NavigationProperty Name="UserPassword" Relationship="Self.FK__UserPassword__ID__3F466844" FromRole="iCAREUser" ToRole="UserPassword" />
           <Property Name="Role" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Role1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="iCAREWorker">
           <Key>
@@ -589,21 +588,7 @@
             <End Role="iCAREWorker" EntitySet="iCAREWorker" />
             <End Role="PatientRecord" EntitySet="PatientRecord" />
           </AssociationSet>
-          <EntitySet Name="Files1" EntityType="Group2_iCAREDBModel.File" />
         </EntityContainer>
-        <EntityType Name="File">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="FileName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ContentType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="FilePath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Descript" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Data" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="UploadDate" Type="DateTime" Precision="0" />
-          <Property Name="UploadedByID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -633,6 +618,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Files">
+            <EntityTypeMapping TypeName="Group2_iCAREDBModel.Files">
+              <MappingFragment StoreEntitySet="Files">
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="Descript" ColumnName="Descript" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="UploadedByID" ColumnName="UploadedByID" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="GeoCodes">
             <EntityTypeMapping TypeName="Group2_iCAREDBModel.GeoCodes">
               <MappingFragment StoreEntitySet="GeoCodes">
@@ -654,7 +653,7 @@
           <EntitySetMapping Name="iCAREUser">
             <EntityTypeMapping TypeName="Group2_iCAREDBModel.iCAREUser">
               <MappingFragment StoreEntitySet="iCAREUser">
-                <ScalarProperty Name="Role1" ColumnName="Role" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
@@ -722,20 +721,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Files1">
-            <EntityTypeMapping TypeName="Group2_iCAREDBModel.File">
-              <MappingFragment StoreEntitySet="Files">
-                <ScalarProperty Name="UploadedByID" ColumnName="UploadedByID" />
-                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
-                <ScalarProperty Name="Data" ColumnName="Data" />
-                <ScalarProperty Name="Descript" ColumnName="Descript" />
-                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
-                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -751,7 +736,7 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

@@ -7,7 +7,7 @@ using System.Web;
 namespace Group2_iCare.Models
 {
     public class UserAuthentication
-    {
+    { // user authentication model
         [Required(ErrorMessage = "Username field is required")]
         public string UserName { get; set; }
 

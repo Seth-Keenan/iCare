@@ -35,13 +35,24 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult iCAREBoardResult(string ID)
         {
-            GeoCodes gc = db.GeoCodes.Find(ID);
+            GeoCodes gc = db.GeoCodes.Find(ID); // find the geocode by ID
+
+            if (gc == null)
+            {
+                ModelState.AddModelError("GeoCode", "Invalid GeoCode selected");
+                return RedirectToAction("iCAREBoardForm");
+            }
+
+            if (string.IsNullOrEmpty(gc.Description)) 
+            {
+                ModelState.AddModelError("Descripton", "Please choose a GeoCode");
+            }
 
             var patientRecords = db.PatientRecord.Where(pr => pr.GeoCodeID == ID).ToList();
 
-            ViewBag.SelectedGeoCode = gc.Description;
+            ViewBag.SelectedGeoCode = gc.Description; // display the geocode description
 
-            return View(patientRecords);
+            return View(patientRecords); // return the patient records
         }
     }
 }

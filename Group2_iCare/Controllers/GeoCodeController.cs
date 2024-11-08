@@ -17,26 +17,26 @@ namespace Group2_iCare.Controllers
         // GET: GeoCode
         public ActionResult Index()
         {
-            return View(db.GeoCodes.ToList());
+            return View(db.GeoCodes.ToList()); // display all geo codes as a list
         }
 
         // GET: GeoCode/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
+            if (id == null) // id is null error
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GeoCodes geoCodes = db.GeoCodes.Find(id);
-            if (geoCodes == null)
+            GeoCodes geoCodes = db.GeoCodes.Find(id); // find the geo code by id
+            if (geoCodes == null) // if geo code is null/ not found
             {
                 return HttpNotFound();
             }
-            return View(geoCodes);
+            return View(geoCodes); // return the geo code if no error
         }
 
         // GET: GeoCode/Create
-        public ActionResult Create()
+        public ActionResult Create() // create a new geo code
         {
             return View();
         }
@@ -48,29 +48,39 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Description")] GeoCodes geoCodes)
         {
-            if (ModelState.IsValid)
+            if (string.IsNullOrEmpty(geoCodes.ID))
             {
-                db.GeoCodes.Add(geoCodes);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                ModelState.AddModelError("ID", "ID is required");
             }
 
-            return View(geoCodes);
+            if (string.IsNullOrEmpty(geoCodes.Description)) 
+            {
+                ModelState.AddModelError("Description", "Description is required");
+            }
+
+            if (ModelState.IsValid)
+            {
+                db.GeoCodes.Add(geoCodes); // add the geo code
+                db.SaveChanges(); // save changes
+                return RedirectToAction("Index"); 
+            }
+
+            return View(geoCodes); // return the geo code
         }
 
         // GET: GeoCode/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
+            if (id == null) // is id null return error
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GeoCodes geoCodes = db.GeoCodes.Find(id);
+            GeoCodes geoCodes = db.GeoCodes.Find(id); // find the geo code by id
             if (geoCodes == null)
             {
                 return HttpNotFound();
             }
-            return View(geoCodes);
+            return View(geoCodes); // return the geo code
         }
 
         // POST: GeoCode/Edit/5
@@ -80,18 +90,23 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Description")] GeoCodes geoCodes)
         {
+            if (string.IsNullOrEmpty(geoCodes.Description))
+            {
+                ModelState.AddModelError("Description", "Description is required");
+            }
+
             if (ModelState.IsValid)
             {
-                db.Entry(geoCodes).State = EntityState.Modified;
+                db.Entry(geoCodes).State = EntityState.Modified; // edit the geo code
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(geoCodes);
+            return View(geoCodes); // return the geo code 
         }
 
         // GET: GeoCode/Delete/5
         public ActionResult Delete(string id)
-        {
+        { //similar to above
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,14 +124,14 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            GeoCodes geoCodes = db.GeoCodes.Find(id);
+            GeoCodes geoCodes = db.GeoCodes.Find(id); // find the geo code and delete it
             db.GeoCodes.Remove(geoCodes);
-            db.SaveChanges();
+            db.SaveChanges(); // save changes
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
-        {
+        { // dispose
             if (disposing)
             {
                 db.Dispose();

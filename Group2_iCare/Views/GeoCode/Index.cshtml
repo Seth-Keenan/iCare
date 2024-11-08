@@ -8,13 +8,8 @@
     <link href="~/Content/manageAccounts.css" rel="stylesheet" type="text/css" />
 </head>
 
-<h2 style="margin-bottom: 50px;">Manage Accounts</h2>
-<h3>Create GeoCodes</h3>
+<h3>GeoCodes</h3>
 <div class="table-container">
-
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
     <table class="table w-100 overflow-x-scroll">
         <tr>
             <th>
@@ -40,6 +35,7 @@
     </table>
 
     <div>
+        @Html.ActionLink("Create New", "Create", "", new {@class = "btn btn-success"})
         @Html.ActionLink("Back to Admin Dashboard", "AdminDashboard", "ManageAccounts", new { area = "" }, new { @class = "btn btn-danger" })
     </div>
 </div>
