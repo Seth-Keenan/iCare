@@ -319,6 +319,11 @@
     <Content Include="Views\ImportImage\BrowseFiles.cshtml" />
     <Content Include="Views\ImportImage\Scanner.cshtml" />
     <Content Include="Views\ImportImage\EditFile.cshtml" />
+    <Content Include="Views\DocumentMetadata\Create.cshtml" />
+    <Content Include="Views\DocumentMetadata\Delete.cshtml" />
+    <Content Include="Views\DocumentMetadata\Details.cshtml" />
+    <Content Include="Views\DocumentMetadata\Edit.cshtml" />
+    <Content Include="Views\DocumentMetadata\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\App_LocalResources\" />
