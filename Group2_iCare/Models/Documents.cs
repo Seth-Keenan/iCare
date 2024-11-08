@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace Group2_iCare.Models
+﻿namespace Group2_iCare.Models
 {
     public class Documents
     {
@@ -16,7 +13,7 @@ namespace Group2_iCare.Models
 
         public string PatientID { get; set; }
 
-        public string WorkerID { get; set; } 
+        public string WorkerID { get; set; }
 
         public string Descript { get; set; }
     }

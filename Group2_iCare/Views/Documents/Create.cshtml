@@ -19,6 +19,7 @@
             @Html.LabelFor(model => model.DocID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.DocID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DocID, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -26,6 +27,7 @@
             @Html.LabelFor(model => model.DocName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.DocName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DocName, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -33,6 +35,7 @@
             @Html.LabelFor(model => model.PatientID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.PatientID, (SelectList)ViewBag.PatientID, "Select Patient", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PatientID, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -40,6 +43,7 @@
             @Html.LabelFor(model => model.WorkerID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.WorkerID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.WorkerID, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -47,13 +51,15 @@
             @Html.LabelFor(model => model.Descript, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.Descript, new { @class = "form-control", id = "descript", rows = 5, placeholder = "Start typing for drug suggestions..." })
+                @Html.ValidationMessageFor(model => model.Descript, "", new { @class = "text-danger" })
                 <div id="suggestions" style="margin-top: 10px;"></div>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-danger" />
+                @Html.ActionLink("Back to Dashboard", "Index", "DisplayPalette", null, new { @class = "btn btn-danger" })
             </div>
         </div>
     </div>

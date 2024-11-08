@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Group2_iCare.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using Group2_iCare.Models;
 
 namespace Group2_iCare.Controllers
 {
@@ -74,23 +73,55 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "DocID,DocName,PatientID,WorkerID,ModifiedByID,Descript")] DocumentMetadata documentMetadata)
         {
-
             if (ModelState.IsValid)
             {
-                try
+                if (string.IsNullOrEmpty(documentMetadata.DocID))
                 {
-                    db.DocumentMetadata.Add(documentMetadata);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    ModelState.AddModelError("DocID", "Document ID is required");
                 }
-                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+
+                if (string.IsNullOrEmpty(documentMetadata.DocName))
                 {
-                    foreach (var validationErrors in ex.EntityValidationErrors)
+                    ModelState.AddModelError("DocName", "Document Name is required");
+                }
+
+                if (string.IsNullOrEmpty(documentMetadata.PatientID))
+                {
+                    ModelState.AddModelError("PatientID", "Patient ID is required");
+                }
+
+                if (string.IsNullOrEmpty(documentMetadata.WorkerID))
+                {
+                    ModelState.AddModelError("WorkerID", "Worker ID is required");
+                }
+
+                if (string.IsNullOrEmpty(documentMetadata.ModifiedByID))
+                {
+                    ModelState.AddModelError("ModifiedByID", "Modified By ID is required");
+                }
+
+                if (string.IsNullOrEmpty(documentMetadata.Descript))
+                {
+                    ModelState.AddModelError("Descript", "Description is required");
+                }
+
+                if (ModelState.IsValid)
+                {
+                    try
                     {
-                        foreach (var validationError in validationErrors.ValidationErrors)
+                        db.DocumentMetadata.Add(documentMetadata);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+                    {
+                        foreach (var validationErrors in ex.EntityValidationErrors)
                         {
-                            ModelState.AddModelError(validationError.PropertyName, validationError.ErrorMessage);
-                            System.Diagnostics.Debug.WriteLine($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
+                            foreach (var validationError in validationErrors.ValidationErrors)
+                            {
+                                ModelState.AddModelError(validationError.PropertyName, validationError.ErrorMessage);
+                                System.Diagnostics.Debug.WriteLine($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
+                            }
                         }
                     }
                 }

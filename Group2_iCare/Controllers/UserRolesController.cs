@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Group2_iCare.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Group2_iCare.Models;
 
 namespace Group2_iCare.Controllers
 {
@@ -48,6 +44,16 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,RoleName")] UserRole userRole)
         {
+            if (string.IsNullOrEmpty(userRole.ID))
+            {
+                ModelState.AddModelError("ID", "ID is required");
+            }
+
+            if (string.IsNullOrEmpty(userRole.RoleName))
+            {
+                ModelState.AddModelError("RoleName", "RoleName is required");
+            }
+
             if (ModelState.IsValid)
             {
                 db.UserRole.Add(userRole);
@@ -80,6 +86,11 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,RoleName")] UserRole userRole)
         {
+            if (string.IsNullOrEmpty(userRole.RoleName))
+            {
+                ModelState.AddModelError("RoleName", "Insert a valid role");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(userRole).State = EntityState.Modified;

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Group2_iCare.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Group2_iCare.Models;
 
 namespace Group2_iCare.Controllers
 {
@@ -48,6 +44,16 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Description")] GeoCodes geoCodes)
         {
+            if (string.IsNullOrEmpty(geoCodes.ID))
+            {
+                ModelState.AddModelError("ID", "ID is required");
+            }
+
+            if (string.IsNullOrEmpty(geoCodes.Description))
+            {
+                ModelState.AddModelError("Description", "Description is required");
+            }
+
             if (ModelState.IsValid)
             {
                 db.GeoCodes.Add(geoCodes);
@@ -80,6 +86,11 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Description")] GeoCodes geoCodes)
         {
+            if (string.IsNullOrEmpty(geoCodes.Description))
+            {
+                ModelState.AddModelError("Description", "Description is required");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(geoCodes).State = EntityState.Modified;

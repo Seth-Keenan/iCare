@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
-using System.Collections;
-using System.ComponentModel;
+﻿using Group2_iCare.Models;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Web;
-using System.Web.SessionState;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.HtmlControls;
 using System.IO;
-using System.Net;
-using Group2_iCare.Models;
-using System.Data.Entity.Core.Objects;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace Group2_iCare.Controllers
 {

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Data.Entity;
+﻿using Group2_iCare.Models;
+using System;
 using System.Linq;
 using System.Net;
-using System.Runtime.InteropServices;
 using System.Web.Mvc;
-using Group2_iCare.Models;
 
 namespace Group2_iCare.Controllers
 {
@@ -205,13 +203,13 @@ namespace Group2_iCare.Controllers
                     userPassword.UserAccountExpriyDate = model.PasswordExpiryDate;
                 }
 
-                if(model.Role == "ADMIN")
+                if (model.Role == "ADMIN")
                 {
-                    if(worker != null)
+                    if (worker != null)
                     {
                         db.iCAREWorker.Remove(worker);
                     }
-                    if(admin == null)
+                    if (admin == null)
                     {
                         admin = new iCAREAdmin
                         {
