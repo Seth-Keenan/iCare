@@ -73,47 +73,45 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "DocID,DocName,PatientID,WorkerID,ModifiedByID,Descript")] DocumentMetadata documentMetadata)
         {
-            if (ModelState.IsValid)
+
+            if (string.IsNullOrEmpty(documentMetadata.DocID))
             {
-                if (string.IsNullOrEmpty(documentMetadata.DocID))
-                {
-                    ModelState.AddModelError("DocID", "Document ID is required");
-                }
-
-                if (string.IsNullOrEmpty(documentMetadata.DocName))
-                {
-                    ModelState.AddModelError("DocName", "Document Name is required");
-                }
-
-                if (string.IsNullOrEmpty(documentMetadata.PatientID))
-                {
-                    ModelState.AddModelError("PatientID", "Patient ID is required");
-                }
-
-                if (string.IsNullOrEmpty(documentMetadata.WorkerID))
-                {
-                    ModelState.AddModelError("WorkerID", "Worker ID is required");
-                }
-
-                if (string.IsNullOrEmpty(documentMetadata.ModifiedByID))
-                {
-                    ModelState.AddModelError("ModifiedByID", "Modified By ID is required");
-                }
-
-                if (string.IsNullOrEmpty(documentMetadata.Descript))
-                {
-                    ModelState.AddModelError("Descript", "Description is required");
-                }
-
-                if (ModelState.IsValid)
-                {
-                  
-                    db.DocumentMetadata.Add(documentMetadata);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                ModelState.AddModelError("DocID", "Document ID is required");
             }
 
+            if (string.IsNullOrEmpty(documentMetadata.DocName))
+            {
+                ModelState.AddModelError("DocName", "Document Name is required");
+            }
+
+            if (string.IsNullOrEmpty(documentMetadata.PatientID))
+            {
+                ModelState.AddModelError("PatientID", "Patient ID is required");
+            }
+
+            if (string.IsNullOrEmpty(documentMetadata.WorkerID))
+            {
+                ModelState.AddModelError("WorkerID", "Worker ID is required");
+            }
+
+            if (string.IsNullOrEmpty(documentMetadata.ModifiedByID))
+            {
+                ModelState.AddModelError("ModifiedByID", "Modified By ID is required");
+            }
+
+            if (string.IsNullOrEmpty(documentMetadata.Descript))
+            {
+                ModelState.AddModelError("Descript", "Description is required");
+            }
+
+            if (ModelState.IsValid)
+            {  
+                db.DocumentMetadata.Add(documentMetadata);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            PopulateDropdowns();
             return View(documentMetadata);
         }
 
