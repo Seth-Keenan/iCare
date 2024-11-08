@@ -37,7 +37,18 @@ namespace Group2_iCare.Controllers
         {
             GeoCodes gc = db.GeoCodes.Find(ID); // find the geocode by ID
 
-            var patientRecords = db.PatientRecord.Where(pr => pr.GeoCodeID == ID).ToList(); // get patient records for the geocode to display
+            if (gc == null)
+            {
+                ModelState.AddModelError("GeoCode", "Invalid GeoCode selected");
+                return RedirectToAction("iCAREBoardForm");
+            }
+
+            if (string.IsNullOrEmpty(gc.Description)) 
+            {
+                ModelState.AddModelError("Descripton", "Please choose a GeoCode");
+            }
+
+            var patientRecords = db.PatientRecord.Where(pr => pr.GeoCodeID == ID).ToList();
 
             ViewBag.SelectedGeoCode = gc.Description; // display the geocode description
 

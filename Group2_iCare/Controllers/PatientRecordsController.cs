@@ -55,23 +55,29 @@ namespace Group2_iCare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,Address,DateOfBirth,Height,Weight,BloodGroup,BedID,TreatmentArea,GeoCodeID,WorkerID")] PatientRecord patientRecord)
         {
+            if (db.PatientRecord.Find(patientRecord.ID) != null)
+            {
+                ModelState.AddModelError("ID", "ID already exists");
+            }
+
+            if (string.IsNullOrEmpty(patientRecord.Name)) 
+            {
+                ModelState.AddModelError("Name", "Insert Valid name");
+            }
 
             if (ModelState.IsValid)
             {
-                if(db.PatientRecord.Find(patientRecord.ID) != null) // only create if the patient record is not null
-                {
-                    ModelState.AddModelError("ID", "ID already exists"); // add error message
-                    return RedirectToAction("Create"); // return to create
-                }
-                db.PatientRecord.Add(patientRecord); // add the patient record
-                db.SaveChanges(); // save changes
-                return RedirectToAction("Index", "ImportImage", new { PatientRecordID = patientRecord.ID }); 
+
+                db.PatientRecord.Add(patientRecord);
+                db.SaveChanges();
+                return RedirectToAction("Index", "ImportImage", new { PatientRecordID = patientRecord.ID });
             }
 
             ViewBag.GeoCodeID = new SelectList(db.GeoCodes, "ID", "Description", patientRecord.GeoCodeID); // select the geo codes
             ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", patientRecord.WorkerID); // select the worker ids
             return View(patientRecord);
         }
+
 
         // GET: PatientRecords/Edit/5
         public ActionResult Edit(string id)

@@ -6,12 +6,12 @@
 
 <h2>Create Patient Record</h2>
 
-@foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+@*@foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
 {
     <div class="alert alert-danger">
         @error.ErrorMessage
     </div>
-}
+}*@
 
 @using (Html.BeginForm())
 {
