@@ -83,6 +83,9 @@ Upon login, users will be redirected to their respective dashboards (Admin or Wo
 2. Create the roles you need and submit the form.
 3. Navigate to the **Manage Accounts** card to perform CRUD operations on accounts with the roles you've created.
 
+Role names only include - **ADMIN**, **NURSE**, **DOCTOR**
+Lowercased or incorrect spelling will not work
+
 ---
 
 ## Entry and Managing Patient Records
