@@ -2,14 +2,54 @@
     ViewBag.Title = "Import Image";
 }
 
+@model Group2_iCare.Models.PatientRecord
+
 <h2>Import Image</h2>
 
-<form action="/ImportImage/Upload" method="post" enctype="multipart/form-data">
+@using (Html.BeginForm("Upload", "ImportImage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Hidden("PatientRecordID", (int)ViewBag.PatientRecordID)
+
+    <h3>Uploaded Files</h3>
+
+    <h5>Add More Files:</h5>
+
     <div>
-        <label for="file">Choose file to upload:</label>
-        <input type="file" id="file" name="file" />
+        <button type="button" onclick="location.href='@Url.Action("BrowseFiles", "ImportImage", new { PatientRecordID = ViewBag.PatientRecordID })'">Browse files</button>
+        <button type="button" onclick="location.href='@Url.Action("Scanner", "ImportImage", new { PatientRecordID = ViewBag.PatientRecordID })'">Scanner</button>
+        <button type="button" onclick="location.href='@Url.Action("EditFile", "ImportImage", new { PatientRecordID = ViewBag.PatientRecordID })'">Edit files</button>
+        <button type="button" onclick="location.href='@Url.Action("Index", "PatientRecords", new { PatientRecordID = ViewBag.PatientRecordID })'">Save</button>
     </div>
+
+    <h5>Current Files:</h5>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>File Name</th>
+                <th>Content Type</th>
+                <th>Upload Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var file in ViewBag.UploadedFiles)
+            {
+                <tr>
+                    <td>@file.FileName</td>
+                    <td>@file.ContentType</td>
+                    <td>@file.UploadDate</td>
+                    <td>
+                        @Html.ActionLink("View", "ShowUploadedFile", new { fileName = file.FileName, PatientRecordID = ViewBag.PatientRecordID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
     <div>
-        <button type="submit">Submit</button>
+        @Html.ActionLink("Back to Admin Dashboard", "AdminDashboard", "ManageAccounts")
     </div>
-</form>
+}

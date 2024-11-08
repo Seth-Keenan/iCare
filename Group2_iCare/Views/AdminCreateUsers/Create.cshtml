@@ -4,41 +4,50 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<head>
+    <link href="~/Content/login.css" rel="stylesheet" type="text/css" />
+</head>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
+<div class="">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
     <div class="form-horizontal">
-        <h4>AdminCreateUser</h4>
+        <h4>Create User</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <!-- ID Field -->
         <div class="form-group">
             @Html.LabelFor(model => model.ID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        <!-- Name Field -->
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        <!-- Role Dropdown Field -->
         <div class="form-group">
             @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Role, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Role, (SelectList)ViewBag.RoleList, "Select Role", new { @class = "form-control", id = "Role", required = "required" })
                 @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        <!-- Dynamic Profession Field -->
+        <div class="form-group" id="professionField" style="display: none;">
             @Html.LabelFor(model => model.Profession, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Profession, new { htmlAttributes = new { @class = "form-control" } })
@@ -46,54 +55,71 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.AdminEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+        <!-- Dynamic Admin Email Field -->
+        <div class="form-group" id="adminEmailField" style="display: none;">
+            @Html.LabelFor(model => model.AdminEmail, "Email", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.AdminEmail, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.AdminEmail, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        <!-- Username Field -->
         <div class="form-group">
-            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.UserName, "Username", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        <!-- Password Field -->
         <div class="form-group">
             @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PasswordExpiryTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PasswordExpiryTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PasswordExpiryTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserAccountExpriyDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserAccountExpriyDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserAccountExpriyDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
+        <!-- Submission Button -->
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-outline-success" />
             </div>
         </div>
-    </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+    }
+
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            toggleFields();
+        });
+
+        $('#Role').change(function () {
+            toggleFields();
+        });
+
+        function toggleFields() {
+            var selectedRole = $('#Role').val();
+
+            if (selectedRole === 'Admin') {
+                $('#adminEmailField').show().find('input').attr('required', true);
+                $('#professionField').hide().find('input').removeAttr('required');
+            } else if (selectedRole === 'Worker') {
+                $('#professionField').show().find('input').attr('required', true);
+                $('#adminEmailField').hide().find('input').removeAttr('required');
+            } else {
+                $('#adminEmailField').hide().find('input').removeAttr('required');
+                $('#professionField').hide().find('input').removeAttr('required');
+            }
+        }
+    </script>
+}

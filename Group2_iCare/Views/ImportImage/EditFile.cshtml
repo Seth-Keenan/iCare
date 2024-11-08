@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "EditFile";
+}
+
+<h2>EditFile</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>File Name</th>
+            <th>Content Type</th>
+            <th>Upload Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var file in ViewBag.UploadedFiles)
+        {
+            <tr>
+                <td>@file.FileName</td>
+                <td>@file.ContentType</td>
+                <td>@file.UploadDate</td>
+                <td>
+                    @Html.ActionLink("View", "ShowUploadedFile", new { fileName = file.FileName, PatientRecordID = ViewBag.PatientRecordID })
+                    @Html.ActionLink("Delete", "DeleteFile", new { fileName = file.FileName, PatientRecordID = ViewBag.PatientRecordID }, new { onclick = "return confirm('Are you sure you want to delete this file?')"})   
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <button type="button" onclick="location.href='@Url.Action("Index", "ImportImage", new { PatientRecordID = ViewBag.PatientRecordID })'">Back to Import Image</button>
+</div>

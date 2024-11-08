@@ -1,0 +1,47 @@
+﻿
+.table-container {
+    position: relative;
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+.fixed-column {
+    position: sticky;
+    left: 0;
+    background-color: gray;
+    z-index: 1;
+}
+
+.grad-btn {
+    border-radius: 20px;
+    width: auto;
+    background: linear-gradient(34deg, #ff4a4a, #e20059);
+    border: 0px;
+    margin-left: 10px;
+    height: 40px;
+    align-content: center;
+    transition: 0.5s ease-in-out;
+}
+
+.grad-btn:hover {
+    background-position-x: 150px;
+}
+
+.acnt-bg {
+    background: linear-gradient(34deg, #ff4a4a, #e20059);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.acnt-container {
+    background-color: white;
+    padding: 30px;
+    width: 900px;
+    margin: 80px;
+
+}
+
+.create-btn {
+    margin-top: 20px;
+}
