@@ -1,0 +1,54 @@
+﻿@model (IEnumerable<Group2_iCare.Models.DocumentMetadata>, IEnumerable<Group2_iCare.Models.Files>)
+
+@{
+    ViewBag.Title = "View Documents and Files";
+}
+
+<h2>PDFs</h2>
+
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>File Name</th>
+            <th>Content Type</th>
+            <th>Upload Date</th>
+            <th>Uploaded By ID</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    @foreach (var file in Model.Item2)
+    {
+        <tr>
+            <td>@file.FileName</td>
+            <td>@file.ContentType</td>
+            <td>@file.UploadDate</td>
+            <td>@file.UploadedByID</td>
+            <td>
+                @Html.ActionLink("View", "ShowUploadedFile", new { fileName = file.FileName }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+</table>
+<hr />
+
+<h2>Drug Documents</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Patient ID</th>
+            <th>Doc ID</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    @foreach (var documentMetadata in Model.Item1)
+    {
+        <tr>
+            <td>@Html.DisplayFor(_ => documentMetadata.PatientID)</td>
+            <td>@Html.DisplayFor(_ => documentMetadata.DocID)</td>
+            <td>@Html.DisplayFor(_ => documentMetadata.Descript)</td>
+        </tr>
+    }
+</table>
