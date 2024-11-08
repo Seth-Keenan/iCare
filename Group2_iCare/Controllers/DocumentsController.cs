@@ -107,27 +107,13 @@ namespace Group2_iCare.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    try
-                    {
-                        db.DocumentMetadata.Add(documentMetadata);
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-                    }
-                    catch (System.Data.Entity.Validation.DbEntityValidationException ex)
-                    {
-                        foreach (var validationErrors in ex.EntityValidationErrors)
-                        {
-                            foreach (var validationError in validationErrors.ValidationErrors)
-                            {
-                                ModelState.AddModelError(validationError.PropertyName, validationError.ErrorMessage);
-                                System.Diagnostics.Debug.WriteLine($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
-                            }
-                        }
-                    }
+                  
+                    db.DocumentMetadata.Add(documentMetadata);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
             }
 
-            PopulateDropdowns();
             return View(documentMetadata);
         }
 
