@@ -1,150 +1,75 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Group2_iCare.Models;
+using System.Collections;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Web;
+using System.Web.SessionState;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
+using System.IO;
+using System.Net;
 
 namespace Group2_iCare.Controllers
 {
     public class ImportImageController : Controller
     {
-        private Group2_iCAREDBEntities db = new Group2_iCAREDBEntities();
-
         // GET: ImportImage
         public ActionResult Index()
         {
-            var files = db.Files.Include(f => f.iCAREUser);
-            return View(files.ToList());
-        }
-
-        // GET: ImportImage/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Files files = db.Files.Find(id);
-            if (files == null)
-            {
-                return HttpNotFound();
-            }
-            return View(files);
-        }
-
-        // GET: ImportImage/Create
-        public ActionResult Create()
-        {
-            ViewBag.UploadedByID = new SelectList(db.iCAREUser, "ID", "Name");
             return View();
         }
 
-        // POST: ImportImage/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(HttpPostedFileBase fileUpload, string patientId)
+        public ActionResult Upload(HttpPostedFileBase file)
         {
-            if (fileUpload != null && fileUpload.ContentLength > 0)
+            if (file != null && file.ContentLength > 0)
             {
-                var file = new Files
+                var fileName = Path.GetFileName(file.FileName);
+                var fileExtension = Path.GetExtension(fileName).ToLower();
+
+                if (fileExtension != ".pdf")
                 {
-                    FileName = Path.GetFileName(fileUpload.FileName),
-                    ContentType = fileUpload.ContentType,
-                    Data = ConvertToBytes(fileUpload),
-                    UploadedByID = patientId // Assuming UploadedByID is the foreign key to the patient record
-                };
+                    ViewBag.Message = "Only PDF files are allowed.";
+                    return View("Index");
+                }
 
-                db.Files.Add(file);
-                db.SaveChanges();
-                return RedirectToAction("Index", "DisplayPalette");
+                var directoryPath = Server.MapPath("~/Repository/UploadedFiles");
+
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+
+                var path = Path.Combine(directoryPath, fileName);
+                file.SaveAs(path);
+                ViewBag.FileName = path;
+                ViewBag.Message = "File uploaded successfully";
+            }
+            else
+            {
+                ViewBag.Message = "No file selected";
             }
 
-            return View();
+            return View("ShowUploadedFile");
         }
 
-        private byte[] ConvertToBytes(HttpPostedFileBase file)
+        public ActionResult ShowUploadedFile(string fileName)
         {
-            byte[] fileBytes = null;
-            using (var binaryReader = new BinaryReader(file.InputStream))
-            {
-                fileBytes = binaryReader.ReadBytes(file.ContentLength);
-            }
-            return fileBytes;
-        }
+            var directoryPath = Server.MapPath("~/Repository/UploadedFiles");
+            var path = Path.Combine(directoryPath, fileName);
 
-        // GET: ImportImage/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
+            if (System.IO.File.Exists(path))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var imageBytes = System.IO.File.ReadAllBytes(path);
+                return File(imageBytes, "application/pdf");
             }
-            Files files = db.Files.Find(id);
-            if (files == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.UploadedByID = new SelectList(db.iCAREUser, "ID", "Name", files.UploadedByID);
-            return View(files);
-        }
 
-        // POST: ImportImage/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FileName,ContentType,Data,UploadedByID,UploadDate,Descript")] Files files)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(files).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.UploadedByID = new SelectList(db.iCAREUser, "ID", "Name", files.UploadedByID);
-            return View(files);
-        }
-
-        // GET: ImportImage/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Files files = db.Files.Find(id);
-            if (files == null)
-            {
-                return HttpNotFound();
-            }
-            return View(files);
-        }
-
-        // POST: ImportImage/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            Files files = db.Files.Find(id);
-            db.Files.Remove(files);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            return HttpNotFound();
         }
     }
 }
