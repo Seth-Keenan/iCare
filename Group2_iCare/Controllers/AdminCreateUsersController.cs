@@ -36,8 +36,8 @@ namespace Group2_iCare.Controllers
                 }).ToList();
 
             var admins = users.Where(u => u.Role == "ADMIN").AsEnumerable();
-            var workers = users.Where(u => u.Role == "WORKER").AsEnumerable();
-            var others = users.Where(u => u.Role != "ADMIN" && u.Role != "WORKER");
+            var workers = users.Where(u => u.Role != "ADMIN").AsEnumerable();
+            var others = users.Where(u => u.Role == null);
 
 
             return View((admins, workers, others));
@@ -88,7 +88,7 @@ namespace Group2_iCare.Controllers
                     };
                     db.iCAREAdmin.Add(admin);
                 }
-                else if (model.Role == "WORKER")
+                else
                 {
                     var worker = new iCAREWorker
                     {

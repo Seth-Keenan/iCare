@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Group2_iCare.Controllers
 {
@@ -22,7 +24,17 @@ namespace Group2_iCare.Controllers
                 return RedirectToAction("LoginForm", "UserAuthentication");
             }
 
-            var patientRecords = db.PatientRecord.Where(pr => pr.WorkerID == user.ID).ToList();
+            List<PatientRecord> patientRecords = null;
+            if(user.Role == "DOCTOR")
+            {
+                patientRecords = db.PatientRecord.Where(pr => pr.WorkerID == user.ID).ToList();
+            } else
+            {
+                patientRecords = db.PatientRecord
+                    .ToList()
+                    .Where(u => u.NID_Array != null && JArray.Parse(u.NID_Array).Any(id => id.ToString() == user.ID.ToString()))
+                    .ToList();
+            }
 
             return View(patientRecords);
         }

@@ -26,7 +26,10 @@ namespace Group2_iCare.Controllers
             }
             else if (user.Role == "NURSE")
             {
-                patients = db.PatientRecord.Where(u => JArray.Parse(u.NID_Array).Count < 3).ToList();
+                patients = db.PatientRecord
+                    .ToList()
+                    .Where(u => (string.IsNullOrEmpty(u.NID_Array) || JArray.Parse(u.NID_Array).Count < 3) && (string.IsNullOrEmpty(u.NID_Array) || !JArray.Parse(u.NID_Array).Contains(user.ID)))
+                    .ToList();
             }
             return View(patients);
         }
@@ -55,14 +58,41 @@ namespace Group2_iCare.Controllers
             //    return RedirectToAction("AssignPatientForm");
             //}
 
-            foreach (var patientId in selectedPatientIds)
+            if(user.Role == "DOCTOR")
             {
-                var patient = db.PatientRecord.Find(patientId);
-                if (patient != null)
+                foreach (var patientId in selectedPatientIds)
                 {
-                    patient.WorkerID = user.ID;
+                    var patient = db.PatientRecord.Find(patientId);
+                    if (patient != null)
+                    {
+                        patient.WorkerID = user.ID;
+                    }
+                }
+            } else
+            {
+                foreach (var patientId in selectedPatientIds)
+                {
+                    var patient = db.PatientRecord.Find(patientId);
+                    if (patient != null)
+                    {
+                        JArray array;
+                        if (string.IsNullOrEmpty(patient.NID_Array))
+                        {
+                            array = new JArray();
+                        }
+                        else
+                        {
+                            array = JArray.Parse(patient.NID_Array);
+                        }
+
+                        array.Add(user.ID);
+
+                        patient.NID_Array = JsonConvert.SerializeObject(array);
+                    }
                 }
             }
+
+
 
             db.SaveChanges();
             return RedirectToAction("AssignPatientForm");
