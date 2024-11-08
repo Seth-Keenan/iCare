@@ -1,47 +1,83 @@
-﻿@model IEnumerable<Group2_iCare.Models.DocumentMetadata>
+﻿@model (IEnumerable<Group2_iCare.Models.DocumentMetadata>, IEnumerable<Group2_iCare.Models.Files>)
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Display Pallete</h2>
+<h1>Documents</h1>
+<hr />
+
+<div class="d-flex align-items-center justify-content-between">
+    <h2>PDFs</h2>
+    @Html.ActionLink(
+        "Manage PDFs through Patient Records",
+        "Index",
+        "PatientRecords",
+        null,
+        new {@class = "btn btn-danger"}
+    )
+</div>
+<hr />
 
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.DocName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateOfCreation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descript)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DocName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateOfCreation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descript)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.DocID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.DocID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.DocID })
-        </td>
-    </tr>
-}
-
+    <thead>
+        <tr>
+            <th>File Name</th>
+            <th>Content Type</th>
+            <th>Upload Date</th>
+            <th>Uploaded By ID</th>
+        </tr>
+    </thead>
+    @foreach (var file in Model.Item2)
+    {
+        <tr>
+            <td>@file.FileName</td>
+            <td>@file.ContentType</td>
+            <td>@file.UploadDate</td>
+            <td>@file.UploadedByID</td>
+            <td>
+                @Html.ActionLink(
+               "View Document",
+               "Index",
+               "ImportImage",
+               new {PatientRecordID = 10
+               })
+            </td>
+        </tr>
+    }
 </table>
 
-<div>
-    @Html.ActionLink("Create New", "Create", "", new {@class = "btn btn-outline-success"})
-    @Html.ActionLink("Back to Worker Dashboard", "Index", "WorkerDashboard", null, new { @class = "btn btn-outline-danger" })
+<hr />
+<div class="d-flex align-items-center justify-content-between">
+    <h2>Other Documents</h2>
+    @Html.ActionLink(
+    "Manage Other Documents",
+    "Index",
+    "ManageDocuments",
+    null,
+    new {@class = "btn btn-danger"}
+    )
 </div>
+<hr />
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Patient ID</th>
+            <th>Doc ID</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    @foreach (var documentMetadata in Model.Item1)
+    {
+        <tr>
+            <td>@Html.DisplayFor(_ => documentMetadata.PatientID)</td>
+            <td>@Html.DisplayFor(_ => documentMetadata.DocID)</td>
+            <td>@Html.DisplayFor(_ => documentMetadata.Descript)</td>
+        </tr>
+    }
+    <hr />
+</table>
+
+

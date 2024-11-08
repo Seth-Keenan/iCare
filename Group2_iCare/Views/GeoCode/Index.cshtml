@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Group2_iCare.Models.GeoCodes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+    <link href="~/Content/manageAccounts.css" rel="stylesheet" type="text/css" />
+</head>
+
+<h2 style="margin-bottom: 50px;">Manage Accounts</h2>
+<h3>Create GeoCodes</h3>
+<div class="table-container">
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table w-100 overflow-x-scroll">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div>
+        @Html.ActionLink("Back to Admin Dashboard", "AdminDashboard", "ManageAccounts", new { area = "" }, new { @class = "btn btn-danger" })
+    </div>
+</div>
