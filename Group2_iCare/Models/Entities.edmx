@@ -61,6 +61,7 @@
           </Key>
           <Property Name="ID" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="Role" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="iCAREWorker">
           <Key>
@@ -348,6 +349,7 @@
           <NavigationProperty Name="iCAREAdmin" Relationship="Self.FK__iCAREAdmin__ID__3C69FB99" FromRole="iCAREUser" ToRole="iCAREAdmin" />
           <NavigationProperty Name="iCAREWorker" Relationship="Self.FK__iCAREWorker__ID__398D8EEE" FromRole="iCAREUser" ToRole="iCAREWorker" />
           <NavigationProperty Name="UserPassword" Relationship="Self.FK__UserPassword__ID__3F466844" FromRole="iCAREUser" ToRole="UserPassword" />
+          <Property Name="Role" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="iCAREWorker">
           <Key>
@@ -651,6 +653,7 @@
           <EntitySetMapping Name="iCAREUser">
             <EntityTypeMapping TypeName="Group2_iCAREDBModel.iCAREUser">
               <MappingFragment StoreEntitySet="iCAREUser">
+                <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
