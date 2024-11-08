@@ -197,6 +197,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Entities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\File.cs">
+      <DependentUpon>Entities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Files.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
