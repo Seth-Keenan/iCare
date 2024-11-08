@@ -59,6 +59,7 @@ CREATE TABLE PatientRecord (
 	BloodGroup VARCHAR(255),
 	BedID VARCHAR(255),
 	TreatmentArea VARCHAR(255),
+	NID_Array NVARCHAR(MAX),
 	FOREIGN KEY (WorkerID) REFERENCES iCAREWorker(ID),
 	FOREIGN KEY (GeoCodeID) REFERENCES GeoCodes(ID),
 );

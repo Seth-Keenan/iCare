@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using Group2_iCare.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Group2_iCare.Controllers
 {
+
     public class AssignPatientController : Controller
     {
         private Group2_iCAREDBEntities db = new Group2_iCAREDBEntities();
@@ -15,7 +19,15 @@ namespace Group2_iCare.Controllers
         public ActionResult AssignPatientForm()
         {
             var user = Session["User"] as iCAREUser;
-            var patients = db.PatientRecord.Where(u => u.WorkerID != user.ID && u.WorkerID == null).ToList();
+            List<PatientRecord> patients = null;
+            if (user.Role == "DOCTOR")
+            {
+                patients = db.PatientRecord.Where(u => u.WorkerID == null).ToList();
+            }
+            else if (user.Role == "NURSE")
+            {
+                patients = db.PatientRecord.Where(u => JArray.Parse(u.NID_Array).Count < 3).ToList();
+            }
             return View(patients);
         }
 
