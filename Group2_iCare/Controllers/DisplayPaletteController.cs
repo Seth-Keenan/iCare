@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -18,7 +17,7 @@ namespace Group2_iCare.Controllers
         // GET: DisplayPalette
         public ActionResult Index()
         {
-            var documentMetadata = db.DocumentMetadata.Include(d => d.ModificationHistory);
+            var documentMetadata = db.DocumentMetadata.Include(d => d.iCAREUser).Include(d => d.PatientRecord).Include(d => d.iCAREWorker).Include(d => d.ModificationHistory);
             return View(documentMetadata.ToList());
         }
 
@@ -40,6 +39,9 @@ namespace Group2_iCare.Controllers
         // GET: DisplayPalette/Create
         public ActionResult Create()
         {
+            ViewBag.ModifiedByID = new SelectList(db.iCAREUser, "ID", "Name");
+            ViewBag.PatientID = new SelectList(db.PatientRecord, "ID", "WorkerID");
+            ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession");
             ViewBag.DocID = new SelectList(db.ModificationHistory, "DocID", "Description");
             return View();
         }
@@ -49,7 +51,7 @@ namespace Group2_iCare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DocID,DocName,DateOfCreation,Descript")] DocumentMetadata documentMetadata, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "DocID,DocName,DateOfCreation,PatientID,WorkerID,ModifiedByID,CreationDate,ModifyDate,Descript")] DocumentMetadata documentMetadata)
         {
             if (ModelState.IsValid)
             {
@@ -58,6 +60,9 @@ namespace Group2_iCare.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ModifiedByID = new SelectList(db.iCAREUser, "ID", "Name", documentMetadata.ModifiedByID);
+            ViewBag.PatientID = new SelectList(db.PatientRecord, "ID", "WorkerID", documentMetadata.PatientID);
+            ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", documentMetadata.WorkerID);
             ViewBag.DocID = new SelectList(db.ModificationHistory, "DocID", "Description", documentMetadata.DocID);
             return View(documentMetadata);
         }
@@ -74,6 +79,9 @@ namespace Group2_iCare.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ModifiedByID = new SelectList(db.iCAREUser, "ID", "Name", documentMetadata.ModifiedByID);
+            ViewBag.PatientID = new SelectList(db.PatientRecord, "ID", "WorkerID", documentMetadata.PatientID);
+            ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", documentMetadata.WorkerID);
             ViewBag.DocID = new SelectList(db.ModificationHistory, "DocID", "Description", documentMetadata.DocID);
             return View(documentMetadata);
         }
@@ -83,7 +91,7 @@ namespace Group2_iCare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DocID,DocName,DateOfCreation")] DocumentMetadata documentMetadata)
+        public ActionResult Edit([Bind(Include = "DocID,DocName,DateOfCreation,PatientID,WorkerID,ModifiedByID,CreationDate,ModifyDate,Descript")] DocumentMetadata documentMetadata)
         {
             if (ModelState.IsValid)
             {
@@ -91,6 +99,9 @@ namespace Group2_iCare.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.ModifiedByID = new SelectList(db.iCAREUser, "ID", "Name", documentMetadata.ModifiedByID);
+            ViewBag.PatientID = new SelectList(db.PatientRecord, "ID", "WorkerID", documentMetadata.PatientID);
+            ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", documentMetadata.WorkerID);
             ViewBag.DocID = new SelectList(db.ModificationHistory, "DocID", "Description", documentMetadata.DocID);
             return View(documentMetadata);
         }
