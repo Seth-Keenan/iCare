@@ -27,6 +27,7 @@
         <AssociationConnector Association="Group2_iCAREDBModel.FK__iCAREWorker__ID__398D8EEE" ManuallyRouted="false" />
         <AssociationConnector Association="Group2_iCAREDBModel.FK__UserPassword__ID__3F466844" ManuallyRouted="false" />
         <AssociationConnector Association="Group2_iCAREDBModel.FK__PatientRe__Worke__45F365D3" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Group2_iCAREDBModel.File" Width="1.5" PointX="3.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -15,14 +15,12 @@ namespace Group2_iCare.Controllers
     {
         private Group2_iCAREDBEntities db = new Group2_iCAREDBEntities();
 
-        // GET: DisplayPalette
         public ActionResult Index()
         {
             var documentMetadata = db.DocumentMetadata.Include(d => d.ModificationHistory);
             return View(documentMetadata.ToList());
         }
 
-        // GET: DisplayPalette/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -37,16 +35,12 @@ namespace Group2_iCare.Controllers
             return View(documentMetadata);
         }
 
-        // GET: DisplayPalette/Create
         public ActionResult Create()
         {
             ViewBag.DocID = new SelectList(db.ModificationHistory, "DocID", "Description");
             return View();
         }
 
-        // POST: DisplayPalette/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "DocID,DocName,DateOfCreation,Descript")] DocumentMetadata documentMetadata, HttpPostedFileBase file)
@@ -62,7 +56,6 @@ namespace Group2_iCare.Controllers
             return View(documentMetadata);
         }
 
-        // GET: DisplayPalette/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -78,9 +71,6 @@ namespace Group2_iCare.Controllers
             return View(documentMetadata);
         }
 
-        // POST: DisplayPalette/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "DocID,DocName,DateOfCreation")] DocumentMetadata documentMetadata)
@@ -95,7 +85,6 @@ namespace Group2_iCare.Controllers
             return View(documentMetadata);
         }
 
-        // GET: DisplayPalette/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -110,7 +99,7 @@ namespace Group2_iCare.Controllers
             return View(documentMetadata);
         }
 
-        // POST: DisplayPalette/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
