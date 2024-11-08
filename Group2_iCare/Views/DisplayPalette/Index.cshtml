@@ -20,37 +20,16 @@
         "Index",
         "Documents",
         null,
-        new {@class = "btn btn-outline-danger"}
+        new { @class = "btn btn-outline-danger" }
     )
 
     @Html.ActionLink(
-    "Manage Other Documents",
-    "Index",
-    "Documents",
-    null,
-    new {@class = "btn btn-outline-danger"}
+        "Back to Dashboard",
+        "Index",
+        "WorkerDashboard",
+        null,
+        new { @class = "btn btn-outline-danger" }
     )
 
 </div>
 <hr />
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Patient ID</th>
-            <th>Doc ID</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    @foreach (var documentMetadata in Model.Item1)
-    {
-        <tr>
-            <td>@Html.DisplayFor(_ => documentMetadata.PatientID)</td>
-            <td>@Html.DisplayFor(_ => documentMetadata.DocID)</td>
-            <td>@Html.DisplayFor(_ => documentMetadata.Descript)</td>
-        </tr>
-    }
-</table>
-<div class="mb-3 d-flex justify-content-end">
-    @Html.ActionLink("Back to Dashboard", "Index", "WorkerDashboard", null, new { @class = "btn btn-outline-danger" })
-</div>
