@@ -57,7 +57,7 @@ namespace Group2_iCare.Controllers
             {
                 db.DocumentMetadata.Add(documentMetadata);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Drugs");
             }
 
             ViewBag.ModifiedByID = new SelectList(db.iCAREUser, "ID", "Name", documentMetadata.ModifiedByID);
@@ -130,6 +130,11 @@ namespace Group2_iCare.Controllers
             db.DocumentMetadata.Remove(documentMetadata);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Drugs()
+        {
+            return View();
         }
 
         protected override void Dispose(bool disposing)
