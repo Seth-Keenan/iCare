@@ -1,0 +1,116 @@
+﻿@model Group2_iCare.Models.DocumentMetadata
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "DisplayPalette", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>DocumentMetadata</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DocID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DocID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DocID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DocName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DocName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DocName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfCreation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfCreation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateOfCreation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descript, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Descript, new { @class = "form-control", id = "descript", rows = 5, placeholder = "Drug suggestions at bottom ex. Tylenol" })
+                <div id="suggestions" class="autocomplete-suggestions" style="margin-top: 10px;"></div>
+                @Html.ValidationMessageFor(model => model.Descript, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success" />
+                @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#descript").on("input", function() {
+            let query = getLastWord($(this).val());
+
+            if (query.length >= 2) {
+                fetchSuggestions(query);
+            } else {
+                clearSuggestions();
+            }
+        });
+    });
+
+    function getLastWord(text) {
+        let words = text.split(" ");
+        return words.pop();
+    }
+
+    function fetchSuggestions(query) {
+        $.ajax({
+            url: '@Url.Action("GetDrugSuggestions", "Drug")',
+            data: { query: query },
+            dataType: 'json',
+            success: function(data) {
+                displaySuggestions(data);
+            }
+        });
+    }
+
+    function displaySuggestions(suggestions) {
+        clearSuggestions();
+        $.each(suggestions, function(index, suggestion) {
+            let suggestionItem = $("<div>")
+                .addClass("suggestion-item")
+                .html("<strong>" + suggestion.DrugName + "</strong>: " + suggestion.DrugDescription)
+                .click(function() {
+                    addSuggestionToDescription(suggestion.DrugName);
+                    clearSuggestions();
+                });
+            $("#suggestions").append(suggestionItem);
+        });
+    }
+
+    function addSuggestionToDescription(suggestion) {
+        let currentText = $("#descript").val();
+        let lastIndex = currentText.lastIndexOf(" ");
+        let newText = currentText.substring(0, lastIndex + 1) + suggestion + " ";
+        $("#descript").val(newText);
+    }
+
+    function clearSuggestions() {
+        $("#suggestions").empty();
+    }
+</script>

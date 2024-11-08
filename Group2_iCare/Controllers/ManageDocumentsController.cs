@@ -10,18 +10,18 @@ using Group2_iCare.Models;
 
 namespace Group2_iCare.Controllers
 {
-    public class DocumentMetadatasController : Controller
+    public class ManageDocumentsController : Controller
     {
         private Group2_iCAREDBEntities db = new Group2_iCAREDBEntities();
 
-        // GET: DocumentMetadata
+        // GET: ManageDocuments
         public ActionResult Index()
         {
             var documentMetadata = db.DocumentMetadata.Include(d => d.iCAREUser).Include(d => d.PatientRecord).Include(d => d.iCAREWorker).Include(d => d.ModificationHistory);
             return View(documentMetadata.ToList());
         }
 
-        // GET: DocumentMetadata/Details/5
+        // GET: ManageDocuments/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -36,7 +36,7 @@ namespace Group2_iCare.Controllers
             return View(documentMetadata);
         }
 
-        // GET: DocumentMetadata/Create
+        // GET: ManageDocuments/Create
         public ActionResult Create()
         {
             ViewBag.ModifiedByID = new SelectList(db.iCAREUser, "ID", "Name");
@@ -46,7 +46,7 @@ namespace Group2_iCare.Controllers
             return View();
         }
 
-        // POST: DocumentMetadata/Create
+        // POST: ManageDocuments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -67,7 +67,7 @@ namespace Group2_iCare.Controllers
             return View(documentMetadata);
         }
 
-        // GET: DocumentMetadata/Edit/5
+        // GET: ManageDocuments/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -86,26 +86,19 @@ namespace Group2_iCare.Controllers
             return View(documentMetadata);
         }
 
-        // POST: DocumentMetadata/Edit/5
+        // POST: ManageDocuments/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DocID,ModifyDate,Descript")] DocumentMetadata documentMetadata)
+        public ActionResult Edit([Bind(Include = "DocID,DocName,DateOfCreation,PatientID,WorkerID,ModifiedByID,CreationDate,ModifyDate,Descript")] DocumentMetadata documentMetadata)
         {
             if (ModelState.IsValid)
             {
-                var existingDocument = db.DocumentMetadata.Find(documentMetadata.DocID);
-                if (existingDocument != null)
-                {
-                    existingDocument.ModifyDate = documentMetadata.ModifyDate;
-                    existingDocument.Descript = documentMetadata.Descript;
-                    db.Entry(existingDocument).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                db.Entry(documentMetadata).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-
             ViewBag.ModifiedByID = new SelectList(db.iCAREUser, "ID", "Name", documentMetadata.ModifiedByID);
             ViewBag.PatientID = new SelectList(db.PatientRecord, "ID", "WorkerID", documentMetadata.PatientID);
             ViewBag.WorkerID = new SelectList(db.iCAREWorker, "ID", "Profession", documentMetadata.WorkerID);
@@ -113,7 +106,7 @@ namespace Group2_iCare.Controllers
             return View(documentMetadata);
         }
 
-        // GET: DocumentMetadata/Delete/5
+        // GET: ManageDocuments/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -128,7 +121,7 @@ namespace Group2_iCare.Controllers
             return View(documentMetadata);
         }
 
-        // POST: DocumentMetadata/Delete/5
+        // POST: ManageDocuments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
