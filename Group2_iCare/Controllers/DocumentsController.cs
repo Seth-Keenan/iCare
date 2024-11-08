@@ -94,11 +94,6 @@ namespace Group2_iCare.Controllers
                 ModelState.AddModelError("WorkerID", "Worker ID is required");
             }
 
-            if (string.IsNullOrEmpty(documentMetadata.ModifiedByID))
-            {
-                ModelState.AddModelError("ModifiedByID", "Modified By ID is required");
-            }
-
             if (string.IsNullOrEmpty(documentMetadata.Descript))
             {
                 ModelState.AddModelError("Descript", "Description is required");

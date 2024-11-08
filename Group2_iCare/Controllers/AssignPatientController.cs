@@ -4,7 +4,6 @@ using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Web.Mvc;
 using Newtonsoft.Json;
-using Group2_iCare.Models;
 using Newtonsoft.Json.Linq;
 using System;
 

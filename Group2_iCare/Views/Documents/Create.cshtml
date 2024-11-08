@@ -6,7 +6,7 @@
 
 <h2>Create Document</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Documents", null, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -59,7 +59,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-success" />
+                @Html.Raw("<button type='submit' class='btn btn-success'>Create</button>")
                 @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-danger" })
             </div>
         </div>
