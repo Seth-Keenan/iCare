@@ -166,5 +166,12 @@ namespace Group2_iCare.Controllers
 
             return HttpNotFound();
         }
+
+        public ActionResult View()
+        {
+            var files = db.Files.AsEnumerable();
+            var documentMetadata = db.DocumentMetadata.Include(d => d.iCAREUser).Include(d => d.PatientRecord).Include(d => d.iCAREWorker).Include(d => d.ModificationHistory).AsEnumerable();
+            return View((documentMetadata, files));
+        }
     }
 }

@@ -365,8 +365,12 @@
     <Content Include="Views\GeoCode\Details.cshtml" />
     <Content Include="Views\GeoCode\Edit.cshtml" />
     <Content Include="Views\GeoCode\Index.cshtml" />
-    <Content Include="Views\DisplayPalette\ShowUploadedFile.cshtml" />
-    <Content Include="Views\DocumentMetadata\Drugs.cshtml" />
+    <Content Include="Views\Documents\Create.cshtml" />
+    <Content Include="Views\Documents\Delete.cshtml" />
+    <Content Include="Views\Documents\Details.cshtml" />
+    <Content Include="Views\Documents\Edit.cshtml" />
+    <Content Include="Views\Documents\Index.cshtml" />
+    <Content Include="Views\DisplayPalette\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\App_LocalResources\" />

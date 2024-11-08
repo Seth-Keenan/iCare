@@ -36,12 +36,6 @@ namespace Group2_iCare.Controllers
                 return RedirectToAction("AssignPatientForm");
             }
 
-            //if (string.IsNullOrEmpty(workerId))
-            //{
-            //    ModelState.AddModelError("", "Worker ID is required.");
-            //    return RedirectToAction("AssignPatientForm");
-            //}
-
             foreach (var patientId in selectedPatientIds)
             {
                 var patient = db.PatientRecord.Find(patientId);
