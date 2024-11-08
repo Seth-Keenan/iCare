@@ -44,7 +44,7 @@ namespace Group2_iCare.Controllers
         }
 
 
-        // GET: AdminCreateUsers/Create
+
         public ActionResult Create()
         {
             var roles = db.UserRole.Select(r => new { r.RoleName }).ToList();
@@ -53,7 +53,6 @@ namespace Group2_iCare.Controllers
         }
 
 
-        // POST: AdminCreateUsers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
 

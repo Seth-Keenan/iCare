@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Group2_iCare.Models.DocumentMetadata>
+
+@{
+    ViewBag.Title = "Documents";
+}
+
+<h2>Documents</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().DocID)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().DocName)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().iCAREUser.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().PatientRecord.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Descript)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.DocID)</td>
+                <td>@Html.DisplayFor(modelItem => item.DocName)</td>
+
+                <!-- Check for nulls before accessing related entities -->
+                <td>
+                    @if (item.iCAREUser != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.iCAREUser.Name)
+                    }
+                    else
+                    {
+                        <span>No User Assigned</span>
+                    }
+                </td>
+
+                <td>
+                    @if (item.PatientRecord != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.PatientRecord.Name)
+                    }
+                    else
+                    {
+                        <span>No Patient Assigned</span>
+                    }
+                </td>
+
+                <td>@Html.DisplayFor(modelItem => item.Descript)</td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.DocID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.DocID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.DocID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    @Html.ActionLink("Create New Document", "Create")
+</p>

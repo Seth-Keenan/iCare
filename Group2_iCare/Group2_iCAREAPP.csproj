@@ -156,7 +156,7 @@
     <Compile Include="Controllers\AssignPatientController.cs" />
     <Compile Include="Controllers\DisplayMyBoardController.cs" />
     <Compile Include="Controllers\DisplayPaletteController.cs" />
-    <Compile Include="Controllers\DocumentMetadatasController.cs" />
+    <Compile Include="Controllers\DocumentsController.cs" />
     <Compile Include="Controllers\DrugAutoSuggestController.cs" />
     <Compile Include="Controllers\GeoCodeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -176,6 +176,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminCreateUser.cs" />
+    <Compile Include="Models\Documents.cs" />
     <Compile Include="Models\DocumentMetadata.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
@@ -289,6 +290,7 @@
     </Content>
     <Content Include="Models\DrugInformation\drugs.csv" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
+    <Content Include="Scripts\autosuggest.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
     <Content Include="Scripts\jquery-3.7.1.slim.js" />
@@ -345,16 +347,6 @@
     <Content Include="Views\ImportImage\BrowseFiles.cshtml" />
     <Content Include="Views\ImportImage\Scanner.cshtml" />
     <Content Include="Views\ImportImage\EditFile.cshtml" />
-    <Content Include="Views\DocumentMetadata\Create.cshtml" />
-    <Content Include="Views\DocumentMetadata\Delete.cshtml" />
-    <Content Include="Views\DocumentMetadata\Details.cshtml" />
-    <Content Include="Views\DocumentMetadata\Edit.cshtml" />
-    <Content Include="Views\DocumentMetadata\Index.cshtml" />
-    <Content Include="Views\ManageDocuments\Create.cshtml" />
-    <Content Include="Views\ManageDocuments\Delete.cshtml" />
-    <Content Include="Views\ManageDocuments\Details.cshtml" />
-    <Content Include="Views\ManageDocuments\Edit.cshtml" />
-    <Content Include="Views\ManageDocuments\Index.cshtml" />
     <Content Include="Views\DisplayPalette\Create.cshtml" />
     <Content Include="Views\DisplayPalette\Delete.cshtml" />
     <Content Include="Views\DisplayPalette\Details.cshtml" />
@@ -365,6 +357,11 @@
     <Content Include="Views\GeoCode\Details.cshtml" />
     <Content Include="Views\GeoCode\Edit.cshtml" />
     <Content Include="Views\GeoCode\Index.cshtml" />
+    <Content Include="Views\Documents\Create.cshtml" />
+    <Content Include="Views\Documents\Delete.cshtml" />
+    <Content Include="Views\Documents\Details.cshtml" />
+    <Content Include="Views\Documents\Edit.cshtml" />
+    <Content Include="Views\Documents\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\App_LocalResources\" />

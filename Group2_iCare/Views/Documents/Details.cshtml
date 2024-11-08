@@ -1,0 +1,31 @@
+﻿@model Group2_iCare.Models.DocumentMetadata
+
+@{
+    ViewBag.Title = "Document Details";
+}
+
+<h2>Document Details</h2>
+
+<div>
+    <h4>Document Metadata</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <!-- Document Name -->
+        <dt>@Html.DisplayNameFor(model => model.DocName)</dt>
+        <dd>@Html.DisplayFor(model => model.DocName)</dd>
+
+        <!-- Modification Date -->
+        <dt>@Html.DisplayNameFor(model => model.ModifiedByID)</dt>
+        <dd>@Html.DisplayFor(model => model.ModifiedByID)</dd>
+
+        <!-- Description -->
+        <dt>@Html.DisplayNameFor(model => model.Descript)</dt>
+        <dd>@Html.DisplayFor(model => model.Descript)</dd>
+
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DocID }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+</p>
